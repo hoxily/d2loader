@@ -3,7 +3,7 @@
 #include "logger.h"
 
 /* global variable */
-struct version_info* Dst;
+union version_info* Dst;
 
 /* string constant */
 #define D2_EXP_DOT_MPQ "d2exp.mpq"
@@ -12,13 +12,27 @@ struct version_info* Dst;
 /* function prototype */
 
 /* struct */
+
+// 在这里使用union简直绝妙！不用费劲心思凑字段的偏移量了。
 #pragma pack(1) // 逐字节对齐，方便定位
-struct version_info
+union version_info
 {
-    BYTE offset_0_expansion;
-    BYTE _0[0x20d - 1];
-    BOOL (*offset_20d_IsExpansion)();
-    BYTE _[0xc94 - 0x20d - 4];
+    #pragma pack(1)
+    struct
+    {
+        // 不允许使用不完整的类型
+        // BYTE offset[0];
+        BYTE value;
+    } expansion;
+
+    #pragma pack(1)
+    struct
+    {
+        BYTE offset[0x20d];
+        BOOL (*value)();
+    } IsExpansion;
+
+    BYTE padding[0xc94];
 };
 
 
@@ -70,25 +84,25 @@ BOOL sub_406bab_IsExpansion()
     {
         return FALSE;
     }
-    return Dst->offset_0_expansion;
+    return Dst->expansion.value;
 }
 
 void sub_4069d8()
 {
-    memset(Dst, 0, sizeof(struct version_info));
+    memset(Dst, 0, sizeof(union version_info));
     if (sub_40735e_CheckExpansion())
     {
-        Dst->offset_0_expansion = TRUE;
+        Dst->expansion.value = TRUE;
     }
 
-    Dst->offset_20d_IsExpansion = sub_406bab_IsExpansion;
+    Dst->IsExpansion.value = sub_406bab_IsExpansion;
     //TODO
 }
 
 void* sub_406803()
 {
-    assert(sizeof(struct version_info) == 0xc94);
-    Dst = malloc(sizeof(struct version_info));
+    assert(sizeof(union version_info) == 0xc94);
+    Dst = malloc(sizeof(union version_info));
     if (!Dst)
     {
         return NULL;
