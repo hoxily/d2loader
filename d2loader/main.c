@@ -1,17 +1,15 @@
 #include <Windows.h>
-#include <stdio.h>
-#include <stdarg.h>
+#include "logger.h"
 
 /* global variable */
 void* Dst;
-FILE* logFile;
 
 /* string constant */
 #define D2_EXP_DOT_MPQ "d2exp.mpq"
 #define D2_X_TALK_DOT_MPQ "d2xtalk.mpq"
 
 /* function prototype */
-void LogFormat(const char* format, ...);
+
 
 /**
  * sub_407380
@@ -61,19 +59,6 @@ void* sub_406803()
     }
     sub_4069d8();
     //TODO
-}
-
-void InitLogFile()
-{
-    fopen_s(&logFile, "d2loader.log", "a");
-}
-
-void LogFormat(const char* format, ...)
-{
-    va_list ap;
-    va_start(ap, format);
-    vfprintf(logFile, format, ap);
-    va_end(ap);
 }
 
 int WINAPI WinMain(
