@@ -16,7 +16,9 @@ struct version_info* Dst;
 struct version_info
 {
     BYTE offset_0_expansion;
-    BYTE _[0xc94 - 1];
+    BYTE _0[0x20d - 1];
+    BOOL (*offset_20d_IsExpansion)();
+    BYTE _[0xc94 - 0x20d - 4];
 };
 
 
@@ -62,10 +64,24 @@ BOOL sub_40735e_CheckExpansion()
     return TRUE;
 }
 
+BOOL sub_406bab_IsExpansion()
+{
+    if (Dst == NULL)
+    {
+        return FALSE;
+    }
+    return Dst->offset_0_expansion;
+}
+
 void sub_4069d8()
 {
     memset(Dst, 0, sizeof(struct version_info));
-    sub_40735e_CheckExpansion();
+    if (sub_40735e_CheckExpansion())
+    {
+        Dst->offset_0_expansion = TRUE;
+    }
+
+    Dst->offset_20d_IsExpansion = sub_406bab_IsExpansion;
     //TODO
 }
 
