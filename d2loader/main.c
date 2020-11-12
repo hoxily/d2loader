@@ -1,14 +1,23 @@
 #include <Windows.h>
+#include <assert.h>
 #include "logger.h"
 
 /* global variable */
-void* Dst;
+struct version_info* Dst;
 
 /* string constant */
 #define D2_EXP_DOT_MPQ "d2exp.mpq"
 #define D2_X_TALK_DOT_MPQ "d2xtalk.mpq"
 
 /* function prototype */
+
+/* struct */
+#pragma pack(1) // 逐字节对齐，方便定位
+struct version_info
+{
+    BYTE offset_0_expansion;
+    BYTE _[0xc94 - 1];
+};
 
 
 BOOL sub_407380_CheckFileExist(const char* filePath)
@@ -26,7 +35,7 @@ BOOL sub_407380_CheckFileExist(const char* filePath)
     return exist;
 }
 
-BOOL sub_40735e()
+BOOL sub_40735e_CheckExpansion()
 {
     if (!sub_407380_CheckFileExist(D2_EXP_DOT_MPQ))
     {
@@ -55,14 +64,15 @@ BOOL sub_40735e()
 
 void sub_4069d8()
 {
-    memset(Dst, 0, 0xc94);
-    sub_40735e();
+    memset(Dst, 0, sizeof(struct version_info));
+    sub_40735e_CheckExpansion();
     //TODO
 }
 
 void* sub_406803()
 {
-    Dst = malloc(0xc94);
+    assert(sizeof(struct version_info) == 0xc94);
+    Dst = malloc(sizeof(struct version_info));
     if (!Dst)
     {
         return NULL;
