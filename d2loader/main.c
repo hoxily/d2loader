@@ -11,10 +11,7 @@ void* Dst;
 /* function prototype */
 
 
-/**
- * sub_407380
- */
-BOOL CheckFileExist(const char* filePath)
+BOOL sub_407380_CheckFileExist(const char* filePath)
 {
     HANDLE file = CreateFileA(
         filePath,
@@ -31,12 +28,12 @@ BOOL CheckFileExist(const char* filePath)
 
 BOOL sub_40735e()
 {
-    if (!CheckFileExist(D2_EXP_DOT_MPQ))
+    if (!sub_407380_CheckFileExist(D2_EXP_DOT_MPQ))
     {
         LogFormat("%s not exist.\n", D2_EXP_DOT_MPQ);
         return FALSE;
     }
-    if (!CheckFileExist(D2_X_TALK_DOT_MPQ))
+    if (!sub_407380_CheckFileExist(D2_X_TALK_DOT_MPQ))
     {
         LogFormat("%s not exist.\n", D2_X_TALK_DOT_MPQ);
         return FALSE;
