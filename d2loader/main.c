@@ -29,18 +29,31 @@ BOOL CheckFileExist(const char* filePath)
     return exist;
 }
 
-void sub_40735e()
+BOOL sub_40735e()
 {
     if (!CheckFileExist(D2_EXP_DOT_MPQ))
     {
         LogFormat("%s not exist.\n", D2_EXP_DOT_MPQ);
-        return;
+        return FALSE;
     }
     if (!CheckFileExist(D2_X_TALK_DOT_MPQ))
     {
         LogFormat("%s not exist.\n", D2_X_TALK_DOT_MPQ);
-        return;
+        return FALSE;
     }
+    /* 这里的汇编代码比较难懂：
+    * push filePath
+    * call CheckFileExist
+    * neg eax
+    * sbb eax, eax
+    * pop ecx ;__cdecl 调用约定调用方来平衡栈，所以会 add esp, xxx 或者用若干个 pop ecx的方式来平衡栈。
+    * neg eax
+    * 
+    * neg eax 的意思是 eax <- (0 - eax)，当eax非0时，CF标志位置位。
+    * sbb是带借位的减法，即 eax <- (eax - eax - CF)。
+    * 可以从eax是否为0，还是非0来分别讨论。
+    */
+    return TRUE;
 }
 
 void sub_4069d8()
