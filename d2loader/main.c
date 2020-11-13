@@ -20,49 +20,49 @@ union version_info
         // 不允许使用不完整的类型
         // BYTE offset[0];
         BYTE value;
-    } expansion;
+    } db_0000_expansion;
 
     #pragma pack(1)
     struct
     {
         BYTE offset[0x20d];
         BOOL (*value)();
-    } IsExpansion;
+    } dd_020d_IsExpansion;
 
     #pragma pack(1)
     struct
     {
         BYTE offset[0x79d];
         BYTE value;
-    } flag_79d;
+    } db_079d;
 
     #pragma pack(1)
     struct
     {
         BYTE offset[0x7af];
         BYTE value;
-    } flag_7af;
+    } db_07af;
 
     #pragma pack(1)
     struct
     {
         BYTE offset[0x7bc];
         char value[7 + 1];
-    } bnormal;
+    } db_07bc_bnormal;
 
     #pragma pack(1)
     struct
     {
         BYTE offset[0x7ec];
         char value[9 + 1];
-    } gameName;
+    } db_07ec_gameName;
 
     #pragma pack(1)
     struct
     {
         BYTE offset[0x804];
         char value[38 + 1];
-    } title;
+    } db_0804_title;
 
     BYTE padding[0xc94];
 };
@@ -116,7 +116,7 @@ BOOL sub_406bab_IsExpansion()
     {
         return FALSE;
     }
-    return Dst->expansion.value;
+    return Dst->db_0000_expansion.value;
 }
 
 void sub_4069d8()
@@ -124,15 +124,15 @@ void sub_4069d8()
     memset(Dst, 0, sizeof(union version_info));
     if (sub_40735e_CheckExpansion())
     {
-        Dst->expansion.value = TRUE;
+        Dst->db_0000_expansion.value = TRUE;
     }
 
-    Dst->IsExpansion.value = sub_406bab_IsExpansion;
-    Dst->flag_79d.value = TRUE;
-    Dst->flag_7af.value = TRUE;
-    strcpy(Dst->title.value, D2_LOADER_VERSION_AND_BUILD);
-    strcpy(Dst->gameName.value, DIABLO_II);
-    strcpy(Dst->bnormal.value, B_NORMAL);
+    Dst->dd_020d_IsExpansion.value = sub_406bab_IsExpansion;
+    Dst->db_079d.value = TRUE;
+    Dst->db_07af.value = TRUE;
+    strcpy(Dst->db_0804_title.value, D2_LOADER_VERSION_AND_BUILD);
+    strcpy(Dst->db_07ec_gameName.value, DIABLO_II);
+    strcpy(Dst->db_07bc_bnormal.value, B_NORMAL);
 }
 
 void* sub_406803()
@@ -160,5 +160,6 @@ int WINAPI WinMain(
     {
         return 0;
     }
+    //TODO
     return 0;
 }
