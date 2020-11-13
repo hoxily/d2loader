@@ -1,13 +1,10 @@
 #include <Windows.h>
 #include <assert.h>
 #include "logger.h"
+#include "constant-strings.h"
 
 /* global variable */
 union version_info* Dst;
-
-/* string constant */
-#define D2_EXP_DOT_MPQ "d2exp.mpq"
-#define D2_X_TALK_DOT_MPQ "d2xtalk.mpq"
 
 /* function prototype */
 
@@ -31,6 +28,41 @@ union version_info
         BYTE offset[0x20d];
         BOOL (*value)();
     } IsExpansion;
+
+    #pragma pack(1)
+    struct
+    {
+        BYTE offset[0x79d];
+        BYTE value;
+    } flag_79d;
+
+    #pragma pack(1)
+    struct
+    {
+        BYTE offset[0x7af];
+        BYTE value;
+    } flag_7af;
+
+    #pragma pack(1)
+    struct
+    {
+        BYTE offset[0x7bc];
+        char value[7 + 1];
+    } bnormal;
+
+    #pragma pack(1)
+    struct
+    {
+        BYTE offset[0x7ec];
+        char value[9 + 1];
+    } gameName;
+
+    #pragma pack(1)
+    struct
+    {
+        BYTE offset[0x804];
+        char value[38 + 1];
+    } title;
 
     BYTE padding[0xc94];
 };
@@ -96,7 +128,11 @@ void sub_4069d8()
     }
 
     Dst->IsExpansion.value = sub_406bab_IsExpansion;
-    //TODO
+    Dst->flag_79d.value = TRUE;
+    Dst->flag_7af.value = TRUE;
+    strcpy(Dst->title.value, D2_LOADER_VERSION_AND_BUILD);
+    strcpy(Dst->gameName.value, DIABLO_II);
+    strcpy(Dst->bnormal.value, B_NORMAL);
 }
 
 void* sub_406803()
