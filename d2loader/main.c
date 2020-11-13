@@ -135,6 +135,47 @@ void sub_4069d8()
     strcpy(Dst->db_07bc_bnormal.value, B_NORMAL);
 }
 
+char* sub_406a68(char* arg0, char* buffer)
+{
+    if (arg0 == NULL)
+    {
+        return NULL;
+    }
+    char* p = arg0;
+    char* pBuffer = buffer;
+    BOOL esi = FALSE;
+    if (*p == '\0')
+    {
+        buffer[0] = '\0';
+        return p;
+    }
+    else
+    {
+        while (*p != '\0')
+        {
+            if (*p == '\"')
+            {
+                esi = TRUE;
+            }
+            else
+            {
+                if (*p == ' ')
+                {
+
+                }
+            }
+            p++;
+        }
+    }
+}
+
+BOOL sub_406887(char* commandLine)
+{
+    char buffer[0x100];
+    sub_406a68(commandLine, buffer);
+    //TODO
+}
+
 void* sub_406803()
 {
     assert(sizeof(union version_info) == 0xc94);
@@ -144,6 +185,11 @@ void* sub_406803()
         return NULL;
     }
     sub_4069d8();
+    char* commandLine = GetCommandLineA();
+    if (!sub_406887(commandLine))
+    {
+        return NULL;
+    }
     //TODO
 }
 
