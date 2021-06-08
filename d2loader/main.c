@@ -1,5 +1,6 @@
 #include <Windows.h>
 #include <assert.h>
+#include <stdio.h>
 #include "logger.h"
 #include "constant-strings.h"
 
@@ -35,6 +36,13 @@ union version_info
         BYTE offset[0x79d];
         BYTE value;
     } db_079d;
+
+    #pragma pack(1)
+    struct
+    {
+        BYTE offset[0x7ac];
+        BYTE value;
+    } db_07ac_enableLogFile;
 
     #pragma pack(1)
     struct
@@ -217,6 +225,11 @@ int WINAPI WinMain(
     if (!sub_406803())
     {
         return 0;
+    }
+    if (Dst->db_07ac_enableLogFile.value)
+    {
+        FILE* logFile = fopen("d2loader.log", "a");
+        //TODO
     }
     //TODO
     return 0;
