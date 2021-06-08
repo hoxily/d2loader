@@ -7,6 +7,8 @@
 /* global variable */
 union version_info* Dst;
 FILE* logFile;
+FILE* global_dw_40858c_logFile;
+DWORD global_dw_408590;
 
 /* function prototype */
 
@@ -215,6 +217,17 @@ BOOL sub_406803()
     //TODO
 }
 
+void sub_404eb1_setLogFile(FILE* fp)
+{
+    global_dw_40858c_logFile = fp;
+}
+
+void sub_404ec5_setValue(DWORD num)
+{
+    // 由于 global_dw_408590 的初始值为 0，所以此处的按位或等价于将它赋值为传入的 0x20
+    global_dw_408590 |= num;
+}
+
 int WINAPI WinMain(
     _In_ HINSTANCE hInstance,
     _In_opt_ HINSTANCE hPrevInstance,
@@ -229,8 +242,10 @@ int WINAPI WinMain(
     }
     if (Dst->db_07ac_enableLogFile.value)
     {
-        FILE* logFile = fopen("d2loader.log", "a");
-        //TODO
+        logFile = fopen("d2loader.log", "a");
+        sub_404eb1_setLogFile(logFile);
+        sub_404ec5_setValue(0x20);
+        // add esp, 10h 是平衡前面的三个C函数调用造成的栈变化
     }
     //TODO
     return 0;
