@@ -188,19 +188,19 @@ BOOL sub_4068f2(char* filename)
     //TODO
 }
 
-void* sub_406803()
+BOOL sub_406803()
 {
     assert(sizeof(union version_info) == 0xc94);
     Dst = malloc(sizeof(union version_info));
     if (!Dst)
     {
-        return NULL;
+        return FALSE;
     }
     sub_4069d8();
     char* commandLine = GetCommandLineA();
     if (!sub_406887(commandLine))
     {
-        return NULL;
+        return FALSE;
     }
     sub_4068f2(&Dst->db_0884_filename);
     //TODO
@@ -214,8 +214,7 @@ int WINAPI WinMain(
 {
     InitLogFile();
 
-    Dst = sub_406803();
-    if (!Dst)
+    if (!sub_406803())
     {
         return 0;
     }
