@@ -6,6 +6,7 @@
 
 /* global variable */
 union version_info* Dst;
+FILE* logFile;
 
 /* function prototype */
 
@@ -210,7 +211,7 @@ BOOL sub_406803()
     {
         return FALSE;
     }
-    sub_4068f2(&Dst->db_0884_filename);
+    sub_4068f2(&Dst->db_0884_filename.value);
     //TODO
 }
 
