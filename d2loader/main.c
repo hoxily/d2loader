@@ -228,6 +228,25 @@ void sub_404ec5_setValue(DWORD num)
     global_dw_408590 |= num;
 }
 
+void sub_406c59()
+{
+    HANDLE fileVersionInfoHandle;
+    UINT len;
+    BYTE* buffer;
+
+    DWORD edi_size = GetFileVersionInfoSizeA(GAME_DOT_EXE, &fileVersionInfoHandle);
+    void* ebx_ptr = VirtualAlloc(NULL, edi_size, MEM_COMMIT, PAGE_READWRITE);
+    if (ebx_ptr) {
+        //TODO
+    }
+    // VirtualFree 要求第一个参数不为 NULL，所以用if包裹一下。
+    if (ebx_ptr)
+    {
+        VirtualFree(ebx_ptr, 0, MEM_RELEASE);
+    }
+    //TODO
+}
+
 int WINAPI WinMain(
     _In_ HINSTANCE hInstance,
     _In_opt_ HINSTANCE hPrevInstance,
@@ -242,11 +261,13 @@ int WINAPI WinMain(
     }
     if (Dst->db_07ac_enableLogFile.value)
     {
-        logFile = fopen("d2loader.log", "a");
+        logFile = fopen(D2_LOADER_DOT_LOG, "a");
         sub_404eb1_setLogFile(logFile);
         sub_404ec5_setValue(0x20);
         // add esp, 10h 是平衡前面的三个C函数调用造成的栈变化
     }
+
+    sub_406c59();
     //TODO
     return 0;
 }
