@@ -6,7 +6,7 @@ static FILE* logFile;
 
 void InitLogFile()
 {
-    fopen_s(&logFile, "d2loader.log", "a");
+    logFile = fopen("d2loader.log", "a");
 }
 
 void LogFormat(const char* format, ...)
