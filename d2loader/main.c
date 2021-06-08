@@ -64,6 +64,13 @@ union version_info
         char value[38 + 1];
     } db_0804_title;
 
+    #pragma pack(1)
+    struct
+    {
+        BYTE offset[0x884];
+        char value;
+    } db_0884_filename;
+
     BYTE padding[0xc94];
 };
 
@@ -176,6 +183,11 @@ BOOL sub_406887(char* commandLine)
     //TODO
 }
 
+BOOL sub_4068f2(char* filename)
+{
+    //TODO
+}
+
 void* sub_406803()
 {
     assert(sizeof(union version_info) == 0xc94);
@@ -190,6 +202,7 @@ void* sub_406803()
     {
         return NULL;
     }
+    sub_4068f2(&Dst->db_0884_filename);
     //TODO
 }
 
