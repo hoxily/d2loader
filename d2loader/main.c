@@ -2,6 +2,7 @@
 #include <assert.h>
 #include <stdio.h>
 #include <stdarg.h>
+#include <time.h>
 #include "logger.h"
 #include "constant-strings.h"
 
@@ -103,6 +104,39 @@ union version_info
 
 sub_404ed0_LogFormat(const char* tag, const char* format, ...)
 {
+    time_t now;
+    char timestamp[32];
+    time(&now);
+    struct tm* localNow = localtime(&now);
+    if (localNow)
+    {
+        strftime(timestamp, sizeof(timestamp), "%b %d %H:%M:%S", localNow);
+    }
+    else
+    {
+        strcpy(timestamp, "?");
+    }
+
+    if ((global_dw_408590 & 0xff) & 0x20)
+    {
+        if (global_dw_40858c_logFile)
+        {
+            fprintf(global_dw_40858c_logFile, "%s %s: ", timestamp, tag);
+
+            va_list ap;
+            va_start(ap, format);
+            vfprintf(global_dw_40858c_logFile, format, ap);
+            va_end(ap);
+
+            fprintf(global_dw_40858c_logFile, "\n");
+            fflush(global_dw_40858c_logFile);
+        }
+    }
+
+    if ((global_dw_408590 & 0xff) & 0x10)
+    {
+
+    }
 
 }
 
