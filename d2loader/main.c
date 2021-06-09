@@ -57,6 +57,13 @@ union version_info
     #pragma pack(1)
     struct
     {
+        BYTE offset[0x7b4];
+        DWORD value;
+    } dw_07b4_gameProductVersionFlag;
+
+    #pragma pack(1)
+    struct
+    {
         BYTE offset[0x7bc];
         char value[7 + 1];
     } db_07bc_bnormal;
@@ -229,7 +236,7 @@ void sub_404ec5_setValue(DWORD num)
     global_dw_408590 |= num;
 }
 
-void sub_406c59()
+void sub_406c59_checkGameExeVersion()
 {
     // GetFileVersionInfoSizeA 总是会把 unusedHandle 设为 0
     DWORD unusedHandle;
@@ -290,7 +297,18 @@ void sub_406c59()
     {
         VirtualFree(ebx_ptr, 0, MEM_RELEASE);
     }
-    //TODO
+
+    if (sub_40735e_CheckExpansion())
+    {
+        // 最高比特位 置1
+        esi |= 0x80000000;
+    }
+    else
+    {
+        // 最高比特位 置0
+        esi &= 0x7fffffff;
+    }
+    Dst->dw_07b4_gameProductVersionFlag.value = esi;
 }
 
 int WINAPI WinMain(
@@ -313,7 +331,7 @@ int WINAPI WinMain(
         // add esp, 10h 是平衡前面的三个C函数调用造成的栈变化
     }
 
-    sub_406c59();
+    sub_406c59_checkGameExeVersion();
     //TODO
     return 0;
 }
