@@ -206,7 +206,7 @@ BOOL sub_406bab_IsExpansion()
     return global_dw_408620_Dst->db_0000_expansion.value;
 }
 
-void sub_4069d8()
+void sub_4069d8_InitializeDefaultSettings()
 {
     memset(global_dw_408620_Dst, 0, sizeof(union version_info));
     if (sub_40735e_CheckExpansion())
@@ -219,6 +219,7 @@ void sub_4069d8()
     global_dw_408620_Dst->db_07af.value = TRUE;
     strcpy(global_dw_408620_Dst->db_0804_title.value, CSTR_D2_LOADER_VERSION_AND_BUILD);
     strcpy(global_dw_408620_Dst->db_07ec_gameName.value, CSTR_DIABLO_II);
+    // 怪不得以前打开windows的任务管理器查看d2loader.exe的优先级，总是显示为低于正常。
     strcpy(global_dw_408620_Dst->db_07bc_processPriority.value, CSTR_PROCESS_PRIORITY_BELOW_NORMAL);
 }
 
@@ -322,7 +323,7 @@ BOOL sub_407bb9_InitializeProcessPriority(HANDLE hProcess, const char* priority)
     return SetPriorityClass(hProcess, priorityClass);
 }
 
-BOOL sub_406803()
+BOOL sub_406803_InitializeSettings()
 {
     assert(sizeof(union version_info) == 0xc94);
     global_dw_408620_Dst = malloc(sizeof(union version_info));
@@ -330,7 +331,7 @@ BOOL sub_406803()
     {
         return FALSE;
     }
-    sub_4069d8();
+    sub_4069d8_InitializeDefaultSettings();
     char* commandLine = GetCommandLineA();
     if (!sub_406887(commandLine))
     {
@@ -455,7 +456,7 @@ int WINAPI WinMain(
 {
     InitLogFile();
 
-    if (!sub_406803())
+    if (!sub_406803_InitializeSettings())
     {
         return 0;
     }
