@@ -225,18 +225,18 @@ BOOL sub_406803()
     return TRUE;
 }
 
-void sub_404eb1_setLogFile(FILE* fp)
+void sub_404eb1_SetLogFile(FILE* fp)
 {
     global_dw_40858c_logFile = fp;
 }
 
-void sub_404ec5_setValue(DWORD num)
+void sub_404ec5_SetValue(DWORD num)
 {
     // 由于 global_dw_408590 的初始值为 0，所以此处的按位或等价于将它赋值为传入的 0x20
     global_dw_408590 |= num;
 }
 
-void sub_406c59_checkGameExeVersion()
+void sub_406c59_CheckGameExeVersion()
 {
     // GetFileVersionInfoSizeA 总是会把 unusedHandle 设为 0
     DWORD unusedHandle;
@@ -326,12 +326,12 @@ int WINAPI WinMain(
     if (Dst->db_07ac_enableLogFile.value)
     {
         logFile = fopen(D2_LOADER_DOT_LOG, "a");
-        sub_404eb1_setLogFile(logFile);
-        sub_404ec5_setValue(0x20);
+        sub_404eb1_SetLogFile(logFile);
+        sub_404ec5_SetValue(0x20);
         // add esp, 10h 是平衡前面的三个C函数调用造成的栈变化
     }
 
-    sub_406c59_checkGameExeVersion();
+    sub_406c59_CheckGameExeVersion();
     //TODO
     return 0;
 }
