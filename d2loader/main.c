@@ -5,8 +5,8 @@
 #include "constant-strings.h"
 
 /* global variable */
-union version_info* Dst;
-FILE* logFile;
+union version_info* global_dw_408620_Dst;
+FILE* global_dw_408588_logFile;
 FILE* global_dw_40858c_logFile;
 DWORD global_dw_408590;
 
@@ -137,27 +137,27 @@ BOOL sub_40735e_CheckExpansion()
 
 BOOL sub_406bab_IsExpansion()
 {
-    if (Dst == NULL)
+    if (global_dw_408620_Dst == NULL)
     {
         return FALSE;
     }
-    return Dst->db_0000_expansion.value;
+    return global_dw_408620_Dst->db_0000_expansion.value;
 }
 
 void sub_4069d8()
 {
-    memset(Dst, 0, sizeof(union version_info));
+    memset(global_dw_408620_Dst, 0, sizeof(union version_info));
     if (sub_40735e_CheckExpansion())
     {
-        Dst->db_0000_expansion.value = TRUE;
+        global_dw_408620_Dst->db_0000_expansion.value = TRUE;
     }
 
-    Dst->dd_020d_IsExpansion.value = sub_406bab_IsExpansion;
-    Dst->db_079d.value = TRUE;
-    Dst->db_07af.value = TRUE;
-    strcpy(Dst->db_0804_title.value, D2_LOADER_VERSION_AND_BUILD);
-    strcpy(Dst->db_07ec_gameName.value, DIABLO_II);
-    strcpy(Dst->db_07bc_bnormal.value, B_NORMAL);
+    global_dw_408620_Dst->dd_020d_IsExpansion.value = sub_406bab_IsExpansion;
+    global_dw_408620_Dst->db_079d.value = TRUE;
+    global_dw_408620_Dst->db_07af.value = TRUE;
+    strcpy(global_dw_408620_Dst->db_0804_title.value, D2_LOADER_VERSION_AND_BUILD);
+    strcpy(global_dw_408620_Dst->db_07ec_gameName.value, DIABLO_II);
+    strcpy(global_dw_408620_Dst->db_07bc_bnormal.value, B_NORMAL);
 }
 
 char* sub_406a68(char* arg0, char* buffer)
@@ -209,8 +209,8 @@ BOOL sub_4068f2(char* filename)
 BOOL sub_406803()
 {
     assert(sizeof(union version_info) == 0xc94);
-    Dst = malloc(sizeof(union version_info));
-    if (!Dst)
+    global_dw_408620_Dst = malloc(sizeof(union version_info));
+    if (!global_dw_408620_Dst)
     {
         return FALSE;
     }
@@ -220,7 +220,7 @@ BOOL sub_406803()
     {
         return FALSE;
     }
-    sub_4068f2(&Dst->db_0884_filename.value);
+    sub_4068f2(&global_dw_408620_Dst->db_0884_filename.value);
     //TODO
     return TRUE;
 }
@@ -308,7 +308,7 @@ void sub_406c59_CheckGameExeVersion()
         // 最高比特位 置0
         esi &= 0x7fffffff;
     }
-    Dst->dw_07b4_gameProductVersionFlag.value = esi;
+    global_dw_408620_Dst->dw_07b4_gameProductVersionFlag.value = esi;
 }
 
 int WINAPI WinMain(
@@ -323,10 +323,10 @@ int WINAPI WinMain(
     {
         return 0;
     }
-    if (Dst->db_07ac_enableLogFile.value)
+    if (global_dw_408620_Dst->db_07ac_enableLogFile.value)
     {
-        logFile = fopen(D2_LOADER_DOT_LOG, "a");
-        sub_404eb1_SetLogFile(logFile);
+        global_dw_408588_logFile = fopen(D2_LOADER_DOT_LOG, "a");
+        sub_404eb1_SetLogFile(global_dw_408588_logFile);
         sub_404ec5_SetValue(0x20);
         // add esp, 10h 是平衡前面的三个C函数调用造成的栈变化
     }
