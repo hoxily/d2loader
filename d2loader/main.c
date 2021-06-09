@@ -68,12 +68,13 @@ union version_info
         DWORD value;
     } dw_07b4_gameProductVersionFlag;
 
+    // 进程的优先级。默认为 bnormal，即 低于正常。
     #pragma pack(1)
     struct
     {
         BYTE offset[0x7bc];
         char value[7 + 1];
-    } db_07bc_bnormal;
+    } db_07bc_processPriority;
 
     #pragma pack(1)
     struct
@@ -164,7 +165,7 @@ void sub_4069d8()
     global_dw_408620_Dst->db_07af.value = TRUE;
     strcpy(global_dw_408620_Dst->db_0804_title.value, CSTR_D2_LOADER_VERSION_AND_BUILD);
     strcpy(global_dw_408620_Dst->db_07ec_gameName.value, CSTR_DIABLO_II);
-    strcpy(global_dw_408620_Dst->db_07bc_bnormal.value, CSTR_B_NORMAL);
+    strcpy(global_dw_408620_Dst->db_07bc_processPriority.value, CSTR_PROCESS_PRIORITY_BELOW_NORMAL);
 }
 
 char* sub_406a68(char* arg0, char* buffer)
@@ -218,7 +219,7 @@ BOOL sub_406bb9()
     //TODO
 }
 
-BOOL sub_407bb9(HANDLE hProcess, const char* priority)
+BOOL sub_407bb9_InitializeProcessPriority(HANDLE hProcess, const char* priority)
 {
     //TODO
 }
@@ -249,11 +250,11 @@ BOOL sub_406803()
         sub_406bb9();
     }
 
-    char* priority = global_dw_408620_Dst->db_07bc_bnormal.value;
+    char* priority = global_dw_408620_Dst->db_07bc_processPriority.value;
     // GetCurrentProcess 返回的是一个伪Handle，总是 (HANDLE)-1 即 0xffffffff。
     // 这并非出错了，而是故意这样设计的。
     HANDLE hProcess = GetCurrentProcess();
-    sub_407bb9(hProcess, priority);
+    sub_407bb9_InitializeProcessPriority(hProcess, priority);
 
     return TRUE;
 }
