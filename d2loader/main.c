@@ -254,11 +254,20 @@ void sub_406c59()
                         MessageBoxA(NULL, D2_LOADER_DOES_NOT_RECOGNIZE_GAME_VERSION, UNKNOW_VERSION, MB_OK | MB_ICONERROR);
                         ExitProcess(1);
                     }
-                    //TODO
+
+                    // VS_FIXEDFILEINFO 结构的大小是 0x34
+                    assert(sizeof(VS_FIXEDFILEINFO) == 0x34);
+                    if (len == sizeof(VS_FIXEDFILEINFO))
+                    {
+                        //TODO
+                    }
                 }
             }
         }
     }
+
+    // 在清理之前还有两段汇编，但是只有出口通向清理，却没有入口。略过。
+
     // VirtualFree 要求第一个参数不为 NULL，所以用if包裹一下。
     if (ebx_ptr)
     {
