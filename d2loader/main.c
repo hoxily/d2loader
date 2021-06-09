@@ -29,6 +29,13 @@ union version_info
     #pragma pack(1)
     struct
     {
+        BYTE offset[4];
+        char value[5 + 1];
+    } db_0004_str;
+
+    #pragma pack(1)
+    struct
+    {
         BYTE offset[0x20d];
         BOOL (*value)();
     } dd_020d_IsExpansion;
@@ -206,6 +213,16 @@ BOOL sub_4068f2(char* filename)
     //TODO
 }
 
+BOOL sub_406bb9()
+{
+    //TODO
+}
+
+BOOL sub_407bb9(HANDLE hProcess, const char* priority)
+{
+    //TODO
+}
+
 BOOL sub_406803()
 {
     assert(sizeof(union version_info) == 0xc94);
@@ -221,7 +238,23 @@ BOOL sub_406803()
         return FALSE;
     }
     sub_4068f2(&global_dw_408620_Dst->db_0884_filename.value);
-    //TODO
+
+    char* dstStr = global_dw_408620_Dst->db_0004_str.value;
+    if (dstStr[0] == 0 &&
+        dstStr[1] == 0 &&
+        dstStr[2] == 0 &&
+        dstStr[3] == 0 &&
+        dstStr[4] == 0)
+    {
+        sub_406bb9();
+    }
+
+    char* priority = global_dw_408620_Dst->db_07bc_bnormal.value;
+    // GetCurrentProcess 返回的是一个伪Handle，总是 (HANDLE)-1 即 0xffffffff。
+    // 这并非出错了，而是故意这样设计的。
+    HANDLE hProcess = GetCurrentProcess();
+    sub_407bb9(hProcess, priority);
+
     return TRUE;
 }
 
