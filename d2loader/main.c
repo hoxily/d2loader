@@ -454,6 +454,7 @@ int WINAPI WinMain(
     {
         return 0;
     }
+
     if (global_dw_408620_Dst->db_07ac_enableLogFile.value)
     {
         global_dw_408588_logFile = fopen(CSTR_D2_LOADER_DOT_LOG, "a");
