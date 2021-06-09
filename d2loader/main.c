@@ -110,14 +110,14 @@ BOOL sub_407380_CheckFileExist(const char* filePath)
 
 BOOL sub_40735e_CheckExpansion()
 {
-    if (!sub_407380_CheckFileExist(D2_EXP_DOT_MPQ))
+    if (!sub_407380_CheckFileExist(CSTR_D2_EXP_DOT_MPQ))
     {
-        LogFormat("%s not exist.\n", D2_EXP_DOT_MPQ);
+        LogFormat("%s not exist.\n", CSTR_D2_EXP_DOT_MPQ);
         return FALSE;
     }
-    if (!sub_407380_CheckFileExist(D2_X_TALK_DOT_MPQ))
+    if (!sub_407380_CheckFileExist(CSTR_D2_X_TALK_DOT_MPQ))
     {
-        LogFormat("%s not exist.\n", D2_X_TALK_DOT_MPQ);
+        LogFormat("%s not exist.\n", CSTR_D2_X_TALK_DOT_MPQ);
         return FALSE;
     }
     /* 这里的汇编代码比较难懂：
@@ -155,9 +155,9 @@ void sub_4069d8()
     global_dw_408620_Dst->dd_020d_IsExpansion.value = sub_406bab_IsExpansion;
     global_dw_408620_Dst->db_079d.value = TRUE;
     global_dw_408620_Dst->db_07af.value = TRUE;
-    strcpy(global_dw_408620_Dst->db_0804_title.value, D2_LOADER_VERSION_AND_BUILD);
-    strcpy(global_dw_408620_Dst->db_07ec_gameName.value, DIABLO_II);
-    strcpy(global_dw_408620_Dst->db_07bc_bnormal.value, B_NORMAL);
+    strcpy(global_dw_408620_Dst->db_0804_title.value, CSTR_D2_LOADER_VERSION_AND_BUILD);
+    strcpy(global_dw_408620_Dst->db_07ec_gameName.value, CSTR_DIABLO_II);
+    strcpy(global_dw_408620_Dst->db_07bc_bnormal.value, CSTR_B_NORMAL);
 }
 
 char* sub_406a68(char* arg0, char* buffer)
@@ -243,12 +243,12 @@ void sub_406c59_CheckGameExeVersion()
     UINT len;
     VS_FIXEDFILEINFO* fileInfo;
 
-    DWORD edi_size = GetFileVersionInfoSizeA(GAME_DOT_EXE, &unusedHandle);
+    DWORD edi_size = GetFileVersionInfoSizeA(CSTR_GAME_DOT_EXE, &unusedHandle);
     void* ebx_ptr = VirtualAlloc(NULL, edi_size, MEM_COMMIT, PAGE_READWRITE);
     UINT esi = 0;
     if (ebx_ptr) {
         // esi 已经在上面被 xor esi, esi 置为0；
-        if (GetFileVersionInfoA(GAME_DOT_EXE, 0, edi_size, ebx_ptr))
+        if (GetFileVersionInfoA(CSTR_GAME_DOT_EXE, 0, edi_size, ebx_ptr))
         {
             if (VerQueryValueA(ebx_ptr, "\\", &fileInfo, &len))
             {
@@ -259,7 +259,7 @@ void sub_406c59_CheckGameExeVersion()
                     // 由于 dwFileVersionMS 必定为 0x00010000，所以只检查了 dwFileVersionLS
                     if (fileInfo->dwFileVersionLS != 0x000d003c)
                     {
-                        MessageBoxA(NULL, D2_LOADER_DOES_NOT_RECOGNIZE_GAME_VERSION, UNKNOW_VERSION, MB_OK | MB_ICONERROR);
+                        MessageBoxA(NULL, CSTR_D2_LOADER_DOES_NOT_RECOGNIZE_GAME_VERSION, CSTR_UNKNOW_VERSION, MB_OK | MB_ICONERROR);
                         ExitProcess(1);
                     }
 
@@ -325,7 +325,7 @@ int WINAPI WinMain(
     }
     if (global_dw_408620_Dst->db_07ac_enableLogFile.value)
     {
-        global_dw_408588_logFile = fopen(D2_LOADER_DOT_LOG, "a");
+        global_dw_408588_logFile = fopen(CSTR_D2_LOADER_DOT_LOG, "a");
         sub_404eb1_SetLogFile(global_dw_408588_logFile);
         sub_404ec5_SetValue(0x20);
         // add esp, 10h 是平衡前面的三个C函数调用造成的栈变化
