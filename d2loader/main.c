@@ -246,7 +246,7 @@ void sub_406c59()
             {
                 if (fileInfo)
                 {
-                    // dwFileVersionLS 的偏移量为 0x0c
+                    assert(offsetof(VS_FIXEDFILEINFO, dwFileVersionLS) == 0x0c);
                     // 检查 game.exe 的FileVersion是否为 1.0.13.60，
                     // 由于 dwFileVersionMS 必定为 0x00010000，所以只检查了 dwFileVersionLS
                     if (fileInfo->dwFileVersionLS != 0x000d003c)
