@@ -10,7 +10,11 @@
 union version_info* global_dw_408620_Dst;
 FILE* global_dw_408588_logFile;
 FILE* global_dw_40858c_logFile;
-DWORD global_dw_408590;
+
+#define LOG_TYPE_FILE 0x20
+#define LOG_TYPE_CONSOLE 0x10
+
+DWORD global_dw_408590_logFlag;
 
 /* function prototype */
 
@@ -117,7 +121,7 @@ void sub_404ed0_LogFormat(const char* tag, const char* format, ...)
         strcpy(timestamp, "?");
     }
 
-    if ((global_dw_408590 & 0xff) & 0x20)
+    if (global_dw_408590_logFlag & LOG_TYPE_FILE)
     {
         if (global_dw_40858c_logFile)
         {
@@ -133,7 +137,7 @@ void sub_404ed0_LogFormat(const char* tag, const char* format, ...)
         }
     }
 
-    if ((global_dw_408590 & 0xff) & 0x10)
+    if (global_dw_408590_logFlag & LOG_TYPE_CONSOLE)
     {
         // 原始汇编是向 _iob + 0x20 写入日志。
         // 最新的MSVC没有 _iob 了。干脆改为 stdout 吧。
@@ -358,10 +362,9 @@ void sub_404eb1_SetLogFile(FILE* fp)
     global_dw_40858c_logFile = fp;
 }
 
-void sub_404ec5_SetValue(DWORD num)
+void sub_404ec5_EnableLog(DWORD logType)
 {
-    // 由于 global_dw_408590 的初始值为 0，所以此处的按位或等价于将它赋值为传入的 0x20
-    global_dw_408590 |= num;
+    global_dw_408590_logFlag |= logType;
 }
 
 void sub_406c59_CheckGameExeVersion()
@@ -455,7 +458,7 @@ int WINAPI WinMain(
     {
         global_dw_408588_logFile = fopen(CSTR_D2_LOADER_DOT_LOG, "a");
         sub_404eb1_SetLogFile(global_dw_408588_logFile);
-        sub_404ec5_SetValue(0x20);
+        sub_404ec5_EnableLog(LOG_TYPE_FILE);
         // add esp, 10h 是平衡前面的三个C函数调用造成的栈变化
     }
 
