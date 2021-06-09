@@ -238,6 +238,7 @@ void sub_406c59()
 
     DWORD edi_size = GetFileVersionInfoSizeA(GAME_DOT_EXE, &unusedHandle);
     void* ebx_ptr = VirtualAlloc(NULL, edi_size, MEM_COMMIT, PAGE_READWRITE);
+    UINT esi = 0;
     if (ebx_ptr) {
         // esi 已经在上面被 xor esi, esi 置为0；
         if (GetFileVersionInfoA(GAME_DOT_EXE, 0, edi_size, ebx_ptr))
@@ -259,7 +260,23 @@ void sub_406c59()
                     assert(sizeof(VS_FIXEDFILEINFO) == 0x34);
                     if (len == sizeof(VS_FIXEDFILEINFO))
                     {
-                        //TODO
+                        assert(offsetof(VS_FIXEDFILEINFO, dwProductVersionMS) == 0x10);
+                        UINT version = fileInfo->dwProductVersionMS;
+                        version >>= 16;
+                        esi = version & 0xff;
+                        version = fileInfo->dwProductVersionMS & 0xff;
+                        esi <<= 8;
+                        esi |= version;
+
+                        assert(offsetof(VS_FIXEDFILEINFO, dwProductVersionLS) == 0x14);
+                        version = fileInfo->dwProductVersionLS;
+                        UINT eax = fileInfo->dwProductVersionLS & 0xff;
+                        version >>= 16;
+                        version = version & 0xff;
+                        esi <<= 8;
+                        esi |= version;
+                        esi <<= 8;
+                        esi |= eax;
                     }
                 }
             }
