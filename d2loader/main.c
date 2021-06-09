@@ -230,14 +230,19 @@ void sub_404ec5_setValue(DWORD num)
 
 void sub_406c59()
 {
-    HANDLE fileVersionInfoHandle;
+    DWORD fileVersionInfoHandle;
     UINT len;
     BYTE* buffer;
 
     DWORD edi_size = GetFileVersionInfoSizeA(GAME_DOT_EXE, &fileVersionInfoHandle);
     void* ebx_ptr = VirtualAlloc(NULL, edi_size, MEM_COMMIT, PAGE_READWRITE);
     if (ebx_ptr) {
-        //TODO
+        // esi 已经在上面被 xor esi, esi 置为0；
+        if (GetFileVersionInfoA(GAME_DOT_EXE, 0, edi_size, ebx_ptr))
+        {
+            VerQueryValueA(ebx_ptr, "\\", &buffer, &len);
+            //TODO
+        }
     }
     // VirtualFree 要求第一个参数不为 NULL，所以用if包裹一下。
     if (ebx_ptr)
