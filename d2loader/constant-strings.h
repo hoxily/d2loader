@@ -1,5 +1,8 @@
 #pragma once
 
+/* 根据函数标识符创建对应的字符串 */
+#define LOG_TAG(identifier) #identifier
+
 /* string constant */
 #define CSTR_D2_EXP_DOT_MPQ "d2exp.mpq"
 #define CSTR_D2_X_TALK_DOT_MPQ "d2xtalk.mpq"
@@ -15,3 +18,4 @@
 #define CSTR_PROCESS_PRIORITY_ABOVE_NORMAL "anormal"
 #define CSTR_PROCESS_PRIORITY_HIGH "high"
 #define CSTR_PROCESS_PRIORITY_REALTIME "realtime"
+#define CSTR_LOG_START_SEPARATOR_LINE "---------------------------------------------------------"

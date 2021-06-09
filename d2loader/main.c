@@ -1,6 +1,7 @@
 #include <Windows.h>
 #include <assert.h>
 #include <stdio.h>
+#include <stdarg.h>
 #include "logger.h"
 #include "constant-strings.h"
 
@@ -100,6 +101,10 @@ union version_info
     BYTE padding[0xc94];
 };
 
+sub_404ed0_LogFormat(const char* tag, const char* format, ...)
+{
+
+}
 
 BOOL sub_407380_CheckFileExist(const char* filePath)
 {
@@ -410,6 +415,7 @@ int WINAPI WinMain(
     }
 
     sub_406c59_CheckGameExeVersion();
+    sub_404ed0_LogFormat(LOG_TAG(WinMain), CSTR_LOG_START_SEPARATOR_LINE);
     //TODO
     return 0;
 }
