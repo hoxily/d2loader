@@ -8,3 +8,5 @@
 #define B_NORMAL "bnormal"
 #define GAME_DOT_EXE "game.exe"
 #define D2_LOADER_DOT_LOG "d2loader.log"
+#define D2_LOADER_DOES_NOT_RECOGNIZE_GAME_VERSION "D2Loader does not recognize this version of Diablo II. This build is only designed to work with Diablo II v1.13c.\r\n\r\nPlease see http://d2loader.blizzsector.net/ for updates."
+#define UNKNOW_VERSION "Unknown Version"

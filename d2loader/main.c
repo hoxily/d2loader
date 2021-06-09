@@ -215,6 +215,7 @@ BOOL sub_406803()
     }
     sub_4068f2(&Dst->db_0884_filename.value);
     //TODO
+    return TRUE;
 }
 
 void sub_404eb1_setLogFile(FILE* fp)
@@ -230,18 +231,32 @@ void sub_404ec5_setValue(DWORD num)
 
 void sub_406c59()
 {
-    DWORD fileVersionInfoHandle;
+    // GetFileVersionInfoSizeA 总是会把 unusedHandle 设为 0
+    DWORD unusedHandle;
     UINT len;
-    BYTE* buffer;
+    VS_FIXEDFILEINFO* fileInfo;
 
-    DWORD edi_size = GetFileVersionInfoSizeA(GAME_DOT_EXE, &fileVersionInfoHandle);
+    DWORD edi_size = GetFileVersionInfoSizeA(GAME_DOT_EXE, &unusedHandle);
     void* ebx_ptr = VirtualAlloc(NULL, edi_size, MEM_COMMIT, PAGE_READWRITE);
     if (ebx_ptr) {
         // esi 已经在上面被 xor esi, esi 置为0；
         if (GetFileVersionInfoA(GAME_DOT_EXE, 0, edi_size, ebx_ptr))
         {
-            VerQueryValueA(ebx_ptr, "\\", &buffer, &len);
-            //TODO
+            if (VerQueryValueA(ebx_ptr, "\\", &fileInfo, &len))
+            {
+                if (fileInfo)
+                {
+                    // dwFileVersionLS 的偏移量为 0x0c
+                    // 检查 game.exe 的FileVersion是否为 1.0.13.60，
+                    // 由于 dwFileVersionMS 必定为 0x00010000，所以只检查了 dwFileVersionLS
+                    if (fileInfo->dwFileVersionLS != 0x000d003c)
+                    {
+                        MessageBoxA(NULL, D2_LOADER_DOES_NOT_RECOGNIZE_GAME_VERSION, UNKNOW_VERSION, MB_OK | MB_ICONERROR);
+                        ExitProcess(1);
+                    }
+                    //TODO
+                }
+            }
         }
     }
     // VirtualFree 要求第一个参数不为 NULL，所以用if包裹一下。
