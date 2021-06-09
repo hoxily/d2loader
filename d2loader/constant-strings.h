@@ -19,3 +19,4 @@
 #define CSTR_PROCESS_PRIORITY_HIGH "high"
 #define CSTR_PROCESS_PRIORITY_REALTIME "realtime"
 #define CSTR_LOG_START_SEPARATOR_LINE "---------------------------------------------------------"
+#define CSTR_D2_LOADER_AUTHOR_STATEMENT "D2Loader By Onlyer(onlyer@263.net) Startup"

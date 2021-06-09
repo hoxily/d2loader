@@ -442,6 +442,11 @@ void sub_406c59_CheckGameExeVersion()
     global_dw_408620_Dst->dw_07b4_gameProductVersionFlag.value = esi;
 }
 
+BOOL sub_404c57()
+{
+    //TODO
+}
+
 int WINAPI WinMain(
     _In_ HINSTANCE hInstance,
     _In_opt_ HINSTANCE hPrevInstance,
@@ -465,6 +470,22 @@ int WINAPI WinMain(
 
     sub_406c59_CheckGameExeVersion();
     sub_404ed0_LogFormat(LOG_TAG(WinMain), CSTR_LOG_START_SEPARATOR_LINE);
-    //TODO
-    return 0;
+    sub_404ed0_LogFormat(LOG_TAG(WinMain), CSTR_D2_LOADER_AUTHOR_STATEMENT);
+    char* commandLine = GetCommandLineA();
+    sub_404ed0_LogFormat(LOG_TAG(WinMain), "Command Line: %s", commandLine);
+    sub_404ed0_LogFormat(LOG_TAG(WinMain), "Loader Version: %s", CSTR_D2_LOADER_VERSION_AND_BUILD);
+    sub_404ed0_LogFormat(LOG_TAG(WinMain), "Client Version: 0x%08X", global_dw_408620_Dst->dw_07b4_gameProductVersionFlag.value);
+    const char* mode = global_dw_408620_Dst->db_0000_expansion.value ? "Expansion" : "Classic";
+    sub_404ed0_LogFormat(LOG_TAG(WinMain), "Running in %s Mode", mode);
+    
+    sub_404c57();
+
+    sub_404eb1_SetLogFile(NULL);
+
+    if (global_dw_408588_logFile)
+    {
+        fclose(global_dw_408588_logFile);
+    }
+
+    return 1;
 }
