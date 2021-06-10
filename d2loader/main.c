@@ -15,6 +15,7 @@ FILE* global_dw_40858c_logFile;
 #define LOG_TYPE_CONSOLE 0x10
 
 DWORD global_dw_408590_logFlag;
+DWORD global_dd_402eb8_indexTable[461];
 
 /* function prototype */
 
@@ -257,11 +258,39 @@ char* sub_406a68(char* arg0, char* buffer)
     }
 }
 
+int sub_406ac0(char* buffer)
+{
+
+}
+
+void sub_406b12(int i, char* buffer)
+{
+
+}
+
 BOOL sub_406887(char* commandLine)
 {
     char buffer[0x100];
-    sub_406a68(commandLine, buffer);
-    //TODO
+    char* edi_s = commandLine;
+    do
+    {
+        edi_s = sub_406a68(edi_s, buffer);
+        int i = sub_406ac0(buffer);
+        // test esi, esi
+        // jl
+        // 这样的组合表示检测esi是否为负数。
+        if (i >= 0)
+        {
+            if (global_dd_402eb8_indexTable[i * 5] != 1)
+            {
+                edi_s = sub_406a68(edi_s, buffer);
+            }
+
+            sub_406b12(i, buffer);
+        }
+    } while (*edi_s != '\0');
+    
+    return TRUE;
 }
 
 BOOL sub_4068f2(char* filename)
