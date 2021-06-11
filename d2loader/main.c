@@ -42,7 +42,7 @@ struct string_index_item
     DWORD type;
 };
 
-struct string_index_item global_dd_402ea8_indexTable[93] = {
+struct string_index_item global_dd_402ea8_CommandLineArgumentTable[93] = {
     { "exp", "MAIN", "expansion", 0x0, ARG_TYPE_NO_PARAM },
     { "w", "VIDEO", "window", 0x4, ARG_TYPE_NO_PARAM },
     { "glide", "VIDEO", "glide", 0x6, ARG_TYPE_NO_PARAM },
@@ -420,7 +420,7 @@ int sub_406ac0_FindArgumentNameIndex(const char* buffer)
     }
 
     int ebp_index = 0;
-    if (global_dd_402ea8_indexTable[0].category == (void*)ebp_index)
+    if (global_dd_402ea8_CommandLineArgumentTable[0].category == (void*)ebp_index)
     {
         return -1;
     }
@@ -428,7 +428,7 @@ int sub_406ac0_FindArgumentNameIndex(const char* buffer)
     // 指向去除“-”的参数名
     const char* ebx_argName = buffer + 1;
 
-    struct string_index_item* esi_stringTableEntry = &global_dd_402ea8_indexTable[0]; //&global_dd_402eb0;
+    struct string_index_item* esi_stringTableEntry = &global_dd_402ea8_CommandLineArgumentTable[0];
     do
     {
         const char* shortName = esi_stringTableEntry[0].shortName;
@@ -466,7 +466,7 @@ BOOL sub_406887_ProcessCommandLineArguments(char* commandLine)
         // 这样的组合表示检测esi是否为负数。
         if (i >= 0)
         {
-            if (global_dd_402ea8_indexTable[i].type != ARG_TYPE_NO_PARAM)
+            if (global_dd_402ea8_CommandLineArgumentTable[i].type != ARG_TYPE_NO_PARAM)
             {
                 edi_s = sub_406a68_CutFirstArgument(edi_s, buffer);
             }
