@@ -25,7 +25,11 @@ DWORD global_dd_408590_logFlag;
 
 // 该命令行参数无具体参数值
 #define ARG_TYPE_NO_PARAM 1
-#define ARG_TYPE_04 4
+// 该命令行参数为16位无符号整数，支持十进制、八进制、十六进制等多种表达方式
+#define ARG_TYPE_UNSIGNED_SHORT_INT 2
+// 该命令行参数为32位无符号整数，支持十进制、八进制、十六进制等多种表达方式
+#define ARG_TYPE_UNSIGNED_INT 4
+// 其他数值表示该参数值作为字符串的存储缓冲区的大小
 
 #pragma pack(1)
 struct string_index_item
@@ -51,20 +55,21 @@ struct string_index_item global_dd_402ea8_CommandLineArgumentTable[93] = {
     { "rave", "VIDEO", "rave", 0x8, ARG_TYPE_NO_PARAM },
     { "per", "VIDEO", "perspective", 0x9, ARG_TYPE_NO_PARAM },
     { "lq", "VIDEO", "lowquality", 0xa, ARG_TYPE_NO_PARAM },
-    { "gamma", "VIDEO", "gamma", 0xc, 0x4 },
+    { "gamma", "VIDEO", "gamma", 0xc, ARG_TYPE_UNSIGNED_INT },
     { "vsync", "VIDEO", "vsync", 0x10, ARG_TYPE_NO_PARAM },
-    { "fr", "VIDEO", "framerate", 0x10, 0x4 },
+    { "fr", "VIDEO", "framerate", 0x10, ARG_TYPE_UNSIGNED_INT },
     { "s", "NETWORK", "serverip", 0x33, 0x18 },
-    { "gametype", "NETWORK", "gametype", 0x14, 0x4 },
-    { "joinid", "NETWORK", "joinid", 0x18, 0x2 },
+    { "gametype", "NETWORK", "gametype", 0x14, ARG_TYPE_UNSIGNED_INT },
+    { "joinid", "NETWORK", "joinid", 0x18, ARG_TYPE_UNSIGNED_SHORT_INT },
     { "gamename", "NETWORK", "gamename", 0x1a, 0x18 },
     { "bn", "NETWORK", "battlenetip", 0x4b, 0x18 },
     { "mcpip", "NETWORK", "mcpip", 0x63, 0x18 },
     { "nopk", "NETWORK", "nopk", 0x7e, ARG_TYPE_NO_PARAM },
     { "openc", "NETWORK", "openc", 0x7f, ARG_TYPE_NO_PARAM },
-    { "arena", "GAME", "arena", 0x202, 0x2 },
+    { "arena", "GAME", "arena", 0x202, ARG_TYPE_UNSIGNED_SHORT_INT },
     { "difficulty", "GAME", "difficulty", 0x20b, ARG_TYPE_NO_PARAM },
     { "txt", "GAME", "text", 0x211, ARG_TYPE_NO_PARAM },
+    // -ama 与 -pal 的偏移量是一样的。可能是 d2loader 的一个bug。
     { "ama", "CHARACTER", "ama", 0x81, ARG_TYPE_NO_PARAM },
     { "pal", "CHARACTER", "pal", 0x81, ARG_TYPE_NO_PARAM },
     { "sor", "CHARACTER", "sor", 0x82, ARG_TYPE_NO_PARAM },
@@ -79,19 +84,19 @@ struct string_index_item global_dd_402ea8_CommandLineArgumentTable[93] = {
     { "realm", "CHARACTER", "realm", 0xd1, 0x18 },
     { "ctemp", "CHARACTER", "ctemp", 0x1e9, ARG_TYPE_NO_PARAM },
     { "charclass", "CHARACTER", "charclass", 0x1e9, ARG_TYPE_NO_PARAM },
-    { "charstatus", "CHARACTER", "charstatus", 0x1ea, 0x2 },
+    { "charstatus", "CHARACTER", "charstatus", 0x1ea, ARG_TYPE_UNSIGNED_SHORT_INT },
     { "nm", "MONSTER", "nomonster", 0x1ec, ARG_TYPE_NO_PARAM },
-    { "m", "MONSTER", "monsterclass", 0x1ed, 0x4 },
+    { "m", "MONSTER", "monsterclass", 0x1ed, ARG_TYPE_UNSIGNED_INT },
     { "minfo", "MONSTER", "monsterinfo", 0x1f1, ARG_TYPE_NO_PARAM },
-    { "md", "MONSTER", "monsterdebug", 0x1f2, 0x4 },
+    { "md", "MONSTER", "monsterdebug", 0x1f2, ARG_TYPE_UNSIGNED_INT },
     { "rare", "ITEM", "rare", 0x1f6, ARG_TYPE_NO_PARAM },
     { "unique", "ITEM", "unique", 0x1f7, ARG_TYPE_NO_PARAM },
-    { "act", "INTERFACE", "act", 0x1fb, 0x4 },
+    { "act", "INTERFACE", "act", 0x1fb, ARG_TYPE_UNSIGNED_INT },
     { "log", "DEBUGS", "log", 0x212, ARG_TYPE_NO_PARAM },
     { "msglog", "DEBUGS", "msglog", 0x212, ARG_TYPE_NO_PARAM },
     { "safe", "DEBUGS", "safemode", 0x213, ARG_TYPE_NO_PARAM },
     { "nosave", "DEBUGS", "nosave", 0x215, ARG_TYPE_NO_PARAM },
-    { "seed", "DEBUGS", "seed", 0x216, 0x4 },
+    { "seed", "DEBUGS", "seed", 0x216, ARG_TYPE_UNSIGNED_INT },
     { "teen", "DEBUGS", "teen", 0x21a, ARG_TYPE_NO_PARAM },
     { "cheats", "DEBUGS", "cheats", 0x219, ARG_TYPE_NO_PARAM },
     { "ns", "DEBUGS", "nosound", 0x21b, ARG_TYPE_NO_PARAM },
@@ -101,8 +106,8 @@ struct string_index_item global_dd_402ea8_CommandLineArgumentTable[93] = {
     { "direct", "FILEIO", "direct", 0x1ff, ARG_TYPE_NO_PARAM },
     { "lem", "FILEIO", "lowend", 0x200, ARG_TYPE_NO_PARAM },
     { "nocompress", "FILEIO", "nocompress", 0x202, ARG_TYPE_NO_PARAM },
-    { "comint", "BNET", "comint", 0x221, 0x4 },
-    { "token", "BNET", "token", 0x223, 0x4 },
+    { "comint", "BNET", "comint", 0x221, ARG_TYPE_UNSIGNED_INT },
+    { "token", "BNET", "token", 0x223, ARG_TYPE_UNSIGNED_INT },
     { "gamepass", "BNET", "gamepass", 0x23f, 0x18 },
     { "skiptobnet", "BNET", "skiptobnet", 0x359, ARG_TYPE_NO_PARAM },
     { "client", "CUSTOM", "client", 0x79b, ARG_TYPE_NO_PARAM },
@@ -134,7 +139,7 @@ struct string_index_item global_dd_402ea8_CommandLineArgumentTable[93] = {
     { "mpq", "CUSTOM", "mpqfile", 0x988, 0x104 },
     { "pdir", "CUSTOM", "plugindir", 0xa8c, 0x104 },
     { "sfile", "CUSTOM", "scriptfile", 0xb90, 0x104 },
-    { "test", "CUSTOM", "test", 0x7b8, 0x4 },
+    { "test", "CUSTOM", "test", 0x7b8, ARG_TYPE_UNSIGNED_INT },
     { NULL, NULL, NULL, 0, 0 },
 };
 
@@ -448,9 +453,52 @@ int sub_406ac0_FindArgumentNameIndex(const char* buffer)
     return ebp_index;
 }
 
-void sub_406b12(int i, char* buffer)
+// 存储一条命令行参数
+// @param i 命令行参数名在索引表的下标
+// @param buffer 该命令行参数的值
+BOOL sub_406b12_StoreCommandLineSetting(int i, char* buffer)
 {
+    assert(offsetof(struct string_index_item, type) == 0x10);
+    DWORD type = global_dd_402ea8_CommandLineArgumentTable[i].type;
+    DWORD offset = global_dd_402ea8_CommandLineArgumentTable[i].offset;
+    if (type == ARG_TYPE_NO_PARAM)
+    {
+        BYTE toggle = global_dd_408620_settings->padding[offset];
+        // 原代码是 xor byte ptr [eax], 1
+        // 看起来会翻转原来已经设置好的配置项。
+        // 预测：d2loader.exe -w -w  这样的启动参数，并不会窗口化运行，而是全屏运行。
+        // 实测结果：TODO
+        global_dd_408620_settings->padding[offset] = !toggle;
+    }
+    else if (type == ARG_TYPE_UNSIGNED_SHORT_INT)
+    {
+        /*
+        * 如果 base(_Radix) 为0，则使用 strSource 指向的字符串的初始字符来确定基。
+        * 如果第一个字符为 0，且第二个字符不为“x”或“X”，则将该字符串视为八进制整数。
+        * 如果第一个字符为“0”，且第二个字符为“x”或“X”，则将该字符串视为十六进制整数。
+        * 如果第一个字符是“1”至“9”，则将该字符串视为十进制整数。
+        */
+        WORD ax = (WORD)strtoul(buffer, NULL, 0);
+        WORD* ptr = (WORD*)(global_dd_408620_settings->padding + offset);
+        *ptr = ax;
+    }
+    else if (type == ARG_TYPE_UNSIGNED_INT)
+    {
+        DWORD eax = strtoul(buffer, NULL, 0);
+        DWORD* ptr = (DWORD*)(global_dd_408620_settings->padding + offset);
+        *ptr = eax;
+    }
+    else
+    {
+        // 此时 type 表示字符串缓冲区的大小。
+        int settingBufferSize = type;
+        // 使用 (void) 丢弃 lstrcpynA 的返回结果。否则Visual Studio会有warning。
+        (void)lstrcpynA(global_dd_408620_settings->padding + offset, buffer, settingBufferSize);
+        // 强制设置缓冲区的最后一个字符为null结束符，以免溢出。
+        global_dd_408620_settings->padding[offset + settingBufferSize - 1] = '\0';
+    }
 
+    return TRUE;
 }
 
 BOOL sub_406887_ProcessCommandLineArguments(char* commandLine)
@@ -471,7 +519,7 @@ BOOL sub_406887_ProcessCommandLineArguments(char* commandLine)
                 edi_s = sub_406a68_CutFirstArgument(edi_s, buffer);
             }
 
-            sub_406b12(i, buffer);
+            sub_406b12_StoreCommandLineSetting(i, buffer);
         }
     } while (*edi_s != '\0');
     
