@@ -718,6 +718,7 @@ BOOL sub_404c57()
     //TODO
 }
 
+// sub_404b60
 int WINAPI WinMain(
     _In_ HINSTANCE hInstance,
     _In_opt_ HINSTANCE hPrevInstance,
