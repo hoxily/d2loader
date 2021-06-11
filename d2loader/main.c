@@ -453,7 +453,7 @@ void sub_406b12(int i, char* buffer)
 
 }
 
-BOOL sub_406887(char* commandLine)
+BOOL sub_406887_ProcessCommandLineArguments(char* commandLine)
 {
     char buffer[0x100];
     const char* edi_s = commandLine;
@@ -547,7 +547,7 @@ BOOL sub_406803_InitializeSettings()
     }
     sub_4069d8_InitializeDefaultSettings();
     char* commandLine = GetCommandLineA();
-    if (!sub_406887(commandLine))
+    if (!sub_406887_ProcessCommandLineArguments(commandLine))
     {
         return FALSE;
     }
