@@ -408,7 +408,7 @@ const char* sub_406a68_CutFirstArgument(const char* args, char* buffer)
     return eax_p;
 }
 
-int sub_406ac0(const char* buffer)
+int sub_406ac0_FindArgumentNameIndex(const char* buffer)
 {
     if (buffer == 0) {
         return -1;
@@ -460,7 +460,7 @@ BOOL sub_406887(char* commandLine)
     do
     {
         edi_s = sub_406a68_CutFirstArgument(edi_s, buffer);
-        int i = sub_406ac0(buffer);
+        int i = sub_406ac0_FindArgumentNameIndex(buffer);
         // test esi, esi
         // jl
         // 这样的组合表示检测esi是否为负数。
