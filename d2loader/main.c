@@ -14,7 +14,7 @@
  */
 
 /* global variable */
-union version_info* global_dd_408620_Dst;
+union program_setting_store* global_dd_408620_settings;
 FILE* global_dd_408588_logFile;
 FILE* global_dd_40858c_logFile;
 
@@ -36,7 +36,7 @@ struct string_index_item
     const char* category;
     // 参数的长名
     const char* longName;
-    // 该参数在 version_info 结构中的偏移量
+    // 该参数在 program_setting_store 结构中的偏移量
     DWORD offset;
     // 参数的类型
     DWORD type;
@@ -144,7 +144,7 @@ struct string_index_item global_dd_402ea8_CommandLineArgumentTable[93] = {
 
 // 在这里使用union简直绝妙！不用费劲心思凑字段的偏移量了。
 #pragma pack(1) // 逐字节对齐，方便定位
-union version_info
+union program_setting_store
 {
     #pragma pack(1)
     struct
@@ -321,28 +321,28 @@ BOOL sub_40735e_CheckExpansion()
 
 BOOL sub_406bab_IsExpansion()
 {
-    if (global_dd_408620_Dst == NULL)
+    if (global_dd_408620_settings == NULL)
     {
         return FALSE;
     }
-    return global_dd_408620_Dst->db_0000_expansion.value;
+    return global_dd_408620_settings->db_0000_expansion.value;
 }
 
 void sub_4069d8_InitializeDefaultSettings()
 {
-    memset(global_dd_408620_Dst, 0, sizeof(union version_info));
+    memset(global_dd_408620_settings, 0, sizeof(union program_setting_store));
     if (sub_40735e_CheckExpansion())
     {
-        global_dd_408620_Dst->db_0000_expansion.value = TRUE;
+        global_dd_408620_settings->db_0000_expansion.value = TRUE;
     }
 
-    global_dd_408620_Dst->dd_020d_IsExpansion.value = sub_406bab_IsExpansion;
-    global_dd_408620_Dst->db_079d.value = TRUE;
-    global_dd_408620_Dst->db_07af.value = TRUE;
-    strcpy(global_dd_408620_Dst->db_0804_title.value, CSTR_D2_LOADER_VERSION_AND_BUILD);
-    strcpy(global_dd_408620_Dst->db_07ec_gameName.value, CSTR_DIABLO_II);
+    global_dd_408620_settings->dd_020d_IsExpansion.value = sub_406bab_IsExpansion;
+    global_dd_408620_settings->db_079d.value = TRUE;
+    global_dd_408620_settings->db_07af.value = TRUE;
+    strcpy(global_dd_408620_settings->db_0804_title.value, CSTR_D2_LOADER_VERSION_AND_BUILD);
+    strcpy(global_dd_408620_settings->db_07ec_gameName.value, CSTR_DIABLO_II);
     // 怪不得以前打开windows的任务管理器查看d2loader.exe的优先级，总是显示为低于正常。
-    strcpy(global_dd_408620_Dst->db_07bc_processPriority.value, CSTR_PROCESS_PRIORITY_BELOW_NORMAL);
+    strcpy(global_dd_408620_settings->db_07bc_processPriority.value, CSTR_PROCESS_PRIORITY_BELOW_NORMAL);
 }
 
 /**
@@ -539,9 +539,9 @@ BOOL sub_407bb9_InitializeProcessPriority(HANDLE hProcess, const char* priority)
 
 BOOL sub_406803_InitializeSettings()
 {
-    assert(sizeof(union version_info) == 0xc94);
-    global_dd_408620_Dst = malloc(sizeof(union version_info));
-    if (!global_dd_408620_Dst)
+    assert(sizeof(union program_setting_store) == 0xc94);
+    global_dd_408620_settings = malloc(sizeof(union program_setting_store));
+    if (!global_dd_408620_settings)
     {
         return FALSE;
     }
@@ -551,9 +551,9 @@ BOOL sub_406803_InitializeSettings()
     {
         return FALSE;
     }
-    sub_4068f2(&global_dd_408620_Dst->db_0884_filename.value);
+    sub_4068f2(&global_dd_408620_settings->db_0884_filename.value);
 
-    char* dstStr = global_dd_408620_Dst->db_0004_str.value;
+    char* dstStr = global_dd_408620_settings->db_0004_str.value;
     if (dstStr[0] == 0 &&
         dstStr[1] == 0 &&
         dstStr[2] == 0 &&
@@ -563,7 +563,7 @@ BOOL sub_406803_InitializeSettings()
         sub_406bb9();
     }
 
-    char* priority = global_dd_408620_Dst->db_07bc_processPriority.value;
+    char* priority = global_dd_408620_settings->db_07bc_processPriority.value;
     // GetCurrentProcess 返回的是一个伪Handle，总是 (HANDLE)-1 即 0xffffffff。
     // 这并非出错了，而是故意这样设计的。
     HANDLE hProcess = GetCurrentProcess();
@@ -654,7 +654,7 @@ void sub_406c59_CheckGameExeVersion()
         // 最高比特位 置0
         esi &= 0x7fffffff;
     }
-    global_dd_408620_Dst->dw_07b4_gameProductVersionFlag.value = esi;
+    global_dd_408620_settings->dw_07b4_gameProductVersionFlag.value = esi;
 }
 
 BOOL sub_404c57()
@@ -675,7 +675,7 @@ int WINAPI WinMain(
         return 0;
     }
 
-    if (global_dd_408620_Dst->db_07ac_enableLogFile.value)
+    if (global_dd_408620_settings->db_07ac_enableLogFile.value)
     {
         global_dd_408588_logFile = fopen(CSTR_D2_LOADER_DOT_LOG, "a");
         sub_404eb1_SetLogFile(global_dd_408588_logFile);
@@ -689,8 +689,8 @@ int WINAPI WinMain(
     char* commandLine = GetCommandLineA();
     sub_404ed0_LogFormat(LOG_TAG(WinMain), "Command Line: %s", commandLine);
     sub_404ed0_LogFormat(LOG_TAG(WinMain), "Loader Version: %s", CSTR_D2_LOADER_VERSION_AND_BUILD);
-    sub_404ed0_LogFormat(LOG_TAG(WinMain), "Client Version: 0x%08X", global_dd_408620_Dst->dw_07b4_gameProductVersionFlag.value);
-    const char* mode = global_dd_408620_Dst->db_0000_expansion.value ? "Expansion" : "Classic";
+    sub_404ed0_LogFormat(LOG_TAG(WinMain), "Client Version: 0x%08X", global_dd_408620_settings->dw_07b4_gameProductVersionFlag.value);
+    const char* mode = global_dd_408620_settings->db_0000_expansion.value ? "Expansion" : "Classic";
     sub_404ed0_LogFormat(LOG_TAG(WinMain), "Running in %s Mode", mode);
     
     sub_404c57();
