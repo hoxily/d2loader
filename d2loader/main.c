@@ -233,38 +233,67 @@ void sub_4069d8_InitializeDefaultSettings()
     strcpy(global_dd_408620_Dst->db_07bc_processPriority.value, CSTR_PROCESS_PRIORITY_BELOW_NORMAL);
 }
 
-char* sub_406a68(char* arg0, char* buffer)
+/**
+ * 切出 args 中的第一个命令行参数，存入 buffer 中。
+ * @param args 非空格开头的命令行参数字符串
+ * @param buffer 存储结果的缓冲区
+ * @returns 返回下一次处理时的起始位置
+ * */
+const char* sub_406a68_CutFirstArgument(const char* args, char* buffer)
 {
-    if (arg0 == NULL)
+    if (args == NULL)
     {
         return NULL;
     }
-    char* p = arg0;
-    char* pBuffer = buffer;
-    BOOL esi = FALSE;
-    if (*p == '\0')
-    {
-        buffer[0] = '\0';
-        return p;
-    }
-    else
-    {
-        while (*p != '\0')
-        {
-            if (*p == '\"')
-            {
-                esi = TRUE;
-            }
-            else
-            {
-                if (*p == ' ')
-                {
 
-                }
-            }
-            p++;
+    const char* eax_p = args;
+    char* edx_pBuffer = buffer;
+    BOOL esi_isDoubleQuoteMode = FALSE;
+
+    // 在汇编里while循环被拆出一个单独的跳转，*eax_p != '\0' 对应的代码被重复了一遍。
+    while (*eax_p != '\0')
+    {
+        if (*eax_p == '"')
+        {
+            /* xor ecx, ecx
+             * test esi, esi
+             * setz cl
+             * mov esi, ecx
+             * setz 的意思是如果ZF标志位为1，则将cl置为1，否则置为0；
+             * 也就是如果 esi 为0，则esi变为1；否则esi变为0；相当于取非运算；
+             * 避免了条件跳转。
+             * */
+            esi_isDoubleQuoteMode = !esi_isDoubleQuoteMode;
         }
+        else
+        {
+            if (*eax_p == ' ' && !esi_isDoubleQuoteMode)
+            {
+                break;
+            }
+
+            // 命令行中的 \" 会作为字符串内容对待，而不是作为含有空格的字符串边界定界符对待。
+            if (*eax_p == '\\' && eax_p[1] == '"')
+            {
+                eax_p = eax_p + 1;
+            }
+
+            // 拷贝这个有效内容
+            *edx_pBuffer = *eax_p;
+            edx_pBuffer++;
+        }
+        eax_p++;
     }
+
+    *edx_pBuffer = '\0';
+    
+    // 移除命令行参数之间用于分隔的空格字符
+    while (*eax_p == ' ')
+    {
+        eax_p++;
+    }
+
+    return eax_p;
 }
 
 int sub_406ac0(char* buffer)
@@ -280,10 +309,10 @@ void sub_406b12(int i, char* buffer)
 BOOL sub_406887(char* commandLine)
 {
     char buffer[0x100];
-    char* edi_s = commandLine;
+    const char* edi_s = commandLine;
     do
     {
-        edi_s = sub_406a68(edi_s, buffer);
+        edi_s = sub_406a68_CutFirstArgument(edi_s, buffer);
         int i = sub_406ac0(buffer);
         // test esi, esi
         // jl
@@ -292,7 +321,7 @@ BOOL sub_406887(char* commandLine)
         {
             if (global_dd_402eb8_indexTable[i * 5] != 1)
             {
-                edi_s = sub_406a68(edi_s, buffer);
+                edi_s = sub_406a68_CutFirstArgument(edi_s, buffer);
             }
 
             sub_406b12(i, buffer);
