@@ -36,8 +36,8 @@ struct string_index_item
     const char* category;
     // 参数的长名
     const char* longName;
-    // 参数的长名的长度
-    DWORD length;
+    // 该参数在 version_info 结构中的偏移量
+    DWORD offset;
     // 参数的类型
     DWORD type;
 };
