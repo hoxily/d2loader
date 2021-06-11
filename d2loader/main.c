@@ -450,7 +450,15 @@ int sub_406ac0_FindArgumentNameIndex(const char* buffer)
         ebp_index++;
     } while (esi_stringTableEntry[0].category != NULL);
 
-    return ebp_index;
+    // hoxily fix: 如果没有找到合适的参数名，则返回 -1。
+    if (esi_stringTableEntry[0].category == NULL)
+    {
+        return -1;
+    }
+    else
+    {
+        return ebp_index;
+    }
 }
 
 // 存储一条命令行参数
@@ -467,7 +475,7 @@ BOOL sub_406b12_StoreCommandLineSetting(int i, char* buffer)
         // 原代码是 xor byte ptr [eax], 1
         // 看起来会翻转原来已经设置好的配置项。
         // 预测：d2loader.exe -w -w  这样的启动参数，并不会窗口化运行，而是全屏运行。
-        // 实测结果：TODO
+        // 实测结果：确实是没有窗口化运行。
         global_dd_408620_settings->padding[offset] = !toggle;
     }
     else if (type == ARG_TYPE_UNSIGNED_SHORT_INT)
