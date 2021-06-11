@@ -26,6 +26,10 @@ DWORD global_dd_408590_logFlag;
 //TODO 需要填充这个indexTable
 DWORD global_dd_402eb8_indexTable[461];
 
+void* global_dd_402eac = 0x004035f0;
+
+void* global_dd_402eb0 = 0x004035f8;
+
 /* function prototype */
 
 /* struct */
@@ -296,9 +300,44 @@ const char* sub_406a68_CutFirstArgument(const char* args, char* buffer)
     return eax_p;
 }
 
-int sub_406ac0(char* buffer)
+int sub_406ac0(const char* buffer)
 {
+    if (buffer == 0) {
+        return -1;
+    }
 
+    if (buffer[0] != '-')
+    {
+        return -1;
+    }
+
+    int ebp_index = 0;
+    if (global_dd_402eac == ebp_index)
+    {
+        return -1;
+    }
+
+    // 指向去除“-”的参数名
+    const char* ebx_argName = buffer + 1;
+    // 这里的字符串查找表需要重新换算。
+    char** esi_stringTableEntry = &global_dd_402eb0;
+    do
+    {
+        const char* entry_minus8 = esi_stringTableEntry[-2];
+        if (lstrcmpiA(entry_minus8, ebx_argName) == 0)
+        {
+            break;
+        }
+        const char* entry = esi_stringTableEntry[0];
+        if (lstrcmpiA(entry, ebx_argName) == 0)
+        {
+            break;
+        }
+        esi_stringTableEntry += 5;
+        ebp_index++;
+    } while (esi_stringTableEntry[-1] != NULL);
+
+    return ebp_index;
 }
 
 void sub_406b12(int i, char* buffer)
