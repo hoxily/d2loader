@@ -431,13 +431,13 @@ int sub_406ac0_FindArgumentNameIndex(const char* buffer)
     struct string_index_item* esi_stringTableEntry = &global_dd_402ea8_indexTable[0]; //&global_dd_402eb0;
     do
     {
-        const char* entry_minus8 = esi_stringTableEntry[0].shortName;
-        if (lstrcmpiA(entry_minus8, ebx_argName) == 0)
+        const char* shortName = esi_stringTableEntry[0].shortName;
+        if (lstrcmpiA(shortName, ebx_argName) == 0)
         {
             break;
         }
-        const char* entry = esi_stringTableEntry[0].longName;
-        if (lstrcmpiA(entry, ebx_argName) == 0)
+        const char* longName = esi_stringTableEntry[0].longName;
+        if (lstrcmpiA(longName, ebx_argName) == 0)
         {
             break;
         }
