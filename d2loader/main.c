@@ -227,8 +227,8 @@ union program_setting_store
     struct
     {
         BYTE offset[0x884];
-        char value;
-    } db_0884_filename;
+        char value[0x104];
+    } db_0884_confFile;
 
     BYTE padding[0xc94];
 };
@@ -534,7 +534,7 @@ BOOL sub_406887_ProcessCommandLineArguments(char* commandLine)
     return TRUE;
 }
 
-BOOL sub_4068f2(char* filename)
+BOOL sub_4068f2_LoadConfFile(char* filename)
 {
     //TODO
 }
@@ -607,7 +607,7 @@ BOOL sub_406803_InitializeSettings()
     {
         return FALSE;
     }
-    sub_4068f2(&global_dd_408620_settings->db_0884_filename.value);
+    sub_4068f2_LoadConfFile(global_dd_408620_settings->db_0884_confFile.value);
 
     char* dstStr = global_dd_408620_settings->db_0004_str.value;
     if (dstStr[0] == 0 &&
