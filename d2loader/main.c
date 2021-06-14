@@ -183,6 +183,13 @@ union program_setting_store
     #pragma pack(1)
     struct
     {
+        BYTE offset[0x7a9];
+        BYTE value;
+    } db_07a9_printArg;
+
+    #pragma pack(1)
+    struct
+    {
         BYTE offset[0x7ac];
         BYTE value;
     } db_07ac_enableLogFile;
@@ -827,9 +834,39 @@ void sub_406c59_CheckGameExeVersion()
     global_dd_408620_settings->dw_07b4_gameProductVersionFlag.value = esi;
 }
 
+BOOL sub_4066dc_PrintParametersTable(FILE* fp)
+{
+    if (fp == NULL)
+    {
+        return FALSE;
+    }
+
+    struct string_index_item* entry = &global_dd_402ea8_CommandLineArgumentTable[0];
+    if (entry->category != NULL)
+    {
+        do
+        {
+            //esi Ö¸Ïò entry->longName
+            fprintf(fp, "%-12s %-12s 0x%08X\n", entry->category, entry->longName, entry->offset);
+            entry++;
+        } while (entry->category != NULL);
+    }
+
+    fflush(fp);
+    return TRUE;
+}
+
 BOOL sub_404c57_GameMain()
 {
+    if (global_dd_408620_settings->db_07a9_printArg.value)
+    {
+        sub_404ed0_LogFormat(LOG_TAG(sub_404c57_GameMain), "Printing Parameters Table");
+        sub_4066dc_PrintParametersTable(global_dd_408588_logFile);
+        sub_404ed0_LogFormat(LOG_TAG(sub_404c57_GameMain), "Parameters Table Printed, Exitting");
+    }
     //TODO
+    return TRUE;
+    
 }
 
 // sub_404b60
