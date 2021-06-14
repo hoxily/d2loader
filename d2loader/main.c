@@ -977,8 +977,14 @@ BOOL sub_404c57_GameMain()
             LOG_TAG(sub_404c57_GameMain),
             "Exit From Game Client Loop, Cleanup");
         sub_40a600_Cleanup();
-        // TODO: 这儿有一个 LogFormat 调用，但是没有提供任何参数，很奇怪。
+        // 这儿有一个 LogFormat 调用，但是没有提供任何参数，很奇怪。
         // call sub_404ed0
+        // 由于call sub_40a600_Cleanup 之前的两次LogFormat调用结束后还没有平衡栈，
+        // 所以这里再次调用 LogFormat，相当于沿用上次push的参数。
+        sub_404ed0_LogFormat(
+            LOG_TAG(sub_404c57_GameMain),
+            "Exit From Game Client Loop, Cleanup");
+        // 实测发现，并没有输出两遍 “Exit From Game Client Loop, Cleanup”
         
         if (global_dd_408620_settings->db_07af_noCleanup.value)
         {
