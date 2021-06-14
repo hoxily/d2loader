@@ -190,6 +190,20 @@ union program_setting_store
     #pragma pack(1)
     struct
     {
+        BYTE offset[0x7aa];
+        BYTE value;
+    } db_07aa_noScript;
+
+    #pragma pack(1)
+    struct
+    {
+        BYTE offset[0x7ab];
+        BYTE value;
+    } db_07ab_noPlugin;
+
+    #pragma pack(1)
+    struct
+    {
         BYTE offset[0x7ac];
         BYTE value;
     } db_07ac_enableLogFile;
@@ -206,7 +220,7 @@ union program_setting_store
     {
         BYTE offset[0x7af];
         BYTE value;
-    } db_07af;
+    } db_07af_noCleanup;
 
     #pragma pack(1)
     struct
@@ -357,7 +371,7 @@ void sub_4069d8_InitializeDefaultSettings()
 
     global_dd_408620_settings->dd_020d_IsExpansion.value = sub_406bab_IsExpansion;
     global_dd_408620_settings->db_079d.value = TRUE;
-    global_dd_408620_settings->db_07af.value = TRUE;
+    global_dd_408620_settings->db_07af_noCleanup.value = TRUE;
     strcpy(global_dd_408620_settings->db_0804_title.value, CSTR_D2_LOADER_VERSION_AND_BUILD);
     strcpy(global_dd_408620_settings->db_07ec_gameName.value, CSTR_DIABLO_II);
     // 怪不得以前打开windows的任务管理器查看d2loader.exe的优先级，总是显示为低于正常。
@@ -635,7 +649,7 @@ BOOL sub_406bb9_LoadVideoConfigFromRegistry()
         "Render",
         NULL,
         &type,
-        &data,
+        (LPBYTE)&data,
         &cbData);
     if (ret != ERROR_SUCCESS)
     {
@@ -856,15 +870,134 @@ BOOL sub_4066dc_PrintParametersTable(FILE* fp)
     return TRUE;
 }
 
+void sub_406014()
+{
+    //TODO
+}
+
+BOOL sub_4054fd()
+{
+    //TODO
+}
+
+BOOL sub_40a480()
+{
+    //TODO
+}
+
+void sub_4057a8()
+{
+    //TODO
+}
+
+void sub_40a600_Cleanup()
+{
+    //TODO
+}
+
+void sub_4071a5()
+{
+    //TODO
+}
+
+void sub_405af1()
+{
+    //TODO
+}
+
+void sub_406175()
+{
+    //TODO
+}
+
+void sub_405602()
+{
+    //TODO
+}
+
+void sub_4069bc()
+{
+    //TODO
+}
+
+void sub_404d77_GameClientLoop()
+{
+    //TODO
+}
+
 BOOL sub_404c57_GameMain()
 {
     if (global_dd_408620_settings->db_07a9_printArg.value)
     {
-        sub_404ed0_LogFormat(LOG_TAG(sub_404c57_GameMain), "Printing Parameters Table");
+        sub_404ed0_LogFormat(
+            LOG_TAG(sub_404c57_GameMain),
+            "Printing Parameters Table");
         sub_4066dc_PrintParametersTable(global_dd_408588_logFile);
-        sub_404ed0_LogFormat(LOG_TAG(sub_404c57_GameMain), "Parameters Table Printed, Exitting");
+        sub_404ed0_LogFormat(
+            LOG_TAG(sub_404c57_GameMain),
+            "Parameters Table Printed, Exitting");
     }
-    //TODO
+    else
+    {
+        if (global_dd_408620_settings->db_07ab_noPlugin.value)
+        {
+            sub_404ed0_LogFormat(
+                LOG_TAG(sub_404c57_GameMain),
+                "Plugin Have Been Disabled");
+        }
+        else
+        {
+            sub_406014();
+        }
+
+        BOOL hookRet = sub_4054fd();
+        sub_404ed0_LogFormat(
+            LOG_TAG(sub_404c57_GameMain),
+            "Hook Returned %s",
+            hookRet ? "True" : "False");
+
+        if (!sub_40a480())
+        {
+            sub_404ed0_LogFormat(
+                LOG_TAG(sub_404c57_GameMain),
+                "Game Initialize Failed, Exitting\n");
+            return FALSE;
+        }
+
+        if (!global_dd_408620_settings->db_07aa_noScript.value)
+        {
+            sub_4057a8();
+        }
+
+        sub_404ed0_LogFormat(
+            LOG_TAG(sub_404c57_GameMain),
+            "Entering Game Client Loop");
+        sub_404d77_GameClientLoop();
+        sub_404ed0_LogFormat(
+            LOG_TAG(sub_404c57_GameMain),
+            "Exit From Game Client Loop, Cleanup");
+        sub_40a600_Cleanup();
+        // TODO: 这儿有一个 LogFormat 调用，但是没有提供任何参数，很奇怪。
+        // call sub_404ed0
+        
+        if (global_dd_408620_settings->db_07af_noCleanup.value)
+        {
+            ExitProcess(1);
+            assert("Unreachable code.");
+        }
+        else
+        {
+            sub_4071a5();
+            sub_405af1();
+            sub_406175();
+            sub_405602();
+            sub_4069bc();
+            sub_404ed0_LogFormat(
+                LOG_TAG(sub_404c57_GameMain),
+                "Cleanup Done, Exitting\n");
+        }
+    }
+    
     return TRUE;
     
 }
