@@ -827,7 +827,7 @@ void sub_406c59_CheckGameExeVersion()
     global_dd_408620_settings->dw_07b4_gameProductVersionFlag.value = esi;
 }
 
-BOOL sub_404c57()
+BOOL sub_404c57_GameMain()
 {
     //TODO
 }
@@ -864,7 +864,7 @@ int WINAPI WinMain(
     const char* mode = global_dd_408620_settings->db_0000_expansion.value ? "Expansion" : "Classic";
     sub_404ed0_LogFormat(LOG_TAG(WinMain), "Running in %s Mode", mode);
     
-    sub_404c57();
+    sub_404c57_GameMain();
 
     sub_404eb1_SetLogFile(NULL);
 
