@@ -870,8 +870,9 @@ BOOL sub_4066dc_PrintParametersTable(FILE* fp)
     return TRUE;
 }
 
-void sub_406014()
+void sub_406014_LoadPlugin()
 {
+
     //TODO
 }
 
@@ -947,7 +948,7 @@ BOOL sub_404c57_GameMain()
         }
         else
         {
-            sub_406014();
+            sub_406014_LoadPlugin();
         }
 
         BOOL hookRet = sub_4054fd();
