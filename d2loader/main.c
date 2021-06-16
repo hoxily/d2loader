@@ -870,9 +870,9 @@ BOOL sub_4066dc_PrintParametersTable(FILE* fp)
     return TRUE;
 }
 
-void sub_406014_LoadPlugin()
+void sub_406014_PluginInit()
 {
-
+    sub_404ed0_LogFormat(LOG_TAG(sub_406014_PluginInit), "Plugin System Version 0x%08X", 0x01000912);
     //TODO
 }
 
@@ -948,7 +948,7 @@ BOOL sub_404c57_GameMain()
         }
         else
         {
-            sub_406014_LoadPlugin();
+            sub_406014_PluginInit();
         }
 
         BOOL hookRet = sub_4054fd();
