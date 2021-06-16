@@ -15,4 +15,6 @@ void LogFormat(const char* format, ...)
     va_start(ap, format);
     vfprintf(logFile, format, ap);
     va_end(ap);
+    fprintf(logFile, "\n");
+    fflush(logFile);
 }
