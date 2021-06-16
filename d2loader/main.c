@@ -22,6 +22,10 @@ FILE* global_dd_40858c_logFile;
 #define LOG_TYPE_CONSOLE 0x10
 
 DWORD global_dd_408590_logFlag;
+char global_db_402958_pluginDir[0x104] = "Plugin";
+DWORD global_dd_4085f0;
+CRITICAL_SECTION global_dd_4085f8_criticalSection;
+int global_dd_408618_loadedPluginCount;
 
 // 该命令行参数无具体参数值
 #define ARG_TYPE_NO_PARAM 1
@@ -257,6 +261,13 @@ union program_setting_store
         BYTE offset[0x884];
         char value[0x104];
     } db_0884_confFile;
+
+    #pragma pack(1)
+    struct
+    {
+        BYTE offset[0xa8c];
+        char value[0x104];
+    } db_0a8c_pluginDir;
 
     BYTE padding[0xc94];
 };
@@ -870,10 +881,56 @@ BOOL sub_4066dc_PrintParametersTable(FILE* fp)
     return TRUE;
 }
 
-void sub_406014_PluginInit()
+void sub_406451_AddPluginDll(const char* dllFilePath)
+{
+    global_dd_408618_loadedPluginCount++;
+}
+
+void sub_4061df_PluginListRun(DWORD reasonFlag)
+{
+
+}
+
+BOOL sub_406014_PluginInit()
 {
     sub_404ed0_LogFormat(LOG_TAG(sub_406014_PluginInit), "Plugin System Version 0x%08X", 0x01000912);
-    //TODO
+    if (global_dd_408620_settings->db_0a8c_pluginDir.value[0] != '\0')
+    {
+        strcpy(global_db_402958_pluginDir, global_dd_408620_settings->db_0a8c_pluginDir.value);
+    }
+    sub_404ed0_LogFormat(LOG_TAG(sub_406014_PluginInit), "Plugin Directory is \"%s\"", global_db_402958_pluginDir);
+
+    char fileName[0x104];
+    WIN32_FIND_DATAA findFileData;
+
+    wsprintfA(fileName, "%s\\*.dll", global_db_402958_pluginDir);
+
+    // 0x3e8 为 1000
+    global_dd_4085f0 = 0x3e8;
+    InitializeCriticalSection(&global_dd_4085f8_criticalSection);
+    
+    assert(sizeof(findFileData) == 0x140);
+    HANDLE handle = FindFirstFileA(fileName, &findFileData);
+    if (handle == INVALID_HANDLE_VALUE)
+    {
+        sub_404ed0_LogFormat(LOG_TAG(sub_406014_PluginInit), "Error Searching Plugins");
+        return FALSE;
+    }
+    else
+    {
+        do
+        {
+            sub_406451_AddPluginDll(findFileData.cFileName);
+        } while (FindNextFileA(handle, &findFileData));
+        
+        FindClose(handle);
+
+        sub_4061df_PluginListRun(0x00000001);
+
+        sub_404ed0_LogFormat(LOG_TAG(sub_406014_PluginInit), "Total %d Plugins Loaded", global_dd_408618_loadedPluginCount);
+
+        return TRUE;
+    }
 }
 
 BOOL sub_4054fd()
