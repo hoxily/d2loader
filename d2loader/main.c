@@ -881,7 +881,7 @@ BOOL sub_4066dc_PrintParametersTable(FILE* fp)
     return TRUE;
 }
 
-void sub_406451_AddPluginDll(const char* dllFilePath)
+void sub_406451_LoadPlugin(const char* dllFilePath)
 {
     global_dd_408618_loadedPluginCount++;
 }
@@ -920,7 +920,7 @@ BOOL sub_406014_PluginInit()
     {
         do
         {
-            sub_406451_AddPluginDll(findFileData.cFileName);
+            sub_406451_LoadPlugin(findFileData.cFileName);
         } while (FindNextFileA(handle, &findFileData));
         
         FindClose(handle);
