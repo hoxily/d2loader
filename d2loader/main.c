@@ -272,6 +272,18 @@ union program_setting_store
     BYTE padding[0xc94];
 };
 
+typedef void (*fn_OnInitPlugin)(DWORD gameProductVersionFlag);
+
+#pragma pack(1)
+struct query_interface_result
+{
+    DWORD number0;
+    DWORD number1;
+    fn_OnInitPlugin init;
+};
+
+typedef struct query_interface_result* (*fn_QueryInterface)();
+
 void sub_404ed0_LogFormat(const char* tag, const char* format, ...)
 {
     time_t now;
@@ -881,9 +893,108 @@ BOOL sub_4066dc_PrintParametersTable(FILE* fp)
     return TRUE;
 }
 
-void sub_406451_LoadPlugin(const char* dllFilePath)
+BOOL sub_4065bd_AddPlugin(
+    HMODULE dllModule,
+    const char* dllFilePath,
+    struct query_interface_result* result)
 {
-    global_dd_408618_loadedPluginCount++;
+
+}
+
+BOOL sub_406451_LoadPlugin(const char* dllFilePath)
+{
+    char libFileName[0x104];
+    char buffer[0x104];
+    
+    if (dllFilePath == NULL)
+    {
+        return FALSE;
+    }
+
+    sub_404ed0_LogFormat(LOG_TAG(sub_406451_LoadPlugin), "Loading Plugin %s", dllFilePath);
+
+    // \ 开头的路径表示当前驱动器的根目录
+    // 第2个字符为冒号则表示指定了一个类似 C:\abc 这样的带驱动器的完整路径
+    if (global_db_402958_pluginDir[0] == '\\' ||
+        global_db_402958_pluginDir[1] == ':')
+    {
+        wsprintfA(libFileName, "%s\\%s", global_db_402958_pluginDir, dllFilePath);
+    }
+    else
+    {
+        // 否则当作相对于当前目录处理
+        GetCurrentDirectoryA(sizeof(buffer), buffer);
+        wsprintfA(libFileName, "%s\\%s\\%s", buffer, global_db_402958_pluginDir, dllFilePath);
+    }
+
+    HMODULE edi_dll = LoadLibraryA(libFileName);
+    if (edi_dll == NULL)
+    {
+        DWORD errorCode = GetLastError();
+        LogFormat("errorCode: %u", errorCode);
+        sub_404ed0_LogFormat(
+            LOG_TAG(sub_406451_LoadPlugin),
+            "Error Loading %s (%s)",
+            dllFilePath,
+            libFileName);
+        return FALSE;
+    }
+
+    fn_QueryInterface qi = (fn_QueryInterface)GetProcAddress(edi_dll, "QueryInterface");
+    if (qi == NULL)
+    {
+        sub_404ed0_LogFormat(
+            LOG_TAG(sub_406451_LoadPlugin),
+            "Error QueryInterface on %s",
+            dllFilePath);
+        FreeLibrary(edi_dll);
+        return FALSE;
+    }
+
+    struct query_interface_result* ret = qi();
+    if (ret == NULL || ret->number0 != 0x44320000)
+    {
+        sub_404ed0_LogFormat(
+            LOG_TAG(sub_406451_LoadPlugin),
+            "Bad Plugin Interface for %s",
+            dllFilePath);
+        FreeLibrary(edi_dll);
+        return FALSE;
+    }
+
+    // cmp number1, 10000000h
+    // jb short loc_newFormatPlugin
+    if (ret->number1 >= 0x10000000)
+    {
+        sub_404ed0_LogFormat(
+            LOG_TAG(sub_406451_LoadPlugin),
+            "Old Format Plugin %s: \"%s\"",
+            dllFilePath,
+            (const char*)ret->number1);
+        DWORD gameProductVersionFlag = global_dd_408620_settings->dw_07b4_gameProductVersionFlag.value;
+        ret->init(gameProductVersionFlag);
+        return TRUE;
+    }
+    else
+    {
+        const int targetVersion = 0x01000912;
+        if (ret->number1 != targetVersion)
+        {
+            sub_404ed0_LogFormat(
+                LOG_TAG(sub_406451_LoadPlugin),
+                "Plugin %s Version Mismatch %d/%d",
+                dllFilePath,
+                ret->number1,
+                targetVersion);
+
+            FreeLibrary(edi_dll);
+            return FALSE;
+        }
+        else
+        {
+            return sub_4065bd_AddPlugin(edi_dll, dllFilePath, ret);
+        }
+    }
 }
 
 void sub_4061df_PluginListRun(DWORD reasonFlag)
