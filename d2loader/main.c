@@ -25,7 +25,20 @@ DWORD global_dd_408590_logFlag;
 char global_db_402958_pluginDir[0x104] = "Plugin";
 DWORD global_dd_4085f0;
 CRITICAL_SECTION global_dd_4085f8_criticalSection;
+
+struct loaded_plugin_item
+{
+    DWORD dd_0000;
+    HMODULE dd_0004;
+    HANDLE dd_0008_eventHandle;
+    HANDLE dd_000c_eventHandl2;
+    struct query_interface_result* dd_0010_queryInterfaceResult;
+};
+
+struct loaded_plugin_item* global_dd_408610;
+DWORD global_dd_408614_count;
 int global_dd_408618_loadedPluginCount;
+DWORD global_dd_40861c_capacity;
 
 // 该命令行参数无具体参数值
 #define ARG_TYPE_NO_PARAM 1
@@ -278,7 +291,7 @@ typedef void (*fn_OnInitPlugin)(DWORD gameProductVersionFlag);
 struct query_interface_result
 {
     DWORD number0;
-    DWORD number1;
+    char* name;
     fn_OnInitPlugin init;
 };
 
@@ -898,7 +911,32 @@ BOOL sub_4065bd_AddPlugin(
     const char* dllFilePath,
     struct query_interface_result* result)
 {
+    CRITICAL_SECTION* edi_criticalSection = &global_dd_4085f8_criticalSection;
+    EnterCriticalSection(edi_criticalSection);
+    if (global_dd_408614_count >= global_dd_40861c_capacity)
+    {
+        global_dd_40861c_capacity += 0xa;
+        size_t newSize = global_dd_40861c_capacity * 5;
+        newSize <<= 2;
+        // realloc 可能会返回NULL，Visual Studio要求检查返回值。
+        void* ptr = realloc(global_dd_408610, newSize);
+        assert(ptr != NULL);
+        global_dd_408610 = ptr;
+    }
+    
+    assert(sizeof(struct loaded_plugin_item) == 20);
+    //TODO
 
+    global_dd_408618_loadedPluginCount++;
+    global_dd_408614_count++;
+    LeaveCriticalSection(edi_criticalSection);
+    sub_404ed0_LogFormat(
+        LOG_TAG(sub_4065bd_AddPlugin),
+        "Added Plugin %s: \"%s\"",
+        dllFilePath,
+        result->name);
+
+    return TRUE;
 }
 
 BOOL sub_406451_LoadPlugin(const char* dllFilePath)
@@ -962,15 +1000,15 @@ BOOL sub_406451_LoadPlugin(const char* dllFilePath)
         return FALSE;
     }
 
-    // cmp number1, 10000000h
+    // cmp name, 10000000h
     // jb short loc_newFormatPlugin
-    if (ret->number1 >= 0x10000000)
+    if ((void*)ret->name >= (void*)0x10000000)
     {
         sub_404ed0_LogFormat(
             LOG_TAG(sub_406451_LoadPlugin),
             "Old Format Plugin %s: \"%s\"",
             dllFilePath,
-            (const char*)ret->number1);
+            (const char*)ret->name);
         DWORD gameProductVersionFlag = global_dd_408620_settings->dd_07b4_gameProductVersionFlag.value;
         ret->init(gameProductVersionFlag);
         return TRUE;
@@ -978,13 +1016,13 @@ BOOL sub_406451_LoadPlugin(const char* dllFilePath)
     else
     {
         const int targetVersion = 0x01000912;
-        if (ret->number1 != targetVersion)
+        if (ret->name != (void*)targetVersion)
         {
             sub_404ed0_LogFormat(
                 LOG_TAG(sub_406451_LoadPlugin),
                 "Plugin %s Version Mismatch %d/%d",
                 dllFilePath,
-                ret->number1,
+                ret->name,
                 targetVersion);
 
             FreeLibrary(edi_dll);
