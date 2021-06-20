@@ -1,6 +1,5 @@
 ﻿// dllmain.c : 定义 DLL 应用程序的入口点。
-#include <Windows.h>
-#include <stdio.h>
+#include "pch.h"
 
 BOOL APIENTRY DllMain( HMODULE hModule,
                        DWORD  ul_reason_for_call,
@@ -18,32 +17,19 @@ BOOL APIENTRY DllMain( HMODULE hModule,
     return TRUE;
 }
 
-typedef void(__stdcall* fn_OnInitPlugin)(DWORD gameProductVersionFlag);
-
-#pragma pack(1)
-struct query_interface_result_old
+struct query_interface_result
 {
+    // 0x44320000
     DWORD magic;
+    // 0x01000912
+    DWORD version;
     const char* pluginName;
-    fn_OnInitPlugin init;
 };
 
-void __stdcall OnInitPlugin(DWORD gameProductVersionFlag)
-{
-    FILE* logFile = fopen("OldFormatPluginDll.log", "at");
-    if (logFile)
-    {
-        fprintf(logFile, "OldFormatPluginDll.OnInitPlugin: game product version: 0x%08x", gameProductVersionFlag);
-        fprintf(logFile, "\n");
-        fflush(logFile);
-        fclose(logFile);
-    }
-}
-
-struct query_interface_result_old qir = {
+struct query_interface_result qir = {
     0x44320000,
-    "OldFormatPluginExample",
-    OnInitPlugin
+    0x01000912,
+    "NewFormatPluginDllExample"
 };
 
 // 使用 __stdcall 之后函数名会被矫正，导致 GetProcAddress(edi_dll, "QueryInterface") 找不到函数。
@@ -51,7 +37,7 @@ struct query_interface_result_old qir = {
 // 矫正后的名字可以通过IDA的Exports表，右键菜单取消勾选 Show demangled 来查看。
 
 #pragma comment(linker, "/export:QueryInterface=_QueryInterface@0")
-struct query_interface_result_old* __stdcall QueryInterface()
+struct query_interface_result* __stdcall QueryInterface()
 {
     return &qir;
 }

@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "d2loader", "d2loader\d2load
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OldFormatPluginDll", "OldFormatPluginDll\OldFormatPluginDll.vcxproj", "{FC38596F-C2B1-4ECA-B389-A5C87B905835}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NewFormatPluginDll", "NewFormatPluginDll\NewFormatPluginDll.vcxproj", "{AE170F2D-3A35-4438-A07B-2914C0507E4A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{FC38596F-C2B1-4ECA-B389-A5C87B905835}.Release|x64.Build.0 = Release|x64
 		{FC38596F-C2B1-4ECA-B389-A5C87B905835}.Release|x86.ActiveCfg = Release|Win32
 		{FC38596F-C2B1-4ECA-B389-A5C87B905835}.Release|x86.Build.0 = Release|Win32
+		{AE170F2D-3A35-4438-A07B-2914C0507E4A}.Debug|x64.ActiveCfg = Debug|x64
+		{AE170F2D-3A35-4438-A07B-2914C0507E4A}.Debug|x64.Build.0 = Debug|x64
+		{AE170F2D-3A35-4438-A07B-2914C0507E4A}.Debug|x86.ActiveCfg = Debug|Win32
+		{AE170F2D-3A35-4438-A07B-2914C0507E4A}.Debug|x86.Build.0 = Debug|Win32
+		{AE170F2D-3A35-4438-A07B-2914C0507E4A}.Release|x64.ActiveCfg = Release|x64
+		{AE170F2D-3A35-4438-A07B-2914C0507E4A}.Release|x64.Build.0 = Release|x64
+		{AE170F2D-3A35-4438-A07B-2914C0507E4A}.Release|x86.ActiveCfg = Release|Win32
+		{AE170F2D-3A35-4438-A07B-2914C0507E4A}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
