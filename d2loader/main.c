@@ -31,7 +31,7 @@ struct loaded_plugin_item
     DWORD dd_0000;
     HMODULE dd_0004;
     HANDLE dd_0008_eventHandle;
-    HANDLE dd_000c_eventHandl2;
+    const char* dd_000c_dllFileName;
     struct query_interface_result* dd_0010_queryInterfaceResult;
 };
 
@@ -908,7 +908,7 @@ BOOL sub_4066dc_PrintParametersTable(FILE* fp)
 
 BOOL sub_4065bd_AddPlugin(
     HMODULE dllModule,
-    const char* dllFilePath,
+    const char* dllFileName,
     struct query_interface_result* result)
 {
     CRITICAL_SECTION* edi_criticalSection = &global_dd_4085f8_criticalSection;
@@ -925,7 +925,12 @@ BOOL sub_4065bd_AddPlugin(
     }
     
     assert(sizeof(struct loaded_plugin_item) == 20);
-    //TODO
+    struct loaded_plugin_item* item = &global_dd_408610[global_dd_408614_count];
+    item->dd_0000 = 1;
+    item->dd_0004 = dllModule;
+    item->dd_0008_eventHandle = CreateEventA(NULL, FALSE, FALSE, NULL);
+    item->dd_000c_dllFileName = _strdup(dllFileName);
+    item->dd_0010_queryInterfaceResult = result;
 
     global_dd_408618_loadedPluginCount++;
     global_dd_408614_count++;
@@ -933,36 +938,36 @@ BOOL sub_4065bd_AddPlugin(
     sub_404ed0_LogFormat(
         LOG_TAG(sub_4065bd_AddPlugin),
         "Added Plugin %s: \"%s\"",
-        dllFilePath,
+        dllFileName,
         result->name);
 
     return TRUE;
 }
 
-BOOL sub_406451_LoadPlugin(const char* dllFilePath)
+BOOL sub_406451_LoadPlugin(const char* dllFileName)
 {
     char libFileName[0x104];
     char buffer[0x104];
     
-    if (dllFilePath == NULL)
+    if (dllFileName == NULL)
     {
         return FALSE;
     }
 
-    sub_404ed0_LogFormat(LOG_TAG(sub_406451_LoadPlugin), "Loading Plugin %s", dllFilePath);
+    sub_404ed0_LogFormat(LOG_TAG(sub_406451_LoadPlugin), "Loading Plugin %s", dllFileName);
 
     // \ 开头的路径表示当前驱动器的根目录
     // 第2个字符为冒号则表示指定了一个类似 C:\abc 这样的带驱动器的完整路径
     if (global_db_402958_pluginDir[0] == '\\' ||
         global_db_402958_pluginDir[1] == ':')
     {
-        wsprintfA(libFileName, "%s\\%s", global_db_402958_pluginDir, dllFilePath);
+        wsprintfA(libFileName, "%s\\%s", global_db_402958_pluginDir, dllFileName);
     }
     else
     {
         // 否则当作相对于当前目录处理
         GetCurrentDirectoryA(sizeof(buffer), buffer);
-        wsprintfA(libFileName, "%s\\%s\\%s", buffer, global_db_402958_pluginDir, dllFilePath);
+        wsprintfA(libFileName, "%s\\%s\\%s", buffer, global_db_402958_pluginDir, dllFileName);
     }
 
     HMODULE edi_dll = LoadLibraryA(libFileName);
@@ -973,7 +978,7 @@ BOOL sub_406451_LoadPlugin(const char* dllFilePath)
         sub_404ed0_LogFormat(
             LOG_TAG(sub_406451_LoadPlugin),
             "Error Loading %s (%s)",
-            dllFilePath,
+            dllFileName,
             libFileName);
         return FALSE;
     }
@@ -984,7 +989,7 @@ BOOL sub_406451_LoadPlugin(const char* dllFilePath)
         sub_404ed0_LogFormat(
             LOG_TAG(sub_406451_LoadPlugin),
             "Error QueryInterface on %s",
-            dllFilePath);
+            dllFileName);
         FreeLibrary(edi_dll);
         return FALSE;
     }
@@ -995,7 +1000,7 @@ BOOL sub_406451_LoadPlugin(const char* dllFilePath)
         sub_404ed0_LogFormat(
             LOG_TAG(sub_406451_LoadPlugin),
             "Bad Plugin Interface for %s",
-            dllFilePath);
+            dllFileName);
         FreeLibrary(edi_dll);
         return FALSE;
     }
@@ -1007,7 +1012,7 @@ BOOL sub_406451_LoadPlugin(const char* dllFilePath)
         sub_404ed0_LogFormat(
             LOG_TAG(sub_406451_LoadPlugin),
             "Old Format Plugin %s: \"%s\"",
-            dllFilePath,
+            dllFileName,
             (const char*)ret->name);
         DWORD gameProductVersionFlag = global_dd_408620_settings->dd_07b4_gameProductVersionFlag.value;
         ret->init(gameProductVersionFlag);
@@ -1021,7 +1026,7 @@ BOOL sub_406451_LoadPlugin(const char* dllFilePath)
             sub_404ed0_LogFormat(
                 LOG_TAG(sub_406451_LoadPlugin),
                 "Plugin %s Version Mismatch %d/%d",
-                dllFilePath,
+                dllFileName,
                 ret->name,
                 targetVersion);
 
@@ -1030,7 +1035,7 @@ BOOL sub_406451_LoadPlugin(const char* dllFilePath)
         }
         else
         {
-            return sub_4065bd_AddPlugin(edi_dll, dllFilePath, ret);
+            return sub_4065bd_AddPlugin(edi_dll, dllFileName, ret);
         }
     }
 }
