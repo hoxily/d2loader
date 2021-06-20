@@ -28,14 +28,14 @@ CRITICAL_SECTION global_dd_4085f8_criticalSection;
 
 struct loaded_plugin_item
 {
-    DWORD dd_0000;
-    HMODULE dd_0004;
-    HANDLE dd_0008_eventHandle;
+    DWORD dd_0000_flag;
+    HMODULE dd_0004_dllModule;
+    HANDLE dd_0008_autoResetEventHandle;
     const char* dd_000c_dllFileName;
     struct query_interface_result* dd_0010_queryInterfaceResult;
 };
 
-struct loaded_plugin_item* global_dd_408610;
+struct loaded_plugin_item* global_dd_408610_plugins;
 DWORD global_dd_408614_count;
 int global_dd_408618_loadedPluginCount;
 DWORD global_dd_40861c_capacity;
@@ -913,28 +913,31 @@ BOOL sub_4065bd_AddPlugin(
 {
     CRITICAL_SECTION* edi_criticalSection = &global_dd_4085f8_criticalSection;
     EnterCriticalSection(edi_criticalSection);
-    if (global_dd_408614_count >= global_dd_40861c_capacity)
     {
-        global_dd_40861c_capacity += 0xa;
-        size_t newSize = global_dd_40861c_capacity * 5;
-        newSize <<= 2;
-        // realloc 可能会返回NULL，Visual Studio要求检查返回值。
-        void* ptr = realloc(global_dd_408610, newSize);
-        assert(ptr != NULL);
-        global_dd_408610 = ptr;
-    }
-    
-    assert(sizeof(struct loaded_plugin_item) == 20);
-    struct loaded_plugin_item* item = &global_dd_408610[global_dd_408614_count];
-    item->dd_0000 = 1;
-    item->dd_0004 = dllModule;
-    item->dd_0008_eventHandle = CreateEventA(NULL, FALSE, FALSE, NULL);
-    item->dd_000c_dllFileName = _strdup(dllFileName);
-    item->dd_0010_queryInterfaceResult = result;
+        if (global_dd_408614_count >= global_dd_40861c_capacity)
+        {
+            global_dd_40861c_capacity += 0xa;
+            size_t newSize = global_dd_40861c_capacity * 5;
+            newSize <<= 2;
+            // realloc 可能会返回NULL，Visual Studio要求检查返回值。
+            void* ptr = realloc(global_dd_408610_plugins, newSize);
+            assert(ptr != NULL);
+            global_dd_408610_plugins = ptr;
+        }
 
-    global_dd_408618_loadedPluginCount++;
-    global_dd_408614_count++;
+        assert(sizeof(struct loaded_plugin_item) == 20);
+        struct loaded_plugin_item* item = &global_dd_408610_plugins[global_dd_408614_count];
+        item->dd_0000_flag = 1;
+        item->dd_0004_dllModule = dllModule;
+        item->dd_0008_autoResetEventHandle = CreateEventA(NULL, FALSE, FALSE, NULL);
+        item->dd_000c_dllFileName = _strdup(dllFileName);
+        item->dd_0010_queryInterfaceResult = result;
+
+        global_dd_408618_loadedPluginCount++;
+        global_dd_408614_count++;
+    }
     LeaveCriticalSection(edi_criticalSection);
+
     sub_404ed0_LogFormat(
         LOG_TAG(sub_4065bd_AddPlugin),
         "Added Plugin %s: \"%s\"",
