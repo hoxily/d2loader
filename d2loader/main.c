@@ -928,8 +928,8 @@ BOOL sub_4065bd_AddPlugin(
         if (global_dd_408614_count >= global_dd_40861c_capacity)
         {
             global_dd_40861c_capacity += 0xa;
-            size_t newSize = global_dd_40861c_capacity * 5;
-            newSize <<= 2;
+            assert(sizeof(struct loaded_plugin_item) == 20);
+            size_t newSize = global_dd_40861c_capacity * sizeof(struct loaded_plugin_item);
             // realloc 可能会返回NULL，Visual Studio要求检查返回值。
             void* ptr = realloc(global_dd_408610_plugins, newSize);
             assert(ptr != NULL);
