@@ -1055,9 +1055,77 @@ BOOL sub_406451_LoadPlugin(const char* dllFileName)
     }
 }
 
-void sub_4061df_PluginListRun(DWORD reasonFlag)
+void sub_40a4e5()
 {
+    //TODO
+}
 
+int sub_4061df_PluginListRun(DWORD reasonFlag)
+{
+    if (global_dd_408610_plugins == NULL)
+    {
+        if (reasonFlag & 0x40ul)
+        {
+            sub_40a4e5();
+        }
+
+        return 0;
+    }
+
+    int runCount;
+    char reasonString[0x100];
+    reasonString[0] = '\0';
+    if (reasonFlag & 0x1ul)
+    {
+        strcat(reasonString, "REASON_INIT |");
+    }
+    if (reasonFlag & 0x8ul)
+    {
+        strcat(reasonString, "REASON_LEAVE_GAME |");
+    }
+    if (reasonFlag & 0x20ul)
+    {
+        strcat(reasonString, "REASON_LEAVE_CHANNEL |");
+    }
+    if (reasonFlag & 0x80ul)
+    {
+        strcat(reasonString, "REASON_LEAVE_MAIN_MENU |");
+    }
+    if (reasonFlag & 0x40ul)
+    {
+        sub_40a4e5();
+        strcat(reasonString, "REASON_ENTER_MAIN_MENU |");
+    }
+    if (reasonFlag & 0x10ul)
+    {
+        strcat(reasonString, "REASON_ENTER_CHANNEL |");
+    }
+    if (reasonFlag & 0x2ul)
+    {
+        strcat(reasonString, "REASON_CLEANUP |");
+    }
+    if (reasonFlag & 0x4ul)
+    {
+        strcat(reasonString, "REASON_ENTER_GAME |");
+    }
+    // 上面都是 test bl, 立即数
+    // 这里则是 test bh, 1
+    // 因此这里的掩码的低8位为零
+    if (reasonFlag & 0x100ul)
+    {
+        strcat(reasonString, "REASON_ERROR_CLEANUP |");
+    }
+
+    if (reasonString[0] == '\0')
+    {
+        // edi 到目前为止还是 0，这个strcpy好像没有意义。
+        // 在archlinux下做这样的操作会导致段错误。看起来这段代码是想强制结束进程？
+        //strcpy(reasonString, NULL);
+
+        // fix by hoxily@qq.com
+        strcpy(reasonString, "");
+    }
+    //TODO
 }
 
 BOOL sub_406014_PluginInit()
