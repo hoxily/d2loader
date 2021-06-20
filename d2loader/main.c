@@ -285,8 +285,10 @@ union program_setting_store
     BYTE padding[0xc94];
 };
 
-typedef void (*fn_OnInitPlugin)(DWORD gameProductVersionFlag);
+// fn_OnInitPlugin 函数的栈平衡是函数内部做的。
+typedef void (__stdcall *fn_OnInitPlugin)(DWORD gameProductVersionFlag);
 
+//TODO: 新旧不同版本的QueryInterface返回的东西不一样。需要拆成两个结构体。
 #pragma pack(1)
 struct query_interface_result
 {
@@ -295,7 +297,8 @@ struct query_interface_result
     fn_OnInitPlugin init;
 };
 
-typedef struct query_interface_result* (*fn_QueryInterface)();
+// 由于不传参数，所以 __stdcall 与 __cdecl 一致。
+typedef struct query_interface_result* (__stdcall *fn_QueryInterface)();
 
 void sub_404ed0_LogFormat(const char* tag, const char* format, ...)
 {
