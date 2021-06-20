@@ -288,12 +288,20 @@ union program_setting_store
 // fn_OnInitPlugin 函数的栈平衡是函数内部做的。
 typedef void (__stdcall *fn_OnInitPlugin)(DWORD gameProductVersionFlag);
 
-//TODO: 新旧不同版本的QueryInterface返回的东西不一样。需要拆成两个结构体。
-#pragma pack(1)
 struct query_interface_result
 {
-    DWORD number0;
-    char* name;
+    // 0x44320000
+    DWORD magic;
+    // 0x01000912
+    DWORD version;
+    const char* pluginName;
+};
+
+struct query_interface_result_old
+{
+    // 0x44320000
+    DWORD magic;
+    const char* pluginName;
     fn_OnInitPlugin init;
 };
 
@@ -945,7 +953,7 @@ BOOL sub_4065bd_AddPlugin(
         LOG_TAG(sub_4065bd_AddPlugin),
         "Added Plugin %s: \"%s\"",
         dllFileName,
-        result->name);
+        result->pluginName);
 
     return TRUE;
 }
@@ -1001,7 +1009,7 @@ BOOL sub_406451_LoadPlugin(const char* dllFileName)
     }
 
     struct query_interface_result* ret = qi();
-    if (ret == NULL || ret->number0 != 0x44320000)
+    if (ret == NULL || ret->magic != 0x44320000)
     {
         sub_404ed0_LogFormat(
             LOG_TAG(sub_406451_LoadPlugin),
@@ -1011,29 +1019,30 @@ BOOL sub_406451_LoadPlugin(const char* dllFileName)
         return FALSE;
     }
 
-    // cmp name, 10000000h
+    // cmp version, 10000000h
     // jb short loc_newFormatPlugin
-    if ((void*)ret->name >= (void*)0x10000000)
+    if (ret->version >= 0x10000000)
     {
+        struct query_interface_result_old* retOld = (struct query_interface_result_old*)ret;
         sub_404ed0_LogFormat(
             LOG_TAG(sub_406451_LoadPlugin),
             "Old Format Plugin %s: \"%s\"",
             dllFileName,
-            (const char*)ret->name);
+            retOld->pluginName);
         DWORD gameProductVersionFlag = global_dd_408620_settings->dd_07b4_gameProductVersionFlag.value;
-        ret->init(gameProductVersionFlag);
+        retOld->init(gameProductVersionFlag);
         return TRUE;
     }
     else
     {
         const int targetVersion = 0x01000912;
-        if (ret->name != (void*)targetVersion)
+        if (ret->version != targetVersion)
         {
             sub_404ed0_LogFormat(
                 LOG_TAG(sub_406451_LoadPlugin),
                 "Plugin %s Version Mismatch %d/%d",
                 dllFileName,
-                ret->name,
+                ret->version,
                 targetVersion);
 
             FreeLibrary(edi_dll);

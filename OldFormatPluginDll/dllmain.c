@@ -21,10 +21,10 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 typedef void(__stdcall* fn_OnInitPlugin)(DWORD gameProductVersionFlag);
 
 #pragma pack(1)
-struct query_interface_result
+struct query_interface_result_old
 {
-    DWORD number0;
-    char* name;
+    DWORD magic;
+    const char* pluginName;
     fn_OnInitPlugin init;
 };
 
@@ -40,7 +40,7 @@ void __stdcall OnInitPlugin(DWORD gameProductVersionFlag)
     }
 }
 
-struct query_interface_result qir = {
+struct query_interface_result_old qir = {
     0x44320000,
     "OldFormatPluginExample",
     OnInitPlugin
@@ -51,7 +51,7 @@ struct query_interface_result qir = {
 // 矫正后的名字可以通过IDA的Exports表，右键菜单取消勾选 Show demangled 来查看。
 
 #pragma comment(linker, "/export:QueryInterface=_QueryInterface@0")
-struct query_interface_result* __stdcall QueryInterface()
+struct query_interface_result_old* __stdcall QueryInterface()
 {
     return &qir;
 }
