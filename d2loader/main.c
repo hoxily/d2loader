@@ -40,6 +40,16 @@ DWORD global_dd_408614_count;
 int global_dd_408618_loadedPluginCount;
 DWORD global_dd_40861c_capacity;
 
+#define RUN_PLUGIN_REASON_INIT 0x1ul
+#define RUN_PLUGIN_REASON_CLEANUP 0x2ul
+#define RUN_PLUGIN_REASON_ENTER_GAME 0x4ul
+#define RUN_PLUGIN_REASON_LEAVE_GAME 0x8ul
+#define RUN_PLUGIN_REASON_ENTER_CHANNEL 0x10ul
+#define RUN_PLUGIN_REASON_LEAVE_CHANNEL 0x20ul
+#define RUN_PLUGIN_REASON_ENTER_MAIN_MENU 0x40ul
+#define RUN_PLUGIN_REASON_LEAVE_MAIN_MENU 0x80ul
+#define RUN_PLUGIN_REASON_ERROR_CLEANUP 0x100ul
+
 // 该命令行参数无具体参数值
 #define ARG_TYPE_NO_PARAM 1
 // 该命令行参数为16位无符号整数，支持十进制、八进制、十六进制等多种表达方式
@@ -1060,11 +1070,16 @@ void sub_40a4e5()
     //TODO
 }
 
+BOOL sub_406373()
+{
+    //TODO
+}
+
 int sub_4061df_PluginListRun(DWORD reasonFlag)
 {
     if (global_dd_408610_plugins == NULL)
     {
-        if (reasonFlag & 0x40ul)
+        if (reasonFlag & RUN_PLUGIN_REASON_ENTER_MAIN_MENU)
         {
             sub_40a4e5();
         }
@@ -1072,46 +1087,45 @@ int sub_4061df_PluginListRun(DWORD reasonFlag)
         return 0;
     }
 
-    int runCount;
     char reasonString[0x100];
     reasonString[0] = '\0';
-    if (reasonFlag & 0x1ul)
+    if (reasonFlag & RUN_PLUGIN_REASON_INIT)
     {
         strcat(reasonString, "REASON_INIT |");
     }
-    if (reasonFlag & 0x8ul)
+    if (reasonFlag & RUN_PLUGIN_REASON_LEAVE_GAME)
     {
         strcat(reasonString, "REASON_LEAVE_GAME |");
     }
-    if (reasonFlag & 0x20ul)
+    if (reasonFlag & RUN_PLUGIN_REASON_LEAVE_CHANNEL)
     {
         strcat(reasonString, "REASON_LEAVE_CHANNEL |");
     }
-    if (reasonFlag & 0x80ul)
+    if (reasonFlag & RUN_PLUGIN_REASON_LEAVE_MAIN_MENU)
     {
         strcat(reasonString, "REASON_LEAVE_MAIN_MENU |");
     }
-    if (reasonFlag & 0x40ul)
+    if (reasonFlag & RUN_PLUGIN_REASON_ENTER_MAIN_MENU)
     {
         sub_40a4e5();
         strcat(reasonString, "REASON_ENTER_MAIN_MENU |");
     }
-    if (reasonFlag & 0x10ul)
+    if (reasonFlag & RUN_PLUGIN_REASON_ENTER_CHANNEL)
     {
         strcat(reasonString, "REASON_ENTER_CHANNEL |");
     }
-    if (reasonFlag & 0x2ul)
+    if (reasonFlag & RUN_PLUGIN_REASON_CLEANUP)
     {
         strcat(reasonString, "REASON_CLEANUP |");
     }
-    if (reasonFlag & 0x4ul)
+    if (reasonFlag & RUN_PLUGIN_REASON_ENTER_GAME)
     {
         strcat(reasonString, "REASON_ENTER_GAME |");
     }
     // 上面都是 test bl, 立即数
     // 这里则是 test bh, 1
     // 因此这里的掩码的低8位为零
-    if (reasonFlag & 0x100ul)
+    if (reasonFlag & RUN_PLUGIN_REASON_ERROR_CLEANUP)
     {
         strcat(reasonString, "REASON_ERROR_CLEANUP |");
     }
@@ -1125,7 +1139,33 @@ int sub_4061df_PluginListRun(DWORD reasonFlag)
         // fix by hoxily@qq.com
         strcpy(reasonString, "");
     }
-    //TODO
+    else
+    {
+        size_t len = strlen(reasonString);
+        // 这里感觉应该要 len - 2 才能把未尾的 空格 竖线除去。
+        reasonString[len - 1] = '\0';
+    }
+
+    sub_404ed0_LogFormat(
+        LOG_TAG(sub_4061df_PluginListRun),
+        "Call All Plugins With %s",
+        reasonString);
+
+    int runCount = 0;
+    EnterCriticalSection(&global_dd_4085f8_criticalSection);
+    {
+        for (int ebx_i = 0; ebx_i < global_dd_408618_loadedPluginCount; ebx_i++)
+        {
+            BOOL ret = sub_406373(global_dd_408610_plugins[ebx_i], reasonFlag);
+            if (ret)
+            {
+                runCount++;
+            }
+        }
+    }
+    LeaveCriticalSection(&global_dd_4085f8_criticalSection);
+    
+    return runCount;
 }
 
 BOOL sub_406014_PluginInit()
@@ -1162,7 +1202,7 @@ BOOL sub_406014_PluginInit()
         
         FindClose(handle);
 
-        sub_4061df_PluginListRun(0x00000001);
+        sub_4061df_PluginListRun(RUN_PLUGIN_REASON_INIT);
 
         sub_404ed0_LogFormat(LOG_TAG(sub_406014_PluginInit), "Total %d Plugins Loaded", global_dd_408618_loadedPluginCount);
 
