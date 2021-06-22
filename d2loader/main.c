@@ -1143,7 +1143,8 @@ int sub_4061df_PluginListRun(DWORD reasonFlag)
     {
         size_t len = strlen(reasonString);
         // 这里感觉应该要 len - 2 才能把末尾的空格和竖线除去。
-        reasonString[len - 1] = '\0';
+        // fix by hoxily@qq.com
+        reasonString[len - 2] = '\0';
     }
 
     sub_404ed0_LogFormat(
