@@ -1070,7 +1070,7 @@ void sub_40a4e5()
     //TODO
 }
 
-BOOL sub_406373()
+BOOL sub_406373(struct loaded_plugin_item* plugin, DWORD reasonFlag)
 {
     //TODO
 }
@@ -1142,7 +1142,7 @@ int sub_4061df_PluginListRun(DWORD reasonFlag)
     else
     {
         size_t len = strlen(reasonString);
-        // 这里感觉应该要 len - 2 才能把未尾的 空格 竖线除去。
+        // 这里感觉应该要 len - 2 才能把末尾的空格和竖线除去。
         reasonString[len - 1] = '\0';
     }
 
@@ -1156,7 +1156,7 @@ int sub_4061df_PluginListRun(DWORD reasonFlag)
     {
         for (int ebx_i = 0; ebx_i < global_dd_408618_loadedPluginCount; ebx_i++)
         {
-            BOOL ret = sub_406373(global_dd_408610_plugins[ebx_i], reasonFlag);
+            BOOL ret = sub_406373(&global_dd_408610_plugins[ebx_i], reasonFlag);
             if (ret)
             {
                 runCount++;
