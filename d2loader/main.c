@@ -297,6 +297,8 @@ union program_setting_store
 
 // fn_OnInitPlugin 函数的栈平衡是函数内部做的。
 typedef void (__stdcall *fn_OnInitPlugin)(DWORD gameProductVersionFlag);
+// fn_RunPlugin 函数的栈平衡是函数内部做的。
+typedef BOOL (__stdcall* fn_RunPlugin)(DWORD reasonFlag, DWORD* gameProductVersionFlag);
 
 struct query_interface_result
 {
@@ -305,6 +307,7 @@ struct query_interface_result
     // 0x01000912
     DWORD version;
     const char* pluginName;
+    fn_RunPlugin runPlugin;
 };
 
 struct query_interface_result_old
@@ -1070,9 +1073,60 @@ void sub_40a4e5()
     //TODO
 }
 
-BOOL sub_406373(struct loaded_plugin_item* plugin, DWORD reasonFlag)
+void sub_4063f9(struct loaded_plugin_item* plugin)
 {
-    //TODO
+
+}
+
+BOOL sub_406373_RunPlugin(struct loaded_plugin_item* plugin, DWORD reasonFlag)
+{
+    if (plugin == NULL)
+    {
+        return FALSE;
+    }
+
+    if (plugin->dd_0000_flag == 0)
+    {
+        return FALSE;
+    }
+
+    assert(offsetof(struct query_interface_result, runPlugin) == 0xc);
+    fn_RunPlugin runPlugin = plugin->dd_0010_queryInterfaceResult->runPlugin;
+    if (runPlugin == NULL)
+    {
+        return FALSE;
+    }
+
+    BOOL ret;
+    if (reasonFlag == RUN_PLUGIN_REASON_INIT)
+    {
+        DWORD var_8_4[2];
+        var_8_4[0] = global_dd_408620_settings->dd_07b4_gameProductVersionFlag.value;
+        var_8_4[1] = (DWORD)plugin->dd_0008_autoResetEventHandle;
+        ret = runPlugin(RUN_PLUGIN_REASON_INIT, &var_8_4[0]);
+    }
+    else
+    {
+        ret = runPlugin(reasonFlag, (DWORD*)&global_dd_408620_settings->db_0000_expansion.value);
+    }
+
+    if (reasonFlag == RUN_PLUGIN_REASON_CLEANUP)
+    {
+        return TRUE;
+    }
+    
+    if (!ret)
+    {
+        sub_404ed0_LogFormat(
+            LOG_TAG(sub_406373_RunPlugin),
+            "Failed to Run Plugin %s (Reason: %d)",
+            plugin->dd_000c_dllFileName,
+            reasonFlag);
+
+        sub_4063f9(plugin);
+    }
+
+    return ret;
 }
 
 int sub_4061df_PluginListRun(DWORD reasonFlag)
@@ -1157,7 +1211,7 @@ int sub_4061df_PluginListRun(DWORD reasonFlag)
     {
         for (int ebx_i = 0; ebx_i < global_dd_408618_loadedPluginCount; ebx_i++)
         {
-            BOOL ret = sub_406373(&global_dd_408610_plugins[ebx_i], reasonFlag);
+            BOOL ret = sub_406373_RunPlugin(&global_dd_408610_plugins[ebx_i], reasonFlag);
             if (ret)
             {
                 runCount++;
