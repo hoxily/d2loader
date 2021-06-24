@@ -28,16 +28,16 @@ CRITICAL_SECTION global_dd_4085f8_criticalSection;
 
 struct loaded_plugin_item
 {
-    DWORD dd_0000_flag;
+    DWORD dd_0000_activeFlag;
     HMODULE dd_0004_dllModule;
     HANDLE dd_0008_autoResetEventHandle;
-    const char* dd_000c_dllFileName;
+    char* dd_000c_dllFileName;
     struct query_interface_result* dd_0010_queryInterfaceResult;
 };
 
 struct loaded_plugin_item* global_dd_408610_plugins;
 DWORD global_dd_408614_count;
-int global_dd_408618_loadedPluginCount;
+int global_dd_408618_activePluginCount;
 DWORD global_dd_40861c_capacity;
 
 #define RUN_PLUGIN_REASON_INIT 0x1ul
@@ -951,13 +951,13 @@ BOOL sub_4065bd_AddPlugin(
 
         assert(sizeof(struct loaded_plugin_item) == 20);
         struct loaded_plugin_item* item = &global_dd_408610_plugins[global_dd_408614_count];
-        item->dd_0000_flag = 1;
+        item->dd_0000_activeFlag = 1;
         item->dd_0004_dllModule = dllModule;
         item->dd_0008_autoResetEventHandle = CreateEventA(NULL, FALSE, FALSE, NULL);
         item->dd_000c_dllFileName = _strdup(dllFileName);
         item->dd_0010_queryInterfaceResult = result;
 
-        global_dd_408618_loadedPluginCount++;
+        global_dd_408618_activePluginCount++;
         global_dd_408614_count++;
     }
     LeaveCriticalSection(edi_criticalSection);
@@ -1073,9 +1073,33 @@ void sub_40a4e5()
     //TODO
 }
 
-void sub_4063f9(struct loaded_plugin_item* plugin)
-{
+BOOL sub_406373_RunPlugin(struct loaded_plugin_item* plugin, DWORD reasonFlag);
 
+BOOL sub_4063f9_UnloadPlugin(struct loaded_plugin_item* plugin)
+{
+    if (plugin == NULL)
+    {
+        return FALSE;
+    }
+
+    if (plugin->dd_0000_activeFlag == 0)
+    {
+        return FALSE;
+    }
+
+    sub_404ed0_LogFormat(
+        LOG_TAG(sub_4063f9_UnloadPlugin),
+        "Unloading Plugin %s",
+        plugin->dd_000c_dllFileName);
+
+    sub_406373_RunPlugin(plugin, RUN_PLUGIN_REASON_CLEANUP);
+    plugin->dd_0000_activeFlag = 0;
+    free(plugin->dd_000c_dllFileName);
+    CloseHandle(plugin->dd_0008_autoResetEventHandle);
+    FreeLibrary(plugin->dd_0004_dllModule);
+    global_dd_408618_activePluginCount--;
+
+    return TRUE;
 }
 
 BOOL sub_406373_RunPlugin(struct loaded_plugin_item* plugin, DWORD reasonFlag)
@@ -1085,7 +1109,7 @@ BOOL sub_406373_RunPlugin(struct loaded_plugin_item* plugin, DWORD reasonFlag)
         return FALSE;
     }
 
-    if (plugin->dd_0000_flag == 0)
+    if (plugin->dd_0000_activeFlag == 0)
     {
         return FALSE;
     }
@@ -1123,7 +1147,7 @@ BOOL sub_406373_RunPlugin(struct loaded_plugin_item* plugin, DWORD reasonFlag)
             plugin->dd_000c_dllFileName,
             reasonFlag);
 
-        sub_4063f9(plugin);
+        sub_4063f9_UnloadPlugin(plugin);
     }
 
     return ret;
@@ -1209,7 +1233,7 @@ int sub_4061df_PluginListRun(DWORD reasonFlag)
     int runCount = 0;
     EnterCriticalSection(&global_dd_4085f8_criticalSection);
     {
-        for (int ebx_i = 0; ebx_i < global_dd_408618_loadedPluginCount; ebx_i++)
+        for (int ebx_i = 0; ebx_i < global_dd_408618_activePluginCount; ebx_i++)
         {
             BOOL ret = sub_406373_RunPlugin(&global_dd_408610_plugins[ebx_i], reasonFlag);
             if (ret)
@@ -1259,7 +1283,7 @@ BOOL sub_406014_PluginInit()
 
         sub_4061df_PluginListRun(RUN_PLUGIN_REASON_INIT);
 
-        sub_404ed0_LogFormat(LOG_TAG(sub_406014_PluginInit), "Total %d Plugins Loaded", global_dd_408618_loadedPluginCount);
+        sub_404ed0_LogFormat(LOG_TAG(sub_406014_PluginInit), "Total %d Plugins Loaded", global_dd_408618_activePluginCount);
 
         return TRUE;
     }
