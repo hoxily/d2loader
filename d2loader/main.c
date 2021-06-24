@@ -1233,7 +1233,9 @@ int sub_4061df_PluginListRun(DWORD reasonFlag)
     int runCount = 0;
     EnterCriticalSection(&global_dd_4085f8_criticalSection);
     {
-        for (int ebx_i = 0; ebx_i < global_dd_408618_activePluginCount; ebx_i++)
+        // fix by hoxily@qq.com: 这里应该是 global_dd_408614_count 。
+        // 因为在 RunPlugin 函数内部，有可能对plugin做卸载操作，减少activePluginCount值。
+        for (DWORD ebx_i = 0; ebx_i < global_dd_408614_count; ebx_i++)
         {
             BOOL ret = sub_406373_RunPlugin(&global_dd_408610_plugins[ebx_i], reasonFlag);
             if (ret)
