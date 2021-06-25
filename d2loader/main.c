@@ -321,6 +321,24 @@ struct query_interface_result_old
 // 由于不传参数，所以 __stdcall 与 __cdecl 一致。
 typedef struct query_interface_result* (__stdcall *fn_QueryInterface)();
 
+typedef HMODULE (WINAPI *fn_LoadLibraryA)(_In_ LPCSTR lpLibFileName);
+fn_LoadLibraryA global_dd_4085a0_LoadLibraryA;
+
+typedef DWORD (WINAPI *fn_GetModuleFileNameA)(
+    _In_opt_ HMODULE hModule,
+    _Out_ LPSTR lpFilename,
+    _In_ DWORD nSize);
+fn_GetModuleFileNameA global_dd_4085a4_GetModuleFileNameA;
+
+typedef HWND (WINAPI *fn_FindWindowA)(
+    _In_opt_ LPCSTR lpClassName,
+    _In_opt_ LPCSTR lpWindowName
+    );
+fn_FindWindowA global_dd_4085a8_FindWindowA;
+
+const char* global_dd_408598_moduleKernel32FileName;
+const char* global_dd_40859c_gameDotExeFileName;
+
 void sub_404ed0_LogFormat(const char* tag, const char* format, ...)
 {
     time_t now;
@@ -1291,8 +1309,24 @@ BOOL sub_406014_PluginInit()
     }
 }
 
-BOOL sub_4054fd()
+BOOL sub_4054fd_HookDll()
 {
+    HMODULE hModuleKernel32 = GetModuleHandleA("Kernel32.dll");
+    assert(hModuleKernel32 != NULL);
+    global_dd_4085a0_LoadLibraryA = GetProcAddress(hModuleKernel32, "LoadLibraryA");
+    global_dd_4085a4_GetModuleFileNameA = GetProcAddress(hModuleKernel32, "GetModuleFileNameA");
+    
+    HMODULE hModuleUser32 = GetModuleHandleA("User32.dll");
+    assert(hModuleUser32 != NULL);
+    global_dd_4085a8_FindWindowA = GetProcAddress(hModuleUser32, "FindWindowA");
+    
+    char filename[0x104];
+    GetModuleFileNameA(hModuleKernel32, filename, sizeof(filename));
+    global_dd_408598_moduleKernel32FileName = _strdup(filename);
+
+    char* filePart;
+    GetFullPathNameA("game.exe", sizeof(filename), filename, &filePart);
+    global_dd_40859c_gameDotExeFileName = _strdup(filename);
     //TODO
 }
 
@@ -1366,7 +1400,7 @@ BOOL sub_404c57_GameMain()
             sub_406014_PluginInit();
         }
 
-        BOOL hookRet = sub_4054fd();
+        BOOL hookRet = sub_4054fd_HookDll();
         sub_404ed0_LogFormat(
             LOG_TAG(sub_404c57_GameMain),
             "Hook Returned %s",
