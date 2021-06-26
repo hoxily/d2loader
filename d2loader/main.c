@@ -342,8 +342,39 @@ HMODULE global_dd_4085b0_moduleBnClient;
 HMODULE global_dd_4085ac_moduleD2Gfx;
 HMODULE global_dd_4085b4_moduleD2Net;
 
-char* global_dd_4023f0 = "LoadLibraryA";
-char* global_dd_402408 = "FindWindowA";
+struct hook_search_item
+{
+    const char* functionName;
+    void* functionProcAddress;
+};
+
+void sub_4054c2()
+{
+    //TODO
+}
+
+void sub_40543b()
+{
+    //TODO
+}
+
+void sub_4053fd()
+{
+    //TODO
+}
+
+struct hook_search_item global_dd_4023f0[3] =
+{
+    { "LoadLibraryA", sub_4054c2 },
+    { "GetModuleFileNameA", sub_40543b },
+    { (const char*)-1, NULL }
+};
+
+struct hook_search_item global_dd_402408[2] =
+{
+    { "FindWindowA", sub_4053fd },
+    { (const char*)-1, NULL }
+};
 
 void sub_404ed0_LogFormat(const char* tag, const char* format, ...)
 {
@@ -1315,14 +1346,86 @@ BOOL sub_406014_PluginInit()
     }
 }
 
+BOOL sub_4053b3()
+{
+    //TODO
+}
+
 BOOL sub_40513a(
     HMODULE hModule,
     const char* hookDll,
-    char** functionName,
+    struct hook_search_item* functionNameList,
     void* null1,
     void* null2)
 {
+    if (hookDll == NULL)
+    {
+        SetLastErrorEx(ERROR_INVALID_PARAMETER, 1);
+        return FALSE;
+    }
 
+    if (functionNameList == NULL)
+    {
+        SetLastErrorEx(ERROR_INVALID_PARAMETER, 1);
+        return FALSE;
+    }
+
+    DWORD var_4;
+    var_4 = 0;
+    for (struct hook_search_item* eax_item = functionNameList; eax_item->functionName != (const char*)-1; eax_item++)
+    {
+        var_4++;
+    }
+
+    if (var_4 == 0)
+    {
+        SetLastErrorEx(ERROR_INVALID_PARAMETER, 1);
+        return FALSE;
+    }
+
+    if (null1 != NULL)
+    {
+        if (IsBadWritePtr(null1, var_4 * 4))
+        {
+            SetLastErrorEx(ERROR_INVALID_PARAMETER, 1);
+            return FALSE;
+        }
+    }
+
+    if (null2 != NULL)
+    {
+        if (IsBadWritePtr(null2, 4))
+        {
+            SetLastErrorEx(ERROR_INVALID_PARAMETER, 1);
+            return FALSE;
+        }
+    }
+
+    if (var_4 != 0)
+    {
+        DWORD ebx_count = 0;
+        struct hook_search_item* esi_item = functionNameList;
+        do
+        {
+            if (esi_item->functionName == NULL)
+            {
+                return FALSE;
+            }
+            void* ptr = esi_item->functionProcAddress;
+            if (ptr != NULL)
+            {
+                if (IsBadCodePtr(ptr))
+                {
+                    return FALSE;
+                }
+            }
+
+            ebx_count++;
+            esi_item++;
+        } while (ebx_count < var_4);
+    }
+
+    sub_4053b3();
 }
 
 BOOL sub_4054fd_HookDll()
@@ -1360,14 +1463,14 @@ BOOL sub_4054fd_HookDll()
     BOOL ret1 = sub_40513a(
         global_dd_4085b0_moduleBnClient,
         "Kernel32.dll",
-        &global_dd_4023f0,
+        &global_dd_4023f0[0],
         NULL,
         NULL
     );
     BOOL ret2 = sub_40513a(
         global_dd_4085ac_moduleD2Gfx,
         "User32.dll",
-        &global_dd_402408,
+        &global_dd_402408[0],
         NULL,
         NULL
     );
