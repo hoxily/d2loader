@@ -1346,10 +1346,29 @@ BOOL sub_406014_PluginInit()
     }
 }
 
-BOOL sub_4053b3()
+
+BOOL sub_4053b3_IsWin32NtPlatform()
 {
-    //TODO
+    OSVERSIONINFOA version;
+    memset(&version, 0, sizeof(version));
+    assert(offsetof(OSVERSIONINFOA, dwOSVersionInfoSize) == 0);
+    version.dwOSVersionInfoSize = sizeof(version);
+
+    // ¡Ÿ ±Ω˚”√ obsolete°£∑Ò‘Úvisual studio±‡“Î ß∞‹°£
+#pragma warning(disable: 4996)
+    BOOL ret = GetVersionExA(&version);
+#pragma warning(default: 4996)
+
+    if (ret)
+    {
+        if (version.dwPlatformId == VER_PLATFORM_WIN32_NT)
+        {
+            return TRUE;
+        }
+    }
+    return FALSE;
 }
+
 
 BOOL sub_40513a(
     HMODULE hModule,
@@ -1425,7 +1444,7 @@ BOOL sub_40513a(
         } while (ebx_count < var_4);
     }
 
-    sub_4053b3();
+    sub_4053b3_IsWin32NtPlatform();
 }
 
 BOOL sub_4054fd_HookDll()
