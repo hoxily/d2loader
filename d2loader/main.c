@@ -1361,6 +1361,7 @@ BOOL sub_4053b3_IsWin32NtPlatform()
 
     if (ret)
     {
+        assert(offsetof(OSVERSIONINFOA, dwPlatformId) == 0x10);
         if (version.dwPlatformId == VER_PLATFORM_WIN32_NT)
         {
             return TRUE;
@@ -1369,6 +1370,10 @@ BOOL sub_4053b3_IsWin32NtPlatform()
     return FALSE;
 }
 
+void* sub_40532e(HMODULE hModule, const char* hookDll)
+{
+    //TODO
+}
 
 BOOL sub_40513a(
     HMODULE hModule,
@@ -1444,7 +1449,32 @@ BOOL sub_40513a(
         } while (ebx_count < var_4);
     }
 
-    sub_4053b3_IsWin32NtPlatform();
+    BOOL isWin32NtPlatform = sub_4053b3_IsWin32NtPlatform();
+    if (!isWin32NtPlatform)
+    {
+        if (hModule >= (void*)0x80000000)
+        {
+            SetLastErrorEx(ERROR_INVALID_HANDLE, 1);
+            return FALSE;
+        }
+    }
+
+    if (null1 != NULL)
+    {
+        memset(null1, 0, var_4 * 4);
+    }
+
+    if (null2 != NULL)
+    {
+        memset(null2, 0, 4);
+    }
+
+    void* ret = sub_40532e(hModule, hookDll);
+    if (ret == NULL)
+    {
+        return FALSE;
+    }
+    //TODO
 }
 
 BOOL sub_4054fd_HookDll()
