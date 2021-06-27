@@ -1543,12 +1543,46 @@ BOOL sub_40513a(
         memset(null2, 0, 4);
     }
 
-    void* ret = sub_40532e(hModule, hookDll);
-    if (ret == NULL)
+    IMAGE_IMPORT_DESCRIPTOR* importDescriptor = sub_40532e(hModule, hookDll);
+    if (importDescriptor == NULL)
     {
         return FALSE;
     }
-    //TODO
+    
+    assert(offsetof(IMAGE_IMPORT_DESCRIPTOR, OriginalFirstThunk) == 0);
+    assert(offsetof(IMAGE_IMPORT_DESCRIPTOR, FirstThunk) == 0x10);
+    IMAGE_THUNK_DATA32* edi_originalThunkData = (IMAGE_THUNK_DATA32*)((char*)hModule + importDescriptor->OriginalFirstThunk);
+    IMAGE_THUNK_DATA32* esi_thunkData = (IMAGE_THUNK_DATA32*)((char*)hModule + importDescriptor->FirstThunk);
+    
+    assert(sizeof(IMAGE_THUNK_DATA32) == sizeof(DWORD));
+    // fix by hoxily@qq.com, 下面这个循环里已经不再使用 hookDll 参数的值，把它当做一个DWORD大小的变量来用。
+    // 为了方便，这里我们额外定义一个 isByOrdinal 变量。
+    BOOL isByOrdinal;
+    IMAGE_IMPORT_BY_NAME* var_c = NULL;
+    while (*(DWORD*)edi_originalThunkData != 0)
+    {
+        if (IMAGE_SNAP_BY_ORDINAL32(edi_originalThunkData->u1.Ordinal))
+        {
+            isByOrdinal = TRUE;
+        }
+        else
+        {
+            isByOrdinal = FALSE;
+            var_c = (IMAGE_IMPORT_BY_NAME*)((char*)hModule + edi_originalThunkData->u1.AddressOfData);
+            if (var_c->Name[0] == '\0')
+            {
+                // fix by hoxily@qq.com, 这里没有对 edi 做增长，就跳去循环入口。
+                // 一旦遇到一个非Ordinal，但是Name数据又是空的项时，将会导致死循环。
+                edi_originalThunkData++;
+                continue;
+            }
+        }
+
+
+    }
+
+    SetLastError(ERROR_SUCCESS);
+    return TRUE;
 }
 
 BOOL sub_4054fd_HookDll()
