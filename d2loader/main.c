@@ -1468,14 +1468,13 @@ BOOL sub_40513a(
         return FALSE;
     }
 
-    DWORD var_4;
-    var_4 = 0;
+    DWORD functionNameListCount = 0;
     for (struct hook_search_item* eax_item = functionNameList; eax_item->functionName != (const char*)-1; eax_item++)
     {
-        var_4++;
+        functionNameListCount++;
     }
 
-    if (var_4 == 0)
+    if (functionNameListCount == 0)
     {
         SetLastErrorEx(ERROR_INVALID_PARAMETER, 1);
         return FALSE;
@@ -1483,7 +1482,7 @@ BOOL sub_40513a(
 
     if (null1 != NULL)
     {
-        if (IsBadWritePtr(null1, var_4 * 4))
+        if (IsBadWritePtr(null1, functionNameListCount * 4))
         {
             SetLastErrorEx(ERROR_INVALID_PARAMETER, 1);
             return FALSE;
@@ -1499,7 +1498,7 @@ BOOL sub_40513a(
         }
     }
 
-    if (var_4 != 0)
+    if (functionNameListCount != 0)
     {
         DWORD ebx_count = 0;
         struct hook_search_item* esi_item = functionNameList;
@@ -1520,7 +1519,7 @@ BOOL sub_40513a(
 
             ebx_count++;
             esi_item++;
-        } while (ebx_count < var_4);
+        } while (ebx_count < functionNameListCount);
     }
 
     BOOL isWin32NtPlatform = sub_4053b3_IsWin32NtPlatform();
@@ -1535,7 +1534,7 @@ BOOL sub_40513a(
 
     if (null1 != NULL)
     {
-        memset(null1, 0, var_4 * 4);
+        memset(null1, 0, functionNameListCount * 4);
     }
 
     if (null2 != NULL)
@@ -1574,11 +1573,91 @@ BOOL sub_40513a(
                 // fix by hoxily@qq.com, 这里没有对 edi 做增长，就跳去循环入口。
                 // 一旦遇到一个非Ordinal，但是Name数据又是空的项时，将会导致死循环。
                 edi_originalThunkData++;
+                // esi 也需要增长。
+                esi_thunkData++;
                 continue;
             }
         }
 
+        if (functionNameListCount <= 0)
+        {
+            edi_originalThunkData++;
+            esi_thunkData++;
+            continue;
+        }
 
+        struct hook_search_item* eax_item = functionNameList;
+        DWORD ebx_i = 0;
+        BOOL hookFlag = FALSE;
+        for (; ebx_i < functionNameListCount; ebx_i++)
+        {
+            if (!isByOrdinal)
+            {
+                if (((DWORD)eax_item->functionName & 0x80000000) == 0)
+                {
+                    if (lstrcmpiA(eax_item->functionName, var_c->Name) == 0)
+                    {
+                        if (functionNameList[ebx_i].functionProcAddress == NULL)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            hookFlag = TRUE;
+                            break;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (edi_originalThunkData->u1.Ordinal == (DWORD)eax_item->functionName)
+                {
+                    hookFlag = TRUE;
+                    break;
+                }
+            }
+            eax_item++;
+        }
+
+        if (hookFlag)
+        {
+            MEMORY_BASIC_INFORMATION memoryBasicInfo;
+            DWORD oldProtect;
+            assert(sizeof(memoryBasicInfo) == 0x1c);
+            VirtualQuery(
+                esi_thunkData,
+                &memoryBasicInfo,
+                sizeof(memoryBasicInfo)
+            );
+            VirtualProtect(
+                memoryBasicInfo.BaseAddress,
+                memoryBasicInfo.RegionSize,
+                PAGE_EXECUTE_READWRITE,
+                &memoryBasicInfo.Protect
+            );
+            if (null1 != NULL)
+            {
+                DWORD* ptr = (DWORD*)null1;
+                ptr[ebx_i] = esi_thunkData->u1.Function;
+            }
+
+            esi_thunkData->u1.Function = (DWORD)functionNameList[ebx_i].functionProcAddress;
+            VirtualProtect(
+                memoryBasicInfo.BaseAddress,
+                memoryBasicInfo.RegionSize,
+                memoryBasicInfo.Protect,
+                &oldProtect
+            );
+            if (null2 != NULL)
+            {
+                DWORD* ptr = (DWORD*)null2;
+                (*ptr)++;
+            }
+        }
+
+        edi_originalThunkData++;
+        esi_thunkData++;
     }
 
     SetLastError(ERROR_SUCCESS);
