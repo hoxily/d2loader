@@ -348,31 +348,31 @@ struct hook_search_item
     void* functionProcAddress;
 };
 
-void sub_4054c2()
+HMODULE WINAPI sub_4054c2_my_LoadLibraryA(LPCSTR lpLibFileName)
 {
     //TODO
 }
 
-void sub_40543b()
+DWORD WINAPI sub_40543b_my_GetModuleFileNameA(HMODULE hModule, LPSTR lpFilename, DWORD nSize)
 {
     //TODO
 }
 
-void sub_4053fd()
+HWND WINAPI sub_4053fd_my_FindWindowA(LPCSTR lpClassName, LPCSTR lpWindowName)
 {
     //TODO
 }
 
 struct hook_search_item global_dd_4023f0[3] =
 {
-    { "LoadLibraryA", sub_4054c2 },
-    { "GetModuleFileNameA", sub_40543b },
+    { "LoadLibraryA", sub_4054c2_my_LoadLibraryA },
+    { "GetModuleFileNameA", sub_40543b_my_GetModuleFileNameA },
     { (const char*)-1, NULL }
 };
 
 struct hook_search_item global_dd_402408[2] =
 {
-    { "FindWindowA", sub_4053fd },
+    { "FindWindowA", sub_4053fd_my_FindWindowA },
     { (const char*)-1, NULL }
 };
 
