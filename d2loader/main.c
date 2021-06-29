@@ -1,18 +1,6 @@
 #include <Windows.h>
-#include <assert.h>
-#include <stdio.h>
-#include "logger.h"
-#include "constant-strings.h"
-#include "constants.h"
-#include "data-types.h"
-#include "global-variables.h"
 
 
-
-BOOL sub_40a480()
-{
-    //TODO
-}
 
 void sub_4057a8()
 {
