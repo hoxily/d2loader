@@ -1,3 +1,4 @@
+#include "sub_40543b.h"
 #include "../global-variables.h"
 
 DWORD WINAPI sub_40543b_my_GetModuleFileNameA(
