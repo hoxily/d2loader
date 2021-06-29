@@ -1,8 +1,5 @@
 #pragma once
 
-/* 根据函数标识符创建对应的字符串 */
-#define LOG_TAG(identifier) #identifier
-
 /* string constant */
 #define CSTR_D2_EXP_DOT_MPQ "d2exp.mpq"
 #define CSTR_D2_X_TALK_DOT_MPQ "d2xtalk.mpq"
