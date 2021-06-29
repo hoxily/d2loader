@@ -8,57 +8,7 @@
 #include "constants.h"
 #include "data-types.h"
 #include "global-variables.h"
-#include "functions/sub_40543b.h"
-#include "functions/sub_4053fd.h"
 
-
-HMODULE WINAPI sub_4054c2_my_LoadLibraryA(LPCSTR lpLibFileName);
-
-struct hook_search_item global_dd_4023f0[3] =
-{
-    { "LoadLibraryA", sub_4054c2_my_LoadLibraryA },
-    { "GetModuleFileNameA", sub_40543b_my_GetModuleFileNameA },
-    { (const char*)-1, NULL }
-};
-
-BOOL sub_40513a(
-    HMODULE hModule,
-    const char* hookDll,
-    struct hook_search_item* functionNameList,
-    void* null1,
-    void* null2);
-
-HMODULE WINAPI sub_4054c2_my_LoadLibraryA(LPCSTR lpLibFileName)
-{
-    HMODULE hModule = NULL;
-    if (global_dd_4085a0_LoadLibraryA == NULL)
-    {
-        hModule = LoadLibraryA(lpLibFileName);
-    }
-    else
-    {
-        hModule = global_dd_4085a0_LoadLibraryA(lpLibFileName);
-    }
-
-    if (hModule != NULL)
-    {
-        sub_40513a(
-            hModule,
-            "Kernel32.dll",
-            global_dd_4023f0,
-            NULL,
-            NULL
-        );
-    }
-
-    return hModule;
-}
-
-struct hook_search_item global_dd_402408[2] =
-{
-    { "FindWindowA", sub_4053fd_my_FindWindowA },
-    { (const char*)-1, NULL }
-};
 
 void sub_404ed0_LogFormat(const char* tag, const char* format, ...)
 {

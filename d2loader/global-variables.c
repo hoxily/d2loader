@@ -131,3 +131,21 @@ fn_LoadLibraryA global_dd_4085a0_LoadLibraryA;
 fn_GetModuleFileNameA global_dd_4085a4_GetModuleFileNameA;
 
 fn_FindWindowA global_dd_4085a8_FindWindowA;
+
+#include "functions/sub_4054c2.h"
+#include "functions/sub_40543b.h"
+
+struct hook_search_item global_dd_4023f0[3] =
+{
+    { "LoadLibraryA", sub_4054c2_my_LoadLibraryA },
+    { "GetModuleFileNameA", sub_40543b_my_GetModuleFileNameA },
+    { (const char*)-1, NULL }
+};
+
+#include "functions/sub_4053fd.h"
+
+struct hook_search_item global_dd_402408[2] =
+{
+    { "FindWindowA", sub_4053fd_my_FindWindowA },
+    { (const char*)-1, NULL }
+};

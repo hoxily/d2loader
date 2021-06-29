@@ -149,6 +149,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="functions\sub_4053fd.c" />
+    <ClCompile Include="functions\sub_4054c2.c" />
     <ClCompile Include="global-variables.c" />
     <ClCompile Include="logger.c" />
     <ClCompile Include="main.c" />
@@ -160,7 +161,9 @@
     <ClInclude Include="data-types-forward-structs.h" />
     <ClInclude Include="data-types-function-ptr.h" />
     <ClInclude Include="data-types.h" />
+    <ClInclude Include="functions\sub_40513a.h" />
     <ClInclude Include="functions\sub_4053fd.h" />
+    <ClInclude Include="functions\sub_4054c2.h" />
     <ClInclude Include="global-variables.h" />
     <ClInclude Include="logger.h" />
     <ClInclude Include="functions\sub_40543b.h" />

@@ -30,3 +30,7 @@ extern fn_LoadLibraryA global_dd_4085a0_LoadLibraryA;
 extern fn_GetModuleFileNameA global_dd_4085a4_GetModuleFileNameA;
 
 extern fn_FindWindowA global_dd_4085a8_FindWindowA;
+
+extern struct hook_search_item global_dd_4023f0[3];
+
+extern struct hook_search_item global_dd_402408[2];
