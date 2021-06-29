@@ -1,6 +1,5 @@
 #include "sub_406451.h"
 #include "../global-variables.h"
-#include "../logger.h"
 #include "sub_404ed0.h"
 #include "sub_4065bd.h"
 
@@ -36,7 +35,10 @@ BOOL sub_406451_LoadPlugin(
     if (edi_dll == NULL)
     {
         DWORD errorCode = GetLastError();
-        LogFormat("errorCode: %u", errorCode);
+        sub_404ed0_LogFormat(
+            LOG_TAG(sub_406451_LoadPlugin),
+            "errorCode: %u",
+            errorCode);
         sub_404ed0_LogFormat(
             LOG_TAG(sub_406451_LoadPlugin),
             "Error Loading %s (%s)",

@@ -1,5 +1,4 @@
 #include <Windows.h>
-#include "logger.h"
 #include "functions/sub_404b60.h"
 
 int WINAPI WinMain(
@@ -9,8 +8,6 @@ int WINAPI WinMain(
     _In_ int nShowCmd
 )
 {
-    InitLogFile();
-
     return sub_404b60_WinMain(
         hInstance,
         hPrevInstance,

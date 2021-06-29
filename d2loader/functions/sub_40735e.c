@@ -1,18 +1,24 @@
 #include "sub_40735e.h"
 #include "../constant-strings.h"
 #include "sub_407380.h"
-#include "../logger.h"
+#include "sub_404ed0.h"
 
 BOOL sub_40735e_CheckExpansion()
 {
     if (!sub_407380_CheckFileExist(CSTR_D2_EXP_DOT_MPQ))
     {
-        LogFormat("%s not exist.\n", CSTR_D2_EXP_DOT_MPQ);
+        sub_404ed0_LogFormat(
+            LOG_TAG(sub_40735e_CheckExpansion),
+            "%s not exist.\n",
+            CSTR_D2_EXP_DOT_MPQ);
         return FALSE;
     }
     if (!sub_407380_CheckFileExist(CSTR_D2_X_TALK_DOT_MPQ))
     {
-        LogFormat("%s not exist.\n", CSTR_D2_X_TALK_DOT_MPQ);
+        sub_404ed0_LogFormat(
+            LOG_TAG(sub_40735e_CheckExpansion)
+            "%s not exist.\n",
+            CSTR_D2_X_TALK_DOT_MPQ);
         return FALSE;
     }
     /* 这里的汇编代码比较难懂：

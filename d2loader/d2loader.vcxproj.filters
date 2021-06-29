@@ -24,9 +24,6 @@
     <ClCompile Include="main.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="logger.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="global-variables.c">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -129,11 +126,35 @@
     <ClCompile Include="functions\sub_4054fd.c">
       <Filter>函数源文件</Filter>
     </ClCompile>
+    <ClCompile Include="functions\sub_40a480.c">
+      <Filter>函数源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="functions\sub_4057a8.c">
+      <Filter>函数源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="functions\sub_40a600.c">
+      <Filter>函数源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="functions\sub_4071a5.c">
+      <Filter>函数源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="functions\sub_405af1.c">
+      <Filter>函数源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="functions\sub_406175.c">
+      <Filter>函数源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="functions\sub_405602.c">
+      <Filter>函数源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="functions\sub_4069bc.c">
+      <Filter>函数源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="functions\sub_404d77.c">
+      <Filter>函数源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="logger.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="constant-strings.h">
       <Filter>头文件</Filter>
     </ClInclude>
