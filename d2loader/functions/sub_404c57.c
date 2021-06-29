@@ -15,7 +15,8 @@
 #include "sub_405602.h"
 #include "sub_4069bc.h"
 
-BOOL sub_404c57_GameMain()
+BOOL sub_404c57_GameMain(
+)
 {
     if (global_dd_408620_settings->db_07a9_printArg.value)
     {
