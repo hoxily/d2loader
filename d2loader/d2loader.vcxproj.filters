@@ -21,12 +21,24 @@
     <ClCompile Include="logger.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="global-variables.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="logger.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="constant-strings.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="data-types.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="global-variables.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="constants.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

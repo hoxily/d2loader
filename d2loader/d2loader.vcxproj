@@ -148,11 +148,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="global-variables.c" />
     <ClCompile Include="logger.c" />
     <ClCompile Include="main.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="constant-strings.h" />
+    <ClInclude Include="constants.h" />
+    <ClInclude Include="data-types.h" />
+    <ClInclude Include="global-variables.h" />
     <ClInclude Include="logger.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
