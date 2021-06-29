@@ -51,6 +51,9 @@
     <ClCompile Include="functions\sub_404b60.c">
       <Filter>函数源文件</Filter>
     </ClCompile>
+    <ClCompile Include="functions\sub_404c57.c">
+      <Filter>函数源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="logger.h">
@@ -111,6 +114,42 @@
       <Filter>函数头文件</Filter>
     </ClInclude>
     <ClInclude Include="functions\sub_404c57.h">
+      <Filter>函数头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="functions\sub_4066dc.h">
+      <Filter>函数头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="functions\sub_406014.h">
+      <Filter>函数头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="functions\sub_4054fd.h">
+      <Filter>函数头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="functions\sub_40a480.h">
+      <Filter>函数头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="functions\sub_4057a8.h">
+      <Filter>函数头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="functions\sub_404d77.h">
+      <Filter>函数头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="functions\sub_40a600.h">
+      <Filter>函数头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="functions\sub_4071a5.h">
+      <Filter>函数头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="functions\sub_405af1.h">
+      <Filter>函数头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="functions\sub_406175.h">
+      <Filter>函数头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="functions\sub_405602.h">
+      <Filter>函数头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="functions\sub_4069bc.h">
       <Filter>函数头文件</Filter>
     </ClInclude>
   </ItemGroup>
