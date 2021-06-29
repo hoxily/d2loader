@@ -151,6 +151,7 @@
     <ClCompile Include="global-variables.c" />
     <ClCompile Include="logger.c" />
     <ClCompile Include="main.c" />
+    <ClCompile Include="functions\sub_40543b.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="constant-strings.h" />
@@ -160,6 +161,7 @@
     <ClInclude Include="data-types.h" />
     <ClInclude Include="global-variables.h" />
     <ClInclude Include="logger.h" />
+    <ClInclude Include="functions\sub_40543b.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
