@@ -3,7 +3,8 @@
 #include "../global-variables.h"
 #include "sub_40513a.h"
 
-BOOL sub_4054fd_HookDll()
+BOOL sub_4054fd_HookDll(
+)
 {
     HMODULE hModuleKernel32 = GetModuleHandleA("Kernel32.dll");
     assert(hModuleKernel32 != NULL);
