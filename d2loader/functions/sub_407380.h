@@ -2,6 +2,6 @@
 
 #include <Windows.h>
 
-BOOL sub_407380_CheckFileExist(
+extern BOOL sub_407380_CheckFileExist(
     const char* filePath
 );
