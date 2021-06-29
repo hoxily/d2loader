@@ -22,3 +22,7 @@ typedef HWND(WINAPI* fn_FindWindowA)(
     _In_opt_ LPCSTR lpClassName,
     _In_opt_ LPCSTR lpWindowName
     );
+
+typedef UINT(WINAPI* fn_SetErrorMode)(
+    _In_ UINT uMode
+    );
