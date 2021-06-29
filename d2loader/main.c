@@ -10,10 +10,6 @@
 #include "functions/sub_40735e.h"
 
 
-void sub_404eb1_SetLogFile(FILE* fp)
-{
-    global_dd_40858c_logFile = fp;
-}
 
 void sub_404ec5_EnableLog(DWORD logType)
 {

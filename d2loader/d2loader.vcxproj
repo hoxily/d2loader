@@ -150,6 +150,7 @@
   <ItemGroup>
     <ClCompile Include="functions\sub_404b60.c" />
     <ClCompile Include="functions\sub_404c57.c" />
+    <ClCompile Include="functions\sub_404eb1.c" />
     <ClCompile Include="functions\sub_404ed0.c" />
     <ClCompile Include="functions\sub_4053fd.c" />
     <ClCompile Include="functions\sub_4054c2.c" />
