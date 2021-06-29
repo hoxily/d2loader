@@ -157,6 +157,7 @@
     <ClCompile Include="functions\sub_4053fd.c" />
     <ClCompile Include="functions\sub_4054c2.c" />
     <ClCompile Include="functions\sub_406373.c" />
+    <ClCompile Include="functions\sub_4063f9.c" />
     <ClCompile Include="functions\sub_406451.c" />
     <ClCompile Include="functions\sub_4065bd.c" />
     <ClCompile Include="functions\sub_4066dc.c" />
