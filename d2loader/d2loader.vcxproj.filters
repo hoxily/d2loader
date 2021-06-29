@@ -13,7 +13,10 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="函数列表">
+    <Filter Include="函数源文件">
+      <UniqueIdentifier>{2db6c1ec-e71d-48d8-89c4-55685a6232f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="函数头文件">
       <UniqueIdentifier>{946b032d-6043-4bc9-92e9-0a05a7c3775a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -27,14 +30,14 @@
     <ClCompile Include="global-variables.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="functions\sub_40543b.c">
-      <Filter>函数列表</Filter>
-    </ClCompile>
     <ClCompile Include="functions\sub_4053fd.c">
-      <Filter>函数列表</Filter>
+      <Filter>函数源文件</Filter>
     </ClCompile>
     <ClCompile Include="functions\sub_4054c2.c">
-      <Filter>函数列表</Filter>
+      <Filter>函数源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="functions\sub_40543b.c">
+      <Filter>函数源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -60,16 +63,16 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="functions\sub_40543b.h">
-      <Filter>函数列表</Filter>
+      <Filter>函数头文件</Filter>
     </ClInclude>
     <ClInclude Include="functions\sub_4053fd.h">
-      <Filter>函数列表</Filter>
+      <Filter>函数头文件</Filter>
     </ClInclude>
     <ClInclude Include="functions\sub_4054c2.h">
-      <Filter>函数列表</Filter>
+      <Filter>函数头文件</Filter>
     </ClInclude>
     <ClInclude Include="functions\sub_40513a.h">
-      <Filter>函数列表</Filter>
+      <Filter>函数头文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

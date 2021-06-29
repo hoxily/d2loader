@@ -2,7 +2,9 @@
 #include "../global-variables.h"
 #include "sub_40513a.h"
 
-HMODULE WINAPI sub_4054c2_my_LoadLibraryA(LPCSTR lpLibFileName)
+HMODULE WINAPI sub_4054c2_my_LoadLibraryA(
+    LPCSTR lpLibFileName
+)
 {
     HMODULE hModule = NULL;
     if (global_dd_4085a0_LoadLibraryA == NULL)
