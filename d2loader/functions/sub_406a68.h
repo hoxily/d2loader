@@ -6,7 +6,7 @@
  * @param buffer 存储结果的缓冲区
  * @returns 返回下一次处理时的起始位置
  * */
-const char* sub_406a68_CutFirstArgument(
+extern const char* sub_406a68_CutFirstArgument(
     const char* args,
     char* buffer
 );
