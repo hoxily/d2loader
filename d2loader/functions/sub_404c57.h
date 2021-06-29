@@ -2,5 +2,5 @@
 
 #include <Windows.h>
 
-BOOL sub_404c57_GameMain(
+extern BOOL sub_404c57_GameMain(
 );
