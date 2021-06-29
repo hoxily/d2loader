@@ -8,7 +8,7 @@ BOOL sub_40735e_CheckExpansion()
     if (!sub_407380_CheckFileExist(CSTR_D2_EXP_DOT_MPQ))
     {
         sub_404ed0_LogFormat(
-            LOG_TAG(sub_40735e_CheckExpansion),
+            LOG_TAG,
             "%s not exist.\n",
             CSTR_D2_EXP_DOT_MPQ);
         return FALSE;
@@ -16,7 +16,7 @@ BOOL sub_40735e_CheckExpansion()
     if (!sub_407380_CheckFileExist(CSTR_D2_X_TALK_DOT_MPQ))
     {
         sub_404ed0_LogFormat(
-            LOG_TAG(sub_40735e_CheckExpansion)
+            LOG_TAG,
             "%s not exist.\n",
             CSTR_D2_X_TALK_DOT_MPQ);
         return FALSE;

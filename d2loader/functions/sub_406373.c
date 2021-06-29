@@ -48,7 +48,7 @@ BOOL sub_406373_RunPlugin(
     if (!ret)
     {
         sub_404ed0_LogFormat(
-            LOG_TAG(sub_406373_RunPlugin),
+            LOG_TAG,
             "Failed to Run Plugin %s (Reason: %d)",
             plugin->dd_000c_dllFileName,
             reasonFlag);

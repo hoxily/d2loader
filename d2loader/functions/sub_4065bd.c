@@ -37,7 +37,7 @@ BOOL sub_4065bd_AddPlugin(
     LeaveCriticalSection(edi_criticalSection);
 
     sub_404ed0_LogFormat(
-        LOG_TAG(sub_4065bd_AddPlugin),
+        LOG_TAG,
         "Added Plugin %s: \"%s\"",
         dllFileName,
         result->pluginName);

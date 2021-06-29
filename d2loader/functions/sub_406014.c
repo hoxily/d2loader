@@ -9,12 +9,12 @@
 BOOL sub_406014_PluginInit(
 )
 {
-    sub_404ed0_LogFormat(LOG_TAG(sub_406014_PluginInit), "Plugin System Version 0x%08X", 0x01000912);
+    sub_404ed0_LogFormat(LOG_TAG, "Plugin System Version 0x%08X", 0x01000912);
     if (global_dd_408620_settings->db_0a8c_pluginDir.value[0] != '\0')
     {
         strcpy(global_db_402958_pluginDir, global_dd_408620_settings->db_0a8c_pluginDir.value);
     }
-    sub_404ed0_LogFormat(LOG_TAG(sub_406014_PluginInit), "Plugin Directory is \"%s\"", global_db_402958_pluginDir);
+    sub_404ed0_LogFormat(LOG_TAG, "Plugin Directory is \"%s\"", global_db_402958_pluginDir);
 
     char fileName[0x104];
     WIN32_FIND_DATAA findFileData;
@@ -29,7 +29,7 @@ BOOL sub_406014_PluginInit(
     HANDLE handle = FindFirstFileA(fileName, &findFileData);
     if (handle == INVALID_HANDLE_VALUE)
     {
-        sub_404ed0_LogFormat(LOG_TAG(sub_406014_PluginInit), "Error Searching Plugins");
+        sub_404ed0_LogFormat(LOG_TAG, "Error Searching Plugins");
         return FALSE;
     }
     else
@@ -43,7 +43,7 @@ BOOL sub_406014_PluginInit(
 
         sub_4061df_PluginListRun(RUN_PLUGIN_REASON_INIT);
 
-        sub_404ed0_LogFormat(LOG_TAG(sub_406014_PluginInit), "Total %d Plugins Loaded", global_dd_408618_activePluginCount);
+        sub_404ed0_LogFormat(LOG_TAG, "Total %d Plugins Loaded", global_dd_408618_activePluginCount);
 
         return TRUE;
     }

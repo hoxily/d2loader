@@ -80,7 +80,7 @@ int sub_4061df_PluginListRun(
     }
 
     sub_404ed0_LogFormat(
-        LOG_TAG(sub_4061df_PluginListRun),
+        LOG_TAG,
         "Call All Plugins With %s",
         reasonString);
 

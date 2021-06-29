@@ -31,14 +31,14 @@ int WINAPI sub_404b60_WinMain(
     }
 
     sub_406c59_CheckGameExeVersion();
-    sub_404ed0_LogFormat(LOG_TAG(WinMain), CSTR_LOG_START_SEPARATOR_LINE);
-    sub_404ed0_LogFormat(LOG_TAG(WinMain), CSTR_D2_LOADER_AUTHOR_STATEMENT);
+    sub_404ed0_LogFormat(LOG_TAG, CSTR_LOG_START_SEPARATOR_LINE);
+    sub_404ed0_LogFormat(LOG_TAG, CSTR_D2_LOADER_AUTHOR_STATEMENT);
     char* commandLine = GetCommandLineA();
-    sub_404ed0_LogFormat(LOG_TAG(WinMain), "Command Line: %s", commandLine);
-    sub_404ed0_LogFormat(LOG_TAG(WinMain), "Loader Version: %s", CSTR_D2_LOADER_VERSION_AND_BUILD);
-    sub_404ed0_LogFormat(LOG_TAG(WinMain), "Client Version: 0x%08X", global_dd_408620_settings->dd_07b4_gameProductVersionFlag.value);
+    sub_404ed0_LogFormat(LOG_TAG, "Command Line: %s", commandLine);
+    sub_404ed0_LogFormat(LOG_TAG, "Loader Version: %s", CSTR_D2_LOADER_VERSION_AND_BUILD);
+    sub_404ed0_LogFormat(LOG_TAG, "Client Version: 0x%08X", global_dd_408620_settings->dd_07b4_gameProductVersionFlag.value);
     const char* mode = global_dd_408620_settings->db_0000_expansion.value ? "Expansion" : "Classic";
-    sub_404ed0_LogFormat(LOG_TAG(WinMain), "Running in %s Mode", mode);
+    sub_404ed0_LogFormat(LOG_TAG, "Running in %s Mode", mode);
 
     sub_404c57_GameMain();
 

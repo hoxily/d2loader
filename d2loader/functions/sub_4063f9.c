@@ -19,7 +19,7 @@ BOOL sub_4063f9_UnloadPlugin(
     }
 
     sub_404ed0_LogFormat(
-        LOG_TAG(sub_4063f9_UnloadPlugin),
+        LOG_TAG,
         "Unloading Plugin %s",
         plugin->dd_000c_dllFileName);
 
