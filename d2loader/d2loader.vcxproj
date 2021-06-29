@@ -165,6 +165,7 @@
     <ClCompile Include="functions\sub_406b12.c" />
     <ClCompile Include="functions\sub_406bab.c" />
     <ClCompile Include="functions\sub_406bb9.c" />
+    <ClCompile Include="functions\sub_406c59.c" />
     <ClCompile Include="functions\sub_40735e.c" />
     <ClCompile Include="functions\sub_407380.c" />
     <ClCompile Include="functions\sub_407bb9.c" />
