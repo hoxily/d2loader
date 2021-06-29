@@ -102,6 +102,9 @@
     <ClCompile Include="functions\sub_406451.c">
       <Filter>函数源文件</Filter>
     </ClCompile>
+    <ClCompile Include="functions\sub_40a4e5.c">
+      <Filter>函数源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="logger.h">
@@ -231,6 +234,9 @@
       <Filter>函数头文件</Filter>
     </ClInclude>
     <ClInclude Include="functions\sub_406451.h">
+      <Filter>函数头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="functions\sub_40a4e5.h">
       <Filter>函数头文件</Filter>
     </ClInclude>
   </ItemGroup>

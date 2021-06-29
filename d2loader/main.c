@@ -8,12 +8,8 @@
 #include "global-variables.h"
 #include "functions/sub_404ed0.h"
 #include "functions/sub_406451.h"
+#include "functions/sub_40a4e5.h"
 
-
-void sub_40a4e5()
-{
-    //TODO
-}
 
 BOOL sub_406373_RunPlugin(struct loaded_plugin_item* plugin, DWORD reasonFlag);
 
