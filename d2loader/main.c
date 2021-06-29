@@ -8,16 +8,7 @@
 #include "global-variables.h"
 #include "functions/sub_404ed0.h"
 #include "functions/sub_40735e.h"
-
-
-BOOL sub_406bab_IsExpansion()
-{
-    if (global_dd_408620_settings == NULL)
-    {
-        return FALSE;
-    }
-    return global_dd_408620_settings->db_0000_expansion.value;
-}
+#include "functions/sub_406bab.h"
 
 void sub_4069d8_InitializeDefaultSettings()
 {
