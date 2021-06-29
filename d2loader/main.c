@@ -11,10 +11,6 @@
 
 
 
-void sub_404ec5_EnableLog(DWORD logType)
-{
-    global_dd_408590_logFlag |= logType;
-}
 
 void sub_406c59_CheckGameExeVersion()
 {
