@@ -66,6 +66,9 @@
     <ClCompile Include="functions\sub_406ac0.c">
       <Filter>函数源文件</Filter>
     </ClCompile>
+    <ClCompile Include="functions\sub_406b12.c">
+      <Filter>函数源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="logger.h">
@@ -174,6 +177,9 @@
       <Filter>函数头文件</Filter>
     </ClInclude>
     <ClInclude Include="functions\sub_406ac0.h">
+      <Filter>函数头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="functions\sub_406b12.h">
       <Filter>函数头文件</Filter>
     </ClInclude>
   </ItemGroup>
