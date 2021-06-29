@@ -41,5 +41,11 @@
     <ClInclude Include="constants.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="data-types-function-ptr.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="data-types-forward-structs.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

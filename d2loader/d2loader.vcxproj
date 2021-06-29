@@ -155,6 +155,8 @@
   <ItemGroup>
     <ClInclude Include="constant-strings.h" />
     <ClInclude Include="constants.h" />
+    <ClInclude Include="data-types-forward-structs.h" />
+    <ClInclude Include="data-types-function-ptr.h" />
     <ClInclude Include="data-types.h" />
     <ClInclude Include="global-variables.h" />
     <ClInclude Include="logger.h" />
