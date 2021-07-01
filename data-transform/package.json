@@ -1,0 +1,15 @@
+{
+  "name": "data-transform",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "hoxily@qq.com",
+  "license": "MIT",
+  "scripts": {
+    "dev": "npx tsc && node build/index.js",
+    "debug": "npx tsc && node --inspect-brk build/index.js"
+  },
+  "devDependencies": {
+    "@types/node": "^15.12.2",
+    "typescript": "^4.3.2"
+  }
+}
