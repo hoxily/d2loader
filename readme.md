@@ -77,13 +77,69 @@ BOOL sub_407380_CheckFileExist(
 ## 遇到的困难
 
 ### 三元运算符的无跳转优化
-TODO
+
+sub_40532e 函数的结尾处，有一个三元运算符。c语言代码如下：
+```c
+return importDescriptor->Name ? importDescriptor : NULL;
+```
+其对应的反汇编代码如下：
+```asm
+mov eax, [esi + 0ch] ;esi 当前为 importDescriptor 指针
+neg eax
+sbb eax, eax
+and eax, esi
+...
+retn
+```
+neg、sbb组合可以将eax变为0或者0xffffffff。
+最后 and 运算，就相当于根据 importDescriptor->Name 是否为0，来决定要返回 importDescriptor还是NULL。
+
 ### 函数实参变量另作它用
-TODO
+
+在 sub_40513a 函数末尾的while循环里，反汇编代码把函数实参 `const char* hookDll` 变量用于表达导入函数列表项是不是以Ordinal方式导入。而不是重新定义一个局部变量。
+
+这可能是因为hookDll变量的参数值在这个循环以及后面的代码里用不上了。
+
 ### 内联函数无ret直接jmp回去
-TODO
-### 缓冲区长度减1被识别为另一个变量
-TODO
+
+函数 sub_40a480 不是以正常的ret指令返回调用方，而是以jmp指令返回调用方。
+把代码简化一下，就是如下的形式：
+
+```asm
+functionA:
+  call functionB
+onBeforeTest:
+  test eax, eax
+  jnz onOk
+  ...; log 输出错误信息
+  xor eax, eax
+  retn
+onOk:
+  ...; functionB返回非零时的处理
+  retn
+
+functionB:
+  pusha
+  ...; 执行一些操作
+  popa
+  jmp onBeforeTest
+```
+这会导致 ida 的栈平衡分析出错，需要手工修正。这还会导致一个结果，那就是 sub_406d1e 返回值为 FALSE 时，导致调用方的 false 分支执行了两遍，也就是log输出了两遍 "Game Initialize Failed, Exitting\n"。
+
+你可以使用 ida 的动态调试功能，将 eax 值修改为 0，就能观察到这种现象。
+
+### 缓冲区首地址+1被识别为另一个变量
+
+见 sub_4068f2_LoadConfFile 函数的反编译结果。
+```
+Buf = byte ptr - 2800h
+var_27FF = byte ptr -27FFh
+```
+其实这个函数只定义了一个 `char buffer[0x2800];` 的缓冲区，出现 var_27FF 变量只是因为在代码里做了如下的操作。
+```c
+buffer[eax_i + 1] = '\0';
+```
+
 ## 编码技巧
 
 巧用 union 联合体做结构体偏移。TODO
