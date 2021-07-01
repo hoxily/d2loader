@@ -1,6 +1,7 @@
 #include <assert.h>
 #include "sub_404c57.h"
 #include "../global-variables.h"
+#include "../constants.h"
 #include "sub_404ed0.h"
 #include "sub_4066dc.h"
 #include "sub_406014.h"
@@ -80,7 +81,7 @@ BOOL sub_404c57_GameMain(
         if (global_dd_408620_settings->db_07af_noCleanup.value)
         {
             ExitProcess(1);
-            assert("Unreachable code.");
+            assert(ASSERT_UNREACHABLE_CODE);
         }
         else
         {

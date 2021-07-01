@@ -1,5 +1,8 @@
 #pragma once
 
+// 此代码不可能被执行
+#define ASSERT_UNREACHABLE_CODE (0)
+
 // 该命令行参数无具体参数值
 #define ARG_TYPE_NO_PARAM 1
 // 该命令行参数为16位无符号整数，支持十进制、八进制、十六进制等多种表达方式
