@@ -190,9 +190,30 @@ union program_setting_store
 
 对于那些没有log输出的函数，就只能自己命名了。
 
-assert断言确保结构体大小符合要求。TODO
+### assert断言确保结构体大小、成员偏移量符合要求
 
-offsetof求取结构体成员的偏移量。TODO
+利用assert函数，我们在使用逆向出来的结构体时，遇到sizeof求结构体大小时，可以将该大小与汇编中的常量进行断言比较，确保没有差错。
+
+同样的，对于windows api中的结构体成员的偏移量，也可以跟汇编中的常量进行断言比较，确保没有差错。
+
+其原型如下：
+```c
+#include <assert.h>
+
+void assert(scalar expression);
+```
+
+### offsetof求取结构体成员的偏移量
+
+当windows api已经帮我们定义好了一个结构体，我们可以使用 offsetof 宏来求取某个成员的偏移量，结合assert断言，确保跟汇编中的偏移量一致。
+
+其原型如下：
+
+```c
+#include <stddef.h>
+
+size_t offsetof(type, member);
+```
 
 ## 参考文档
 
