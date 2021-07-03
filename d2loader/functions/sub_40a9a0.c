@@ -88,18 +88,18 @@ void sub_40a9a0(
     wchar_t* moduleFileName = var_8(var_31c);
     assert(offsetof(PEB, Ldr) == 0x0c);
     assert((char*)(edi_peb->Ldr) + 0x0c == (char*)(&edi_peb->Ldr->Reserved2[1]));
-    void* ptr = edi_peb->Ldr->Reserved2[1];
-    wchar_t** ecx_plus_28 = (wchar_t**)((char*)ptr + 0x28);
-    *ecx_plus_28 = moduleFileName;
+    LDR_DATA_TABLE_ENTRY* ptr = (LDR_DATA_TABLE_ENTRY*)edi_peb->Ldr->Reserved2[1];
+    assert(offsetof(LDR_DATA_TABLE_ENTRY, FullDllName) + offsetof(UNICODE_STRING, Buffer) == 0x28);
+    ptr->FullDllName.Buffer = moduleFileName;
     
     size_t length = var_c(var_31c);
     size_t byteLength = length + length;
-    WORD* ecx_plus_24 = (WORD*)((char*)ptr + 0x24);
-    *ecx_plus_24 = byteLength & 0xffffu;
+    assert(offsetof(LDR_DATA_TABLE_ENTRY, FullDllName) + offsetof(UNICODE_STRING, Length) == 0x24);
+    ptr->FullDllName.Length = byteLength & 0xffffu;
 
-    WORD* eax_plus_26 = (WORD*)((char*)ptr + 0x26);
-    *eax_plus_26 = *ecx_plus_24;
-    *eax_plus_26 += 2;
+    assert(offsetof(LDR_DATA_TABLE_ENTRY, FullDllName) + offsetof(UNICODE_STRING, MaximumLength) == 0x26);
+    ptr->FullDllName.MaximumLength = ptr->FullDllName.Length;
+    ptr->FullDllName.MaximumLength += 2;
 
     // 这个函数在结尾处做的 add esp, 18h
     // 不足以平衡 var_10, memset, var_8, var_c 调用push进去的内容，少了4。
