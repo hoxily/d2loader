@@ -1,5 +1,7 @@
 #include <Windows.h>
+#include <assert.h>
 #include "sub_40a9a0.h"
+#include "../data-types.h"
 #include <winternl.h>
 #include "sub_404ed0.h"
 
@@ -25,6 +27,8 @@ void sub_40a9a0(
         mov edi_peb, eax;
     }
 
+    // 上面的 edi_peb 指针初始化为NULL。编译器不认识内联汇编中对它的赋值操作。造成C6011号警告。
+    // 此处临时禁用一下该警告。
 #pragma warning(disable: 6011)
     BOOL isBeingDebugged = edi_peb->BeingDebugged;
 #pragma warning(default: 6011)
@@ -43,5 +47,68 @@ void sub_40a9a0(
             "当前没有检测到调试器。"
         );
     }
-    //TODO
+
+    // 疑问：
+    // 这里这么麻烦地使用GetModuleHandle、GetProcAddress的方式去获得一个函数的地址。
+    // 为什么不使用正常的DLL导入方式呢？就像这里调用的 memcpy 函数。
+
+    HMODULE hModule = GetModuleHandleA("MSVCRT");
+    assert(hModule != NULL);
+    fn_wcsrchr var_10 = (fn_wcsrchr)GetProcAddress(hModule, "wcsrchr");
+    fn__wcsdup var_8 = (fn__wcsdup)GetProcAddress(hModule, "_wcsdup");
+    fn_wcslen var_c = (fn_wcslen)GetProcAddress(hModule, "wcslen");
+
+    hModule = GetModuleHandleA("KERNEL32.DLL");
+    assert(hModule != NULL);
+    // 汇编里出现了将 GetProcAddress 结果存入 hModule 局部变量的情况。
+    // 但是两者类型并不匹配，这里用一个新的局部变量来保存它。
+    fn_MultiByteToWideChar multiByteToWideChar = 
+        (fn_MultiByteToWideChar)GetProcAddress(hModule, "MultiByteToWideChar");
+
+    char fileName[0x104];
+    GetModuleFileNameA(NULL, fileName, sizeof(fileName));
+
+    WCHAR var_31c[0x104];
+    multiByteToWideChar(
+        CP_ACP,
+        0,
+        fileName,
+        -1,
+        var_31c,
+        sizeof(fileName)
+    );
+    assert('\\' == 0x5c);
+    wchar_t* lastBackSlash = var_10(var_31c, '\\');
+    // 这里的 L"\\Game.exe" 算上nul结束符，应该一共是20个字节，而不是 0x13。
+    // fix by hoxily@qq.com
+#define WCSTR_BACK_SLASH_GAME_DOT_EXE L"\\Game.exe"
+    memcpy(lastBackSlash, WCSTR_BACK_SLASH_GAME_DOT_EXE, sizeof(WCSTR_BACK_SLASH_GAME_DOT_EXE));
+#undef WCSTR_BACK_SLASH_GAME_DOT_EXE
+    
+    wchar_t* moduleFileName = var_8(var_31c);
+    assert(offsetof(PEB, Ldr) == 0x0c);
+    assert((char*)(edi_peb->Ldr) + 0x0c == (char*)(&edi_peb->Ldr->Reserved2[1]));
+    void* ptr = edi_peb->Ldr->Reserved2[1];
+    wchar_t** ecx_plus_28 = (wchar_t**)((char*)ptr + 0x28);
+    *ecx_plus_28 = moduleFileName;
+    
+    size_t length = var_c(var_31c);
+    size_t byteLength = length + length;
+    WORD* ecx_plus_24 = (WORD*)((char*)ptr + 0x24);
+    *ecx_plus_24 = byteLength & 0xffffu;
+
+    WORD* eax_plus_26 = (WORD*)((char*)ptr + 0x26);
+    *eax_plus_26 = *ecx_plus_24;
+    *eax_plus_26 += 2;
+
+    // 这个函数在结尾处做的 add esp, 18h
+    // 不足以平衡 var_10, memset, var_8, var_c 调用push进去的内容，少了4。
+    // 所以 最后5个指令中的前3个指令，恢复的 edi、esi、ebx是错误的。
+    // pop edi
+    // pop esi
+    // pop ebx
+    // leave
+    // retn
+    // 不过 esp、ebp 倒是恢复了。
+    // 最关键的是，调用当前函数的 sub_40a480 函数，有 pusha 与 popa 保护。问题不大。
 }
