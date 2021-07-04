@@ -149,3 +149,5 @@ struct hook_search_item global_dd_402408[2] =
     { "FindWindowA", sub_4053fd_my_FindWindowA },
     { (const char*)-1, NULL }
 };
+
+HMODULE global_dd_408624_moduleBnClient;

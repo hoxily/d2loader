@@ -20,5 +20,5 @@ BOOL sub_40a480(
     // 这还会导致一个结果，那就是 sub_406d1e 返回值为 FALSE 时，导致调用方的 false 分支执行了两遍，
     // 也就是log输出了两遍 "Game Initialize Failed, Exitting\n"。
     // 你可以使用 ida 的动态调试功能，将 eax 值修改为 0，就能观察到这种现象。
-    return sub_406d1e();
+    return sub_406d1e_D2Init();
 }

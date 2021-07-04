@@ -34,3 +34,5 @@ extern fn_FindWindowA global_dd_4085a8_FindWindowA;
 extern struct hook_search_item global_dd_4023f0[3];
 
 extern struct hook_search_item global_dd_402408[2];
+
+extern HMODULE global_dd_408624_moduleBnClient;

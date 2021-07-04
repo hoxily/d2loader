@@ -162,6 +162,12 @@
     <ClCompile Include="functions\sub_406d1e.c">
       <Filter>函数源文件</Filter>
     </ClCompile>
+    <ClCompile Include="functions\sub_4070aa.c">
+      <Filter>函数源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="functions\sub_4070d5.c">
+      <Filter>函数源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="constant-strings.h">
@@ -315,6 +321,12 @@
       <Filter>函数头文件</Filter>
     </ClInclude>
     <ClInclude Include="functions\sub_406d1e.h">
+      <Filter>函数头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="functions\sub_4070aa.h">
+      <Filter>函数头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="functions\sub_4070d5.h">
       <Filter>函数头文件</Filter>
     </ClInclude>
   </ItemGroup>
