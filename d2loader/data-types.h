@@ -169,10 +169,10 @@ union program_setting_store
         * xor ebx, ebx
         * cmp [eax+988h], bl
         * 
-        * 由于长度未知，暂时定为1.
+        * 另外 global_dd_402ea8_CommandLineArgumentTable 定义了此命令行参数的长度。
         */
-        char value[1];
-    } db_0988_extraMpq;
+        char value[0x104];
+    } db_0988_mpqFile;
 
     #pragma pack(1)
     struct
