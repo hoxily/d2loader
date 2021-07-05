@@ -159,6 +159,24 @@ union program_setting_store
     #pragma pack(1)
     struct
     {
+        BYTE offset[0x988];
+        /*
+        * 这必定是一个char数组。
+        * 原因是 0x00406d4f 处的汇编代码直接访问了此处的第一个字符。
+        * 如果是char指针，则需要先取得针指，然后访问指针指向的内存。参见下方汇编代码：
+        * 
+        * mov eax, global_dd_408620_settings
+        * xor ebx, ebx
+        * cmp [eax+988h], bl
+        * 
+        * 由于长度未知，暂时定为1.
+        */
+        char value[1];
+    } db_0988_extraMpq;
+
+    #pragma pack(1)
+    struct
+    {
         BYTE offset[0xa8c];
         char value[0x104];
     } db_0a8c_pluginDir;

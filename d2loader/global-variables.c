@@ -151,3 +151,5 @@ struct hook_search_item global_dd_402408[2] =
 };
 
 HMODULE global_dd_408624_moduleBnClient;
+
+DWORD global_dd_408638;

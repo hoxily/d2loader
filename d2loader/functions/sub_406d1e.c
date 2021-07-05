@@ -1,4 +1,5 @@
 #include "sub_406d1e.h"
+#include "../global-variables.h"
 #include "sub_4070d5.h"
 #include "sub_404ed0.h"
 
@@ -31,6 +32,17 @@ BOOL sub_406d1e_D2Init(
             MB_ICONERROR
         );
         return FALSE;
+    }
+
+    if (global_dd_408620_settings->db_0988_extraMpq.value[0] != '\0')
+    {
+        BOOL success = dll_storm_266(
+            &global_dd_408620_settings->db_0988_extraMpq.value[0],
+            0x10000,
+            2,
+            &global_dd_408638
+        );
+        //TODO
     }
     return FALSE;//TODO
 }
