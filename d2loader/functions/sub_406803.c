@@ -23,12 +23,12 @@ BOOL sub_406803_InitializeSettings()
     }
     sub_4068f2_LoadConfFile(global_dd_408620_settings->db_0884_confFile.value);
 
-    char* dstStr = global_dd_408620_settings->db_0004_str.value;
-    if (dstStr[0] == 0 &&
-        dstStr[1] == 0 &&
-        dstStr[2] == 0 &&
-        dstStr[3] == 0 &&
-        dstStr[4] == 0)
+    BYTE* videoModeFlags = &global_dd_408620_settings->db_0004_window.value;
+    if (videoModeFlags[0] == 0 &&
+        videoModeFlags[1] == 0 &&
+        videoModeFlags[2] == 0 &&
+        videoModeFlags[3] == 0 &&
+        videoModeFlags[4] == 0)
     {
         sub_406bb9_LoadVideoConfigFromRegistry();
     }

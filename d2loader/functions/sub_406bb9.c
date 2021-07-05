@@ -39,19 +39,19 @@ BOOL sub_406bb9_LoadVideoConfigFromRegistry(
     {
         if (data == 1)
         {
-            global_dd_408620_settings->padding[0x0008] = TRUE;
+            global_dd_408620_settings->db_0008_rave.value = TRUE;
         }
         else if (data == 2)
         {
-            global_dd_408620_settings->padding[0x0006] = TRUE;
+            global_dd_408620_settings->db_0006_glide.value = TRUE;
         }
         else if (data == 3)
         {
-            global_dd_408620_settings->padding[0x0005] = TRUE;
+            global_dd_408620_settings->db_0005.value = TRUE;
         }
         else if (data == 4)
         {
-            global_dd_408620_settings->padding[0x0004] = TRUE;
+            global_dd_408620_settings->db_0004_window.value = TRUE;
         }
     }
     RegCloseKey(phkResult);

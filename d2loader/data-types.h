@@ -61,8 +61,57 @@ union program_setting_store
     struct
     {
         BYTE offset[4];
-        char value[5 + 1];
-    } db_0004_str;
+        BYTE value;
+    } db_0004_window;
+
+    #pragma pack(1)
+    struct
+    {
+        BYTE offset[5];
+        BYTE value;
+    } db_0005;
+
+    #pragma pack(1)
+    struct
+    {
+        BYTE offset[6];
+        BYTE value;
+    } db_0006_glide;
+
+    #pragma pack(1)
+    struct
+    {
+        BYTE offset[7];
+        BYTE value;
+    } db_0007_openGl;
+
+    #pragma pack(1)
+    struct
+    {
+        BYTE offset[8];
+        BYTE value;
+    } db_0008_rave;
+
+    #pragma pack(1)
+    struct
+    {
+        BYTE offset[9];
+        BYTE value;
+    } db_0009_d3d;
+
+    #pragma pack(1)
+    struct
+    {
+        BYTE offset[9];
+        BYTE value;
+    } db_0009_perspective;
+
+    #pragma pack(1)
+    struct
+    {
+        BYTE offset[0xa];
+        BYTE value;
+    } db_000a_lowQuality;
 
     #pragma pack(1)
     struct
