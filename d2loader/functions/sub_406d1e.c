@@ -44,7 +44,32 @@ BOOL sub_406d1e_D2Init(
             2,
             &global_dd_408638_mpqFileHandle
         );
-        //TODO
+        if (success)
+        {
+            sub_404ed0_LogFormat(
+                LOG_TAG,
+                "Added MPQ '%s'",
+                global_dd_408620_settings->db_0988_mpqFile.value
+            );
+        }
+        else
+        {
+            global_dd_408638_mpqFileHandle = 0;
+            sub_404ed0_LogFormat(
+                LOG_TAG,
+                "Failed to open MPQ '%s'",
+                global_dd_408620_settings->db_0988_mpqFile.value
+            );
+        }
+    }
+
+    if (global_dd_408620_settings->db_0004_window.value == 0)
+    {
+
+    }
+    else
+    {
+
     }
     return FALSE;//TODO
 }
