@@ -42,7 +42,7 @@ BOOL sub_406d1e_D2Init(
             global_dd_408620_settings->db_0988_mpqFile.value,
             0x10000,
             2,
-            &global_dd_408638
+            &global_dd_408638_mpqFileHandle
         );
         //TODO
     }

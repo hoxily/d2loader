@@ -37,4 +37,4 @@ extern struct hook_search_item global_dd_402408[2];
 
 extern HMODULE global_dd_408624_moduleBnClient;
 
-extern DWORD global_dd_408638;
+extern DWORD global_dd_408638_mpqFileHandle;
