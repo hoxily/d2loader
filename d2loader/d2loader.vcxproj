@@ -72,6 +72,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <LibraryPath>$(SolutionDir)DummyLibs;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Storm;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -253,6 +255,7 @@
     <ClInclude Include="functions\sub_40a9a0.h" />
     <ClInclude Include="global-variables.h" />
     <ClInclude Include="functions\sub_40543b.h" />
+    <ClInclude Include="storm-api.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

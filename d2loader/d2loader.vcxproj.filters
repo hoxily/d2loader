@@ -329,5 +329,8 @@
     <ClInclude Include="functions\sub_4070d5.h">
       <Filter>函数头文件</Filter>
     </ClInclude>
+    <ClInclude Include="storm-api.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

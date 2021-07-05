@@ -4,10 +4,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.30709.132
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "d2loader", "d2loader\d2loader.vcxproj", "{C7B81E15-9CD8-4091-88BE-FB24D909A73C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0F44AA84-69E9-478F-BC4E-300DBDE7E6FB} = {0F44AA84-69E9-478F-BC4E-300DBDE7E6FB}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OldFormatPluginDll", "OldFormatPluginDll\OldFormatPluginDll.vcxproj", "{FC38596F-C2B1-4ECA-B389-A5C87B905835}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NewFormatPluginDll", "NewFormatPluginDll\NewFormatPluginDll.vcxproj", "{AE170F2D-3A35-4438-A07B-2914C0507E4A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Storm", "Storm\Storm.vcxproj", "{0F44AA84-69E9-478F-BC4E-300DBDE7E6FB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +46,14 @@ Global
 		{AE170F2D-3A35-4438-A07B-2914C0507E4A}.Release|x64.Build.0 = Release|x64
 		{AE170F2D-3A35-4438-A07B-2914C0507E4A}.Release|x86.ActiveCfg = Release|Win32
 		{AE170F2D-3A35-4438-A07B-2914C0507E4A}.Release|x86.Build.0 = Release|Win32
+		{0F44AA84-69E9-478F-BC4E-300DBDE7E6FB}.Debug|x64.ActiveCfg = Debug|x64
+		{0F44AA84-69E9-478F-BC4E-300DBDE7E6FB}.Debug|x64.Build.0 = Debug|x64
+		{0F44AA84-69E9-478F-BC4E-300DBDE7E6FB}.Debug|x86.ActiveCfg = Debug|Win32
+		{0F44AA84-69E9-478F-BC4E-300DBDE7E6FB}.Debug|x86.Build.0 = Debug|Win32
+		{0F44AA84-69E9-478F-BC4E-300DBDE7E6FB}.Release|x64.ActiveCfg = Release|x64
+		{0F44AA84-69E9-478F-BC4E-300DBDE7E6FB}.Release|x64.Build.0 = Release|x64
+		{0F44AA84-69E9-478F-BC4E-300DBDE7E6FB}.Release|x86.ActiveCfg = Release|Win32
+		{0F44AA84-69E9-478F-BC4E-300DBDE7E6FB}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

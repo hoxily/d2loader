@@ -1,7 +1,9 @@
 #include "sub_406d1e.h"
 #include "../global-variables.h"
+#include "../storm-api.h"
 #include "sub_4070d5.h"
 #include "sub_404ed0.h"
+
 
 BOOL sub_406d1e_D2Init(
 )
