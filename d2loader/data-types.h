@@ -123,9 +123,37 @@ union program_setting_store
     #pragma pack(1)
     struct
     {
+        BYTE offset[0x221];
+        void* value;
+    } dd_0221_comInt;
+
+    #pragma pack(1)
+    struct
+    {
+        BYTE offset[0x79b];
+        BYTE value;
+    } db_079b_client;
+
+    #pragma pack(1)
+    struct
+    {
+        BYTE offset[0x79c];
+        BYTE value;
+    } db_079c_server;
+
+    #pragma pack(1)
+    struct
+    {
         BYTE offset[0x79d];
         BYTE value;
     } db_079d_launch;
+
+    #pragma pack(1)
+    struct
+    {
+        BYTE offset[0x79e];
+        BYTE value;
+    } db_079e_multi;
 
     #pragma pack(1)
     struct
@@ -191,6 +219,13 @@ union program_setting_store
         BYTE offset[0x7af];
         BYTE value;
     } db_07af_noCleanup;
+
+    #pragma pack(1)
+    struct
+    {
+        BYTE offset[0x7b0];
+        DWORD value;
+    } dd_07b0;
 
     #pragma pack(1)
     struct

@@ -4,6 +4,9 @@
 #include "sub_404ed0.h"
 #include "sub_405663.h"
 
+typedef void* (*fn_BnClient_QueryInterface)();
+typedef void (__fastcall *fn_ComInt)(union program_setting_store* settings);
+
 BOOL sub_4070d5_D2CommonInit(
 )
 {
@@ -25,14 +28,51 @@ BOOL sub_4070d5_D2CommonInit(
         return FALSE;
     }
 
-    if (sub_405663_LoadDynamicFunctions())
+    if (!sub_405663_LoadDynamicFunctions())
     {
+        sub_404ed0_LogFormat(
+            LOG_TAG,
+            "Error Loading Dynamic Functions"
+        );
+        return FALSE;
+    }
 
+    fn_BnClient_QueryInterface query = (fn_BnClient_QueryInterface)GetProcAddress(global_dd_408624_moduleBnClient, "QueryInterface");
+    if (query == NULL)
+    {
+        sub_404ed0_LogFormat(
+            LOG_TAG,
+            "Error QueryInterface on bnclient.dll"
+        );
+        return FALSE;
+    }
+
+    void* comInt = query();
+    global_dd_408620_settings->dd_0221_comInt.value = comInt;
+    
+    // 小心下面两种 call 的差异：
+    // call eax
+    // call dword ptr [eax]
+    // query 取得的只是一个指针，指向一个函数指针。
+    fn_ComInt fn = *(fn_ComInt*)query();
+
+    fn(global_dd_408620_settings);
+
+    if (global_dd_408620_settings->db_079b_client.value)
+    {
+        global_dd_408620_settings->dd_07b0.value = 1;
+    }
+    else if (global_dd_408620_settings->db_079c_server.value)
+    {
+        global_dd_408620_settings->dd_07b0.value = 2;
+    }
+    else if (global_dd_408620_settings->db_079e_multi.value)
+    {
+        global_dd_408620_settings->dd_07b0.value = 3;
     }
     else
     {
-
+        global_dd_408620_settings->dd_07b0.value = 4;
     }
-    //TODO
-    return FALSE;
+    return TRUE;
 }
