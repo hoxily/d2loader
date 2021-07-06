@@ -117,6 +117,10 @@ BOOL sub_406d1e_D2Init(
     }
     // 下面调用的许多函数都不存在。需要在 sub_4070d5_D2CommonInit 中获取。
     // 看起来使用ecx、edx寄存器来传递函数参数。
+    // 这个特征符合 __fastcall 调用约定。参见 https://docs.microsoft.com/en-us/cpp/cpp/fastcall?view=msvc-160
+    // 1. 前两个小于等于DWORD大小的参数从左到右顺序，分别分配给ecx和edx；
+    // 2. 其他剩余参数从右到左的顺序push到栈上。
+    // 3. 被调用函数负责清理栈上的参数。
     //TODO
     return FALSE;
 }
