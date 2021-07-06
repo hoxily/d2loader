@@ -22,8 +22,8 @@ BOOL sub_405763_InitD2FunctionTable(
         }
 
         assert(offsetof(struct d2_dll_function_item, ordinal) == 8);
-        esi_ptr->procedure = GetProcAddress(*esi_ptr->module, (LPCSTR)esi_ptr->ordinal);
-        if (esi_ptr->procedure == NULL)
+        *esi_ptr->procedure = GetProcAddress(*esi_ptr->module, (LPCSTR)esi_ptr->ordinal);
+        if (*esi_ptr->procedure == NULL)
         {
             return FALSE;
         }
