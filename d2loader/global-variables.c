@@ -177,10 +177,84 @@ struct d2_dll_function_item global_dd_402570_functionTable[] =
 {
     { &global_dd_4085c0_moduleD2Win, &global_dd_40867c, 0x2766 },
     { &global_dd_4085c0_moduleD2Win, &global_dd_4086cc, 0x2715 },
-    //TODO
+    { &global_dd_4085c0_moduleD2Win, &global_dd_40866c, 0x2768 },
+    { &global_dd_4085c0_moduleD2Win, &global_dd_40869c, 0x279e },
+    { &global_dd_4085c0_moduleD2Win, &global_dd_4086d4, 0x2744 },
+    { &global_dd_4085c0_moduleD2Win, &global_dd_4086a0, 0x2730 },
+    { &global_dd_4085b8_moduleFog, &global_dd_408688, 0x2725 },
+    { &global_dd_4085b8_moduleFog, &global_dd_4086ec, 0x2775 },
+    { &global_dd_4085b8_moduleFog, &global_dd_4086c8, 0x2723 },
+    { &global_dd_4085b8_moduleFog, &global_dd_4086d0, 0x2769 },
+    { &global_dd_4085b8_moduleFog, &global_dd_4086c4, 0x27ea },
+    { &global_dd_4085b8_moduleFog, &global_dd_408664, 0x276a },
+    { &global_dd_4085b8_moduleFog, &global_dd_4086a8, 0x279f },
+    { &global_dd_4085bc_moduleD2Sound, &global_dd_40868c, 0x2712 },
+    { &global_dd_4085bc_moduleD2Sound, &global_dd_4086e0, 0x272f },
+    { &global_dd_4085c4_moduleD2Gfx, &global_dd_408670, 0x2764 },
+    { &global_dd_4085c4_moduleD2Gfx, &global_dd_4086c0, 0x2761 },
+    { &global_dd_4085c4_moduleD2Gfx, &global_dd_408674, 0x2745 },
+    { &global_dd_4085c4_moduleD2Gfx, &global_dd_4086b0, 0x2732 },
+    { &global_dd_4085c4_moduleD2Gfx, &global_dd_4086e4, 0x2717 },
+    { &global_dd_4085c4_moduleD2Gfx, &global_dd_4086ac, 0x2740 },
+    { &global_dd_4085b8_moduleFog, &global_dd_4086dc, 0x27c9 },
+    { &global_dd_4085cc_moduleD2Common, &global_dd_408658, 0x294f },
+    { &global_dd_4085cc_moduleD2Common, &global_dd_408694, 0x2950 },
+    { &global_dd_4085c8_moduleD2Game, &global_dd_4086d8, 0x2712 },
+    { &global_dd_4085c8_moduleD2Game, &global_dd_408660, 0x2713 },
+    { &global_dd_4085c8_moduleD2Game, &global_dd_4086b8, 0x2714 },
+    { &global_dd_4085c8_moduleD2Game, &global_dd_4086e8, 0x2715 },
+    { &global_dd_4085c8_moduleD2Game, &global_dd_4086a4, 0x2716 },
+    { &global_dd_4085c8_moduleD2Game, &global_dd_4086b4, 0x2717 },
+    { &global_dd_4085c8_moduleD2Game, &global_dd_40865c, 0x2727 },
+    { &global_dd_4085c8_moduleD2Game, &global_dd_408698, 0x2728 },
+    { &global_dd_4085c8_moduleD2Game, &global_dd_4086bc, 0x273e },
+    { &global_dd_4085c8_moduleD2Game, &global_dd_408668, 0x273f },
+    { &global_dd_4085c8_moduleD2Game, &global_dd_4086f0, 0x2742 },
+    { &global_dd_4085d4_moduleD2Lang, &global_dd_408684, 0x2710 },
+    { &global_dd_4085d4_moduleD2Lang, &global_dd_408680, 0x2711 },
+    { &global_dd_4085d0_moduleD2Net, &global_dd_408678, 0x2713 },
+    { &global_dd_4085d0_moduleD2Net, &global_dd_408690, 0x2714 },
+    { NULL, NULL, 0 }
 };
 
 struct d2_dll_function_item* global_dd_402750_functionTable = &global_dd_402570_functionTable[0];
 
 fn_D2Win_2766 global_dd_40867c;
 fn_D2Win_2715 global_dd_4086cc;
+fn_D2Win_2768 global_dd_40866c;
+fn_D2Win_279e global_dd_40869c;
+fn_D2Win_2744 global_dd_4086d4;
+fn_D2Win_2730 global_dd_4086a0;
+fn_Fog_2725 global_dd_408688;
+fn_Fog_2775 global_dd_4086ec;
+fn_Fog_2723 global_dd_4086c8;
+fn_Fog_2769 global_dd_4086d0;
+fn_Fog_27ea global_dd_4086c4;
+fn_Fog_276a global_dd_408664;
+fn_Fog_279f global_dd_4086a8;
+fn_D2Sound_2712 global_dd_40868c;
+fn_D2Sound_272f global_dd_4086e0;
+fn_D2Gfx_2764 global_dd_408670;
+fn_D2Gfx_2761 global_dd_4086c0;
+fn_D2Gfx_2745 global_dd_408674;
+fn_D2Gfx_2732 global_dd_4086b0;
+fn_D2Gfx_2717 global_dd_4086e4;
+fn_D2Gfx_2740 global_dd_4086ac;
+fn_Fog_27c9 global_dd_4086dc;
+fn_D2Common_294f global_dd_408658;
+fn_D2Common_2950 global_dd_408694;
+fn_D2Game_2712 global_dd_4086d8;
+fn_D2Game_2713 global_dd_408660;
+fn_D2Game_2714 global_dd_4086b8;
+fn_D2Game_2715 global_dd_4086e8;
+fn_D2Game_2716 global_dd_4086a4;
+fn_D2Game_2717 global_dd_4086b4;
+fn_D2Game_2727 global_dd_40865c;
+fn_D2Game_2728 global_dd_408698;
+fn_D2Game_273e global_dd_4086bc;
+fn_D2Game_273f global_dd_408668;
+fn_D2Game_2742 global_dd_4086f0;
+fn_D2Lang_2710 global_dd_408684;
+fn_D2Lang_2711 global_dd_408680;
+fn_D2Net_2713 global_dd_408678;
+fn_D2Net_2714 global_dd_408690;

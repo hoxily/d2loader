@@ -49,7 +49,7 @@ typedef size_t(__cdecl* fn_wcslen)(
     wchar_t const* _String
     );
 
-typedef BOOL(__fastcall* fn_D2Win_2766)(
+typedef BOOL(__stdcall* fn_D2Win_2766)(
     );
 
 typedef BOOL(__fastcall* fn_D2Win_2715)(
@@ -57,4 +57,136 @@ typedef BOOL(__fastcall* fn_D2Win_2715)(
     DWORD arg1,
     DWORD arg2,
     union program_setting_store* settings
+    );
+
+typedef int(__stdcall* fn_D2Win_2768)(
+    );
+
+typedef int(__stdcall* fn_D2Win_279e)(
+    HMODULE module,
+    DWORD videoMode,
+    DWORD arg2,
+    DWORD arg3
+    );
+
+typedef int(__stdcall* fn_D2Win_2744)(
+    BOOL titleEnabled,
+    BOOL isRes800
+    );
+
+typedef int(__stdcall* fn_D2Win_2730)(
+    );
+
+typedef int(__fastcall* fn_Fog_2725)(
+    const char* windowClassName
+    );
+
+typedef int(__fastcall* fn_Fog_2775)(
+    DWORD isDirect,
+    DWORD arg1
+    );
+
+typedef BOOL(*fn_ErrorHandler)(
+    );
+
+typedef int(__fastcall* fn_Fog_2723)(
+    const char* serverName,
+    fn_ErrorHandler onError,
+    const char* windowCaption,
+    DWORD arg3
+    );
+
+typedef int(__fastcall* fn_Fog_2769)(
+    DWORD arg0
+    );
+
+typedef int(__fastcall* fn_Fog_27ea)(
+    );
+
+typedef int(__fastcall* fn_Fog_276a)(
+    );
+
+typedef int(__cdecl* fn_Fog_279f)(
+    DWORD arg0
+    );
+
+typedef int(__fastcall* fn_D2Sound_2712)(
+    DWORD isExpansion
+    );
+
+typedef int(__fastcall* fn_D2Sound_272f)(
+    );
+
+typedef int(__stdcall* fn_D2Gfx_2764)(
+    );
+
+typedef void(__stdcall* fn_D2Gfx_2761)(
+    DWORD arg0
+    );
+
+typedef void(__stdcall* fn_D2Gfx_2745)(
+    );
+
+typedef void(__stdcall* fn_D2Gfx_2732)(
+    DWORD gamma
+    );
+
+typedef void(__stdcall* fn_D2Gfx_2717)(
+    );
+
+typedef HWND(__stdcall* fn_D2Gfx_2740)(
+    );
+
+typedef void(__cdecl* fn_Fog_27c9)(
+    );
+
+typedef void(__cdecl* fn_D2Common_294f)(
+    );
+
+typedef void(__cdecl* fn_D2Common_2950)(
+    );
+
+typedef void(__cdecl* fn_D2Game_2712)(
+    );
+
+typedef void(__cdecl* fn_D2Game_2713)(
+    );
+
+typedef void(__cdecl* fn_D2Game_2714)(
+    );
+
+typedef void(__cdecl* fn_D2Game_2715)(
+    );
+
+typedef void(__cdecl* fn_D2Game_2716)(
+    );
+
+typedef void(__cdecl* fn_D2Game_2717)(
+    );
+
+typedef void(__cdecl* fn_D2Game_2727)(
+    );
+
+typedef void(__cdecl* fn_D2Game_2728)(
+    );
+
+typedef void(__cdecl* fn_D2Game_273e)(
+    );
+
+typedef void(__cdecl* fn_D2Game_273f)(
+    );
+
+typedef void(__cdecl* fn_D2Game_2742)(
+    );
+
+typedef void(__cdecl* fn_D2Lang_2710)(
+    );
+
+typedef void(__cdecl* fn_D2Lang_2711)(
+    );
+
+typedef void(__cdecl* fn_D2Net_2713)(
+    );
+
+typedef void(__cdecl* fn_D2Net_2714)(
     );
