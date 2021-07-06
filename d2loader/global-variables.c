@@ -151,5 +151,19 @@ struct hook_search_item global_dd_402408[2] =
 };
 
 HMODULE global_dd_408624_moduleBnClient;
+HMODULE global_dd_408628_moduleD2Client;
+HMODULE global_dd_40862c_moduleD2Launch;
 
 DWORD global_dd_408638_mpqFileHandle;
+
+BOOL global_dd_4085d8_isOtherDllLoaded = FALSE;
+HMODULE global_dd_4085b8_moduleFog = NULL;
+HMODULE global_dd_4085c0_moduleD2Win = NULL;
+HMODULE global_dd_4085bc_moduleD2Sound = NULL;
+HMODULE global_dd_4085c4_moduleD2Gfx = NULL;
+HMODULE global_dd_4085c8_moduleD2Game = NULL;
+HMODULE global_dd_4085cc_moduleD2Common = NULL;
+HMODULE global_dd_4085d0_moduleD2Net = NULL;
+HMODULE global_dd_4085d4_moduleD2Lang = NULL;
+
+void* global_dd_402750 = &global_dd_4085c0_moduleD2Win;

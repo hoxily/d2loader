@@ -168,6 +168,12 @@
     <ClCompile Include="functions\sub_4070d5.c">
       <Filter>函数源文件</Filter>
     </ClCompile>
+    <ClCompile Include="functions\sub_405663.c">
+      <Filter>函数源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="functions\sub_405763.c">
+      <Filter>函数源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="constant-strings.h">
@@ -331,6 +337,12 @@
     </ClInclude>
     <ClInclude Include="storm-api.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="functions\sub_405663.h">
+      <Filter>函数头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="functions\sub_405763.h">
+      <Filter>函数头文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
