@@ -63,13 +63,60 @@ BOOL sub_406d1e_D2Init(
         }
     }
 
-    if (global_dd_408620_settings->db_0004_window.value == 0)
+    DWORD titleEnabled;
+    DWORD videoMode;
+    if (global_dd_408620_settings->db_0004_window.value)
     {
-
+        videoMode = 1;
+        const char* withOrWithout = NULL;
+        if (global_dd_408620_settings->db_079f_noTitle.value)
+        {
+            titleEnabled = FALSE;
+            withOrWithout = "Without";
+        }
+        else
+        {
+            titleEnabled = TRUE;
+            withOrWithout = "With";
+        }
+        sub_404ed0_LogFormat(
+            LOG_TAG,
+            "Video Mode: Window Mode (%s Title)",
+            withOrWithout
+        );
     }
     else
     {
+        titleEnabled = FALSE;
+        if (global_dd_408620_settings->db_0008_rave.value)
+        {
+            videoMode = 6;
+        }
+        else
+        {
+            if (global_dd_408620_settings->db_0005.value)
+            {
+                videoMode = 4;
+            }
+            else
+            {
+                videoMode = 3;
+            }
+        }
 
+        sub_404ed0_LogFormat(
+            LOG_TAG,
+            "Video Mode: Full Screen Mode"
+        );
     }
-    return FALSE;//TODO
+
+    DWORD edi_isRes800 = FALSE;
+    if (global_dd_408620_settings->db_07a0_res800.value)
+    {
+        edi_isRes800 = TRUE;
+    }
+    // 下面调用的许多函数都不存在。需要在 sub_4070d5_D2CommonInit 中获取。
+    // 看起来使用ecx、edx寄存器来传递函数参数。
+    //TODO
+    return FALSE;
 }

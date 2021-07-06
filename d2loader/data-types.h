@@ -137,6 +137,22 @@ union program_setting_store
     #pragma pack(1)
     struct
     {
+        BYTE offset[0x7a0];
+        // 是否启用 800x600 分辨率
+        BYTE value;
+    } db_07a0_res800;
+
+    #pragma pack(1)
+    struct
+    {
+        BYTE offset[0x7a1];
+        // 是否启用 640x480 分辨率
+        BYTE value;
+    } db_07a1_res640;
+
+    #pragma pack(1)
+    struct
+    {
         BYTE offset[0x7a9];
         BYTE value;
     } db_07a9_printArg;
