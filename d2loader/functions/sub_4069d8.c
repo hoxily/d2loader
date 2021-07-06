@@ -14,7 +14,7 @@ void sub_4069d8_InitializeDefaultSettings()
     }
 
     global_dd_408620_settings->dd_020d_IsExpansion.value = sub_406bab_IsExpansion;
-    global_dd_408620_settings->db_079d.value = TRUE;
+    global_dd_408620_settings->db_079d_launch.value = TRUE;
     global_dd_408620_settings->db_07af_noCleanup.value = TRUE;
     strcpy(global_dd_408620_settings->db_0804_title.value, CSTR_D2_LOADER_VERSION_AND_BUILD);
     strcpy(global_dd_408620_settings->db_07ec_gameName.value, CSTR_DIABLO_II);

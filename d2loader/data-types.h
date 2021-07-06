@@ -125,7 +125,14 @@ union program_setting_store
     {
         BYTE offset[0x79d];
         BYTE value;
-    } db_079d;
+    } db_079d_launch;
+
+    #pragma pack(1)
+    struct
+    {
+        BYTE offset[0x79f];
+        BYTE value;
+    } db_079f_noTitle;
 
     #pragma pack(1)
     struct
