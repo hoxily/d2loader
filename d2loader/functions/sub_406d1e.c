@@ -1,8 +1,10 @@
 #include "sub_406d1e.h"
 #include "../global-variables.h"
+#include "../constant-strings.h"
 #include "../storm-api.h"
 #include "sub_4070d5.h"
 #include "sub_404ed0.h"
+#include "sub_4072b7.h"
 
 
 BOOL sub_406d1e_D2Init(
@@ -110,6 +112,9 @@ BOOL sub_406d1e_D2Init(
         );
     }
 
+    // loc_406e1c:
+    int var_8;
+    int var_4;
     DWORD edi_isRes800 = FALSE;
     if (global_dd_408620_settings->db_07a0_res800.value)
     {
@@ -121,6 +126,49 @@ BOOL sub_406d1e_D2Init(
     // 1. 前两个小于等于DWORD大小的参数从左到右顺序，分别分配给ecx和edx；
     // 2. 其他剩余参数从右到左的顺序push到栈上。
     // 3. 被调用函数负责清理栈上的参数。
+    
+    // 下面的函数调用约定以及传参数量不能光看 d2loader 的汇编代码。
+    // 需要结合对应的dll的代码才能确认。
+
+    var_8 = global_dd_408688("D2");
+
+    // 调试注意事项：
+    // 需要将被调试的d2loader.exe设置为Windows XP SP3兼容性。
+    // 然后Visual Studio需要以管理员权限启动。否则下面这个函数会产生Stack overflow异常。
+    var_4 = global_dd_4086c8(
+        global_dd_408620_settings->db_07ec_gameName.value,
+        sub_4072b7_ErrorHandle,
+        CSTR_D2_LOADER_VERSION_AND_BUILD,
+        1
+    );
+
+    var_8 = global_dd_4086ec(
+        global_dd_408620_settings->db_01ff_direct.value,
+        0
+    );
+
+    var_8 = global_dd_4086d0(
+        1
+    );
+
+    var_8 = global_dd_4086c4();
+
+    if (!var_4)
+    {
+        MessageBoxA(
+            NULL,
+            "Game Server Initialize Failed",
+            LOG_TAG,
+            MB_ICONERROR
+        );
+        return FALSE;
+    }
+
+    sub_404ed0_LogFormat(
+        LOG_TAG,
+        "Game Server Initialized"
+    );
+
     //TODO
     return FALSE;
 }

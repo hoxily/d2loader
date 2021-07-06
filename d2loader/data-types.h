@@ -116,6 +116,13 @@ union program_setting_store
     #pragma pack(1)
     struct
     {
+        BYTE offset[0x1ff];
+        BYTE value;
+    } db_01ff_direct;
+
+    #pragma pack(1)
+    struct
+    {
         BYTE offset[0x20d];
         BOOL(*value)();
     } dd_020d_IsExpansion;
