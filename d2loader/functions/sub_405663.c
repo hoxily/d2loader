@@ -34,7 +34,7 @@ BOOL sub_405663_LoadOtherDll(
     TRY_LOAD_D2_MODULE(global_dd_4085d0_moduleD2Net, "d2net.dll");
     TRY_LOAD_D2_MODULE(global_dd_4085d4_moduleD2Lang, "d2lang.dll");
 
-    if (!sub_405763())
+    if (!sub_405763_InitD2FunctionTable())
     {
         return FALSE;
     }
