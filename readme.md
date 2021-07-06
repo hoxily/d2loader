@@ -56,10 +56,11 @@ repeatable注释的特殊性在于，它能在其他引用了此处对象的地�
 
 比如下面提到的 `内联函数无ret直接jmp回去` 小节，存在一种栈不平衡的情况。
 
-什么是栈平衡呢？就是函数调用前后，栈指针恢复到调用前的状态。这涉及到调用约定(calling conversion)。
+什么是栈平衡呢？就是函数调用前后，栈指针恢复到调用前的状态。这涉及到调用约定(calling conversion)，参见 https://docs.microsoft.com/en-us/cpp/cpp/argument-passing-and-naming-conventions?view=msvc-160 。
 
 - `__cdecl` 调用约定是指函数参数从右到左的顺序依次push到栈上，调用方(caller)清理push进去的数据，恢复栈平衡。这可以实现可变参数数量的效果，例如printf函数。
-- `__stdcall` 调用约定是指函数参数从右到左的顺序依次push到栈上，被调用方(callee)清理push进去的数据，恢得栈平衡。
+- `__stdcall` 调用约定是指函数参数从右到左的顺序依次push到栈上，被调用方(callee)清理push进去的数据，恢复栈平衡。
+- `__fastcall` 调用约定是指函数前2个参数从左到右的顺序分别分配给ecx、edx寄存器，剩余参数按照从右到左的顺序push到栈上，被调用方（callee）清理push进去的数据，恢复栈平衡。
 
 首先我们需要打开栈指针指示，在 Options->Disassembly->Stack pointer 单选框上打勾，即可在每一行汇编代码的前面看到栈指针指示。
 
