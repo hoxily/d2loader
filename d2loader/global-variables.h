@@ -41,7 +41,7 @@ extern HMODULE global_dd_40862c_moduleD2Launch;
 
 extern DWORD global_dd_408638_mpqFileHandle;
 
-extern BOOL global_dd_4085d8_isOtherDllLoaded;
+extern BOOL global_dd_4085d8_isDynamicFunctionsLoaded;
 extern HMODULE global_dd_4085b8_moduleFog;
 extern HMODULE global_dd_4085c0_moduleD2Win;
 extern HMODULE global_dd_4085bc_moduleD2Sound;

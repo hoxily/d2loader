@@ -25,7 +25,7 @@ BOOL sub_4070d5_D2CommonInit(
         return FALSE;
     }
 
-    if (sub_405663_LoadOtherDll())
+    if (sub_405663_LoadDynamicFunctions())
     {
 
     }

@@ -17,10 +17,10 @@ do \
     } \
 } while (FALSE); \
 
-BOOL sub_405663_LoadOtherDll(
+BOOL sub_405663_LoadDynamicFunctions(
 )
 {
-    if (global_dd_4085d8_isOtherDllLoaded)
+    if (global_dd_4085d8_isDynamicFunctionsLoaded)
     {
         return TRUE;
     }
@@ -39,6 +39,6 @@ BOOL sub_405663_LoadOtherDll(
         return FALSE;
     }
 
-    global_dd_4085d8_isOtherDllLoaded = TRUE;
+    global_dd_4085d8_isDynamicFunctionsLoaded = TRUE;
     return TRUE;
 }
