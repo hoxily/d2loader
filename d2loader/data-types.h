@@ -261,3 +261,10 @@ struct hook_search_item
     const char* functionName;
     void* functionProcAddress;
 };
+
+struct d2_dll_function_item
+{
+    HMODULE* module;
+    void *procedure;
+    int ordinal;
+};

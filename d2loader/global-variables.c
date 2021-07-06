@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "data-types.h"
 #include "constants.h"
+#include "global-variables.h"
 
 /*
  * 数据类型前缀：
@@ -166,4 +167,20 @@ HMODULE global_dd_4085cc_moduleD2Common = NULL;
 HMODULE global_dd_4085d0_moduleD2Net = NULL;
 HMODULE global_dd_4085d4_moduleD2Lang = NULL;
 
-void* global_dd_402750 = &global_dd_4085c0_moduleD2Win;
+struct d2_dll_function_item global_dd_402500_functionTable[] =
+{
+    { &global_dd_4085c0_moduleD2Win, &global_dd_40867c, 0x2731 },
+    //TODO
+};
+
+struct d2_dll_function_item global_dd_402570_functionTable[] =
+{
+    { &global_dd_4085c0_moduleD2Win, &global_dd_40867c, 0x2766 },
+    { &global_dd_4085c0_moduleD2Win, &global_dd_4086cc, 0x2715 },
+    //TODO
+};
+
+struct d2_dll_function_item* global_dd_402750_functionTable = &global_dd_402570_functionTable[0];
+
+fn_D2Win_2766 global_dd_40867c;
+fn_D2Win_2715 global_dd_4086cc;

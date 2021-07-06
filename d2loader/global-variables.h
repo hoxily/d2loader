@@ -51,4 +51,9 @@ extern HMODULE global_dd_4085cc_moduleD2Common;
 extern HMODULE global_dd_4085d0_moduleD2Net;
 extern HMODULE global_dd_4085d4_moduleD2Lang;
 
-extern void* global_dd_402750;
+extern struct d2_dll_function_item global_dd_402500_functionTable[];
+extern struct d2_dll_function_item global_dd_402570_functionTable[];
+extern struct d2_dll_function_item* global_dd_402750_functionTable;
+
+extern fn_D2Win_2766 global_dd_40867c;
+extern fn_D2Win_2715 global_dd_4086cc;

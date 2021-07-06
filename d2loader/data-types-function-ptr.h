@@ -48,3 +48,13 @@ typedef wchar_t* (__cdecl* fn__wcsdup)(
 typedef size_t(__cdecl* fn_wcslen)(
     wchar_t const* _String
     );
+
+typedef BOOL(__fastcall* fn_D2Win_2766)(
+    );
+
+typedef BOOL(__fastcall* fn_D2Win_2715)(
+    DWORD arg0,
+    DWORD arg1,
+    DWORD arg2,
+    union program_setting_store* settings
+    );
