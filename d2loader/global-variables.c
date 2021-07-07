@@ -14,6 +14,15 @@
 // 比如一个变量其实是一个数组，当取数组中的某一个元素时，在汇编代码中仍然是全局变量的形式，
 // 当重复定义逻辑上相同的变量时，会引起数据错误。
 
+const char* global_dd_4011b0_gameStateDlls[] =
+{
+    "none.dll",
+    "d2client.dll",
+    "d2server.dll",
+    "d2multi.dll",
+    "d2launch.dll"
+};
+
 union program_setting_store* global_dd_408620_settings;
 FILE* global_dd_408588_logFile;
 FILE* global_dd_40858c_logFile;

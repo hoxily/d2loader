@@ -1,5 +1,6 @@
 #include "sub_4070d5.h"
 #include "../global-variables.h"
+#include "../constants.h"
 #include "sub_4070aa.h"
 #include "sub_404ed0.h"
 #include "sub_405663.h"
@@ -60,19 +61,19 @@ BOOL sub_4070d5_D2CommonInit(
 
     if (global_dd_408620_settings->db_079b_client.value)
     {
-        global_dd_408620_settings->dd_07b0.value = 1;
+        global_dd_408620_settings->dd_07b0_gameState.value = GAME_STATE_CLIENT;
     }
     else if (global_dd_408620_settings->db_079c_server.value)
     {
-        global_dd_408620_settings->dd_07b0.value = 2;
+        global_dd_408620_settings->dd_07b0_gameState.value = GAME_STATE_SERVER;
     }
     else if (global_dd_408620_settings->db_079e_multi.value)
     {
-        global_dd_408620_settings->dd_07b0.value = 3;
+        global_dd_408620_settings->dd_07b0_gameState.value = GAME_STATE_MULTI;
     }
     else
     {
-        global_dd_408620_settings->dd_07b0.value = 4;
+        global_dd_408620_settings->dd_07b0_gameState.value = GAME_STATE_LAUNCH;
     }
     return TRUE;
 }

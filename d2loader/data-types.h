@@ -138,6 +138,14 @@ union program_setting_store
         BYTE value;
     } db_000f_vSync;
 
+
+    #pragma pack(1)
+    struct
+    {
+        BYTE offset[0x14];
+        DWORD value;
+    } dd_0014_gameType;
+
     #pragma pack(1)
     struct
     {
@@ -228,6 +236,20 @@ union program_setting_store
     #pragma pack(1)
     struct
     {
+        BYTE offset[0x7a7];
+        BYTE value;
+    } db_07a7_clientExit;
+
+    #pragma pack(1)
+    struct
+    {
+        BYTE offset[0x7a8];
+        BYTE value;
+    } db_07a8_multiClient;
+
+    #pragma pack(1)
+    struct
+    {
         BYTE offset[0x7a9];
         BYTE value;
     } db_07a9_printArg;
@@ -272,7 +294,7 @@ union program_setting_store
     {
         BYTE offset[0x7b0];
         DWORD value;
-    } dd_07b0;
+    } dd_07b0_gameState;
 
     #pragma pack(1)
     struct
