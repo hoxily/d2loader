@@ -302,6 +302,8 @@ BOOL sub_406d1e_D2Init(
             global_dd_408620_settings->db_0000_expansion.value,
             0
         );
+
+        // 疑问：Sound System 返回值为 0. 但是实际上是有声音的。
         if (var_4)
         {
             sub_404ed0_LogFormat(
