@@ -110,5 +110,5 @@ void sub_40a9a0(
     // leave
     // retn
     // 不过 esp、ebp 倒是恢复了。
-    // 最关键的是，调用当前函数的 sub_40a480 函数，有 pusha 与 popa 保护。问题不大。
+    // 最关键的是，调用当前函数的 sub_40a480_GameInit 函数，有 pusha 与 popa 保护。问题不大。
 }

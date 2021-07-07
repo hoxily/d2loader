@@ -48,7 +48,7 @@ BOOL sub_404c57_GameMain(
             "Hook Returned %s",
             hookRet ? "True" : "False");
 
-        if (!sub_40a480())
+        if (!sub_40a480_GameInit())
         {
             sub_404ed0_LogFormat(
                 LOG_TAG,

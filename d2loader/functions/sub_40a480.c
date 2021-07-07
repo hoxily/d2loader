@@ -4,7 +4,7 @@
 #include "sub_40a9a0.h"
 #include "sub_406d1e.h"
 
-BOOL sub_40a480(
+BOOL sub_40a480_GameInit(
 )
 {
     sub_40a440();
