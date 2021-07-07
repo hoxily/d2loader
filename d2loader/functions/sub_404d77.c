@@ -29,7 +29,7 @@ BOOL sub_404d77_GameClientLoop(
         sub_406108();
 
         edi_oldGameState = global_dd_408620_settings->dd_07b0_gameState.value;
-        esi_gameState = sub_407246(edi_oldGameState);
+        esi_gameState = sub_407246_D2DllEntry(edi_oldGameState);
         if (esi_gameState == GAME_STATE_CLIENT
             && global_dd_408620_settings->db_07a8_multiClient.value
             && global_dd_408620_settings->dd_0014_gameType.value == 3)
