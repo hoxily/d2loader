@@ -233,6 +233,9 @@ BOOL sub_406d1e_D2Init(
         );
     }
 
+    // 这个函数比较奇怪。D2Win.dll 里用于返回的代码是 retn 4，也就是只清理了栈上的4个字节。
+    // 但是此处却push了8个字节的内容。
+    // 使用Visual Studio调试可以发现函数能正常返回。
     var_4 = global_dd_4086d4(
         titleEnabled,
         edi_isRes800
