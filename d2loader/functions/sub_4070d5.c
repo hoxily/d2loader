@@ -5,9 +5,6 @@
 #include "sub_404ed0.h"
 #include "sub_405663.h"
 
-typedef void* (*fn_BnClient_QueryInterface)();
-typedef void (__fastcall *fn_ComInt)(union program_setting_store* settings);
-
 BOOL sub_4070d5_D2CommonInit(
 )
 {
@@ -38,7 +35,10 @@ BOOL sub_4070d5_D2CommonInit(
         return FALSE;
     }
 
-    fn_BnClient_QueryInterface query = (fn_BnClient_QueryInterface)GetProcAddress(global_dd_408624_moduleBnClient, "QueryInterface");
+    fn_D2_QueryInterface query = (fn_D2_QueryInterface)GetProcAddress(
+        global_dd_408624_moduleBnClient,
+        "QueryInterface"
+    );
     if (query == NULL)
     {
         sub_404ed0_LogFormat(
@@ -55,7 +55,7 @@ BOOL sub_4070d5_D2CommonInit(
     // call eax
     // call dword ptr [eax]
     // query 取得的只是一个指针，指向一个函数指针。
-    fn_ComInt fn = *(fn_ComInt*)query();
+    fn_D2_ComInt fn = *(fn_D2_ComInt*)query();
 
     fn(global_dd_408620_settings);
 

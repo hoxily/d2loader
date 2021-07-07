@@ -196,3 +196,14 @@ typedef void(__cdecl* fn_D2Net_2713)(
 
 typedef void(__cdecl* fn_D2Net_2714)(
     );
+
+/*
+* Diablo II DLL的 QueryInterface 接口。
+* 可以用于 BnClient.dll, d2client.dll, d2server.dll, d2multi.dll, d2launch.dll,
+*/
+typedef void* (__stdcall* fn_D2_QueryInterface)(
+    );
+
+typedef DWORD (__fastcall* fn_D2_ComInt)(
+    union program_setting_store* settings
+    );
