@@ -25,7 +25,7 @@ BOOL sub_404d77_GameClientLoop(
             global_dd_4011b0_gameStateDlls[esi_gameState]
         );
 
-        sub_404e35(edi_oldGameState, esi_gameState);
+        sub_404e35_CallPlugin(edi_oldGameState, esi_gameState);
         sub_406108();
 
         edi_oldGameState = global_dd_408620_settings->dd_07b0_gameState.value;
