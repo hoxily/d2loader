@@ -199,6 +199,61 @@ BOOL sub_406d1e_D2Init(
         "Game Data Files Initialized"
     );
 
+    var_4 = global_dd_40869c(
+        GetModuleHandleA(NULL),
+        videoMode,
+        1,
+        1
+    );
+
+    if (!var_4)
+    {
+        MessageBoxA(
+            NULL,
+            "Graphic System Initialize Failed",
+            LOG_TAG,
+            MB_ICONERROR
+        );
+        return FALSE;
+    }
+
+    sub_404ed0_LogFormat(
+        LOG_TAG,
+        "Graphic System Initialized"
+    );
+
+    if (global_dd_408620_settings->db_0009_perspective.value && videoMode >= 4)
+    {
+        global_dd_4086c0(
+            1
+        );
+        sub_404ed0_LogFormat(
+            LOG_TAG,
+            "Hardware Accel Perspective Mode Enabled"
+        );
+    }
+
+    var_4 = global_dd_4086d4(
+        titleEnabled,
+        edi_isRes800
+    );
+
+    if (!var_4)
+    {
+        MessageBoxA(
+            NULL,
+            "Failed to Create Game Client Window",
+            LOG_TAG,
+            MB_ICONERROR
+        );
+        return FALSE;
+    }
+
+    sub_404ed0_LogFormat(
+        LOG_TAG,
+        "Game Client Window Created Successfully"
+    );
+
     //TODO
     return FALSE;
 }
