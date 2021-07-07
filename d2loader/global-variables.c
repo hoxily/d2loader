@@ -154,6 +154,7 @@ struct hook_search_item global_dd_402408[2] =
 HMODULE global_dd_408624_moduleBnClient;
 HMODULE global_dd_408628_moduleD2Client;
 HMODULE global_dd_40862c_moduleD2Launch;
+HMODULE global_dd_408630_moduleD2Multi;
 
 DWORD global_dd_408638_mpqFileHandle;
 
@@ -258,3 +259,5 @@ fn_D2Lang_2710 global_dd_408684;
 fn_D2Lang_2711 global_dd_408680;
 fn_D2Net_2713 global_dd_408678;
 fn_D2Net_2714 global_dd_408690;
+
+HWND global_dd_408634_gameWindowHandle;

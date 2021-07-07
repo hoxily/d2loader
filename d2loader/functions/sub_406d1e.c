@@ -5,7 +5,7 @@
 #include "sub_4070d5.h"
 #include "sub_404ed0.h"
 #include "sub_4072b7.h"
-
+#include "sub_4070aa.h"
 
 BOOL sub_406d1e_D2Init(
 )
@@ -173,6 +173,7 @@ BOOL sub_406d1e_D2Init(
 
     if (!global_dd_408620_settings->db_07a6_noChar.value)
     {
+        // 此处虽然传入了 settings 对象，但是该函数内部只是读取并调用了 0x20d 偏移处的函数指针。
         var_8 = global_dd_4086cc(
             0,
             0,
@@ -254,6 +255,86 @@ BOOL sub_406d1e_D2Init(
         "Game Client Window Created Successfully"
     );
 
-    //TODO
-    return FALSE;
+    if (global_dd_408620_settings->db_000a_lowQuality.value)
+    {
+        global_dd_408674();
+        sub_404ed0_LogFormat(
+            LOG_TAG,
+            "Low Quality Video Mode Enabled"
+        );
+    }
+
+    // 警告: 对 gamma 字段的偏移量，此处的汇编代码和命令行参数表 global_dd_402ea8_CommandLineArgumentTable 有冲突。
+    // 这里以代码为准。
+    if (global_dd_408620_settings->dd_000b_gamma.value)
+    {
+        global_dd_4086b0(
+            global_dd_408620_settings->dd_000b_gamma.value
+        );
+        sub_404ed0_LogFormat(
+            LOG_TAG,
+            "Setting Video Gamma to %d",
+            global_dd_408620_settings->dd_000b_gamma.value
+        );
+    }
+
+    if (global_dd_408620_settings->db_000f_vSync.value)
+    {
+        global_dd_4086e4();
+        sub_404ed0_LogFormat(
+            LOG_TAG,
+            "VSync Video Mode Enabled"
+        );
+    }
+
+    if (global_dd_408620_settings->db_021b_noSound.value)
+    {
+        sub_404ed0_LogFormat(
+            LOG_TAG,
+            "Sound Have Been Disabled"
+        );
+    }
+    else
+    {
+        // 在上面的 global_dd_4086cc 调用处，edx 被置为 0；
+        // 并且到目前为止都没有改过 edx，所以 edx 当前应该为 0
+        var_4 = global_dd_40868c(
+            global_dd_408620_settings->db_0000_expansion.value,
+            0
+        );
+        if (var_4)
+        {
+            sub_404ed0_LogFormat(
+                LOG_TAG,
+                "Sound System Initialized"
+            );
+        }
+        else
+        {
+            sub_404ed0_LogFormat(
+                LOG_TAG,
+                "Failed to Initialize Sound System"
+            );
+        }
+    }
+
+    global_dd_408634_gameWindowHandle = global_dd_4086ac();
+
+    sub_404ed0_LogFormat(
+        LOG_TAG,
+        "Set Window Title to \"%s\"",
+        global_dd_408620_settings->db_0804_title.value
+    );
+
+    if (global_dd_408634_gameWindowHandle)
+    {
+        SetWindowTextA(
+            global_dd_408634_gameWindowHandle,
+            global_dd_408620_settings->db_0804_title.value
+        );
+    }
+
+    global_dd_408630_moduleD2Multi = sub_4070aa_D2LoadLibrary("d2multi.dll");
+
+    return global_dd_408630_moduleD2Multi != NULL;
 }

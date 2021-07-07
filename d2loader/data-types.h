@@ -116,6 +116,31 @@ union program_setting_store
     #pragma pack(1)
     struct
     {
+        BYTE offset[0xb];
+        DWORD value;
+    } dd_000b_gamma;
+
+    #pragma pack(1)
+    struct
+    {
+        // 根据 global_dd_402ea8 命令行参数表，gamma参数的偏移量为 0xc
+        // 而在汇编代码中，gamma参数的偏移量为 0xb，
+        // 两者冲突！
+        // 从对齐的角度来看，DWORD 数据的偏移量为 0xc 更好。
+        BYTE offset[0xc];
+        DWORD value;
+    } dd_000c_gamma;
+
+    #pragma pack(1)
+    struct
+    {
+        BYTE offset[0xf];
+        BYTE value;
+    } db_000f_vSync;
+
+    #pragma pack(1)
+    struct
+    {
         BYTE offset[0x1ff];
         BYTE value;
     } db_01ff_direct;
@@ -126,6 +151,13 @@ union program_setting_store
         BYTE offset[0x20d];
         BOOL(*value)();
     } dd_020d_IsExpansion;
+
+    #pragma pack(1)
+    struct
+    {
+        BYTE offset[0x21b];
+        BYTE value;
+    } db_021b_noSound;
 
     #pragma pack(1)
     struct
@@ -268,7 +300,7 @@ union program_setting_store
     struct
     {
         BYTE offset[0x804];
-        char value[38 + 1];
+        char value[0x80];
     } db_0804_title;
 
     #pragma pack(1)

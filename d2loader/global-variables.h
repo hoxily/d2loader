@@ -38,6 +38,7 @@ extern struct hook_search_item global_dd_402408[2];
 extern HMODULE global_dd_408624_moduleBnClient;
 extern HMODULE global_dd_408628_moduleD2Client;
 extern HMODULE global_dd_40862c_moduleD2Launch;
+extern HMODULE global_dd_408630_moduleD2Multi;
 
 extern DWORD global_dd_408638_mpqFileHandle;
 
@@ -94,3 +95,5 @@ extern fn_D2Lang_2710 global_dd_408684;
 extern fn_D2Lang_2711 global_dd_408680;
 extern fn_D2Net_2713 global_dd_408678;
 extern fn_D2Net_2714 global_dd_408690;
+
+extern HWND global_dd_408634_gameWindowHandle;

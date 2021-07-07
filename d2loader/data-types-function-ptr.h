@@ -110,8 +110,11 @@ typedef int(__cdecl* fn_Fog_279f)(
     DWORD arg0
     );
 
+// 从 d2sound.dll 对应的代码来看，它将 ecx, edx 都保存到全局变量里。
+// 所以应该是有两个参数的。
 typedef int(__fastcall* fn_D2Sound_2712)(
-    DWORD isExpansion
+    DWORD isExpansion,
+    DWORD arg1
     );
 
 typedef int(__fastcall* fn_D2Sound_272f)(
@@ -134,6 +137,9 @@ typedef void(__stdcall* fn_D2Gfx_2732)(
 typedef void(__stdcall* fn_D2Gfx_2717)(
     );
 
+/*
+* 获取游戏窗口句柄
+*/
 typedef HWND(__stdcall* fn_D2Gfx_2740)(
     );
 
