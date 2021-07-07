@@ -169,6 +169,36 @@ BOOL sub_406d1e_D2Init(
         "Game Server Initialized"
     );
 
+    var_4 = global_dd_40867c();
+
+    if (!global_dd_408620_settings->db_07a6_noChar.value)
+    {
+        var_8 = global_dd_4086cc(
+            0,
+            0,
+            0,
+            global_dd_408620_settings
+        );
+
+        var_4 = var_4 & var_8;
+    }
+
+    if (!var_4)
+    {
+        MessageBoxA(
+            NULL,
+            "Couldn't load Diablo 2 MPQ files. Please insert your Diablo II CD.",
+            LOG_TAG,
+            MB_ICONERROR
+        );
+        return FALSE;
+    }
+
+    sub_404ed0_LogFormat(
+        LOG_TAG,
+        "Game Data Files Initialized"
+    );
+
     //TODO
     return FALSE;
 }

@@ -188,6 +188,14 @@ union program_setting_store
     #pragma pack(1)
     struct
     {
+        BYTE offset[0x7a6];
+        // 是否禁用 d2char.mpq 相关数据
+        BYTE value;
+    } db_07a6_noChar;
+
+    #pragma pack(1)
+    struct
+    {
         BYTE offset[0x7a9];
         BYTE value;
     } db_07a9_printArg;
