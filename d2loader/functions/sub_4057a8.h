@@ -1,4 +1,6 @@
 #pragma once
 
-extern void sub_4057a8(
+#include <Windows.h>
+
+extern BOOL sub_4057a8_PatchByD2HackScript(
 );

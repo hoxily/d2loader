@@ -1,6 +1,6 @@
 #include "sub_4057a8.h"
 
-void sub_4057a8(
+BOOL sub_4057a8_PatchByD2HackScript(
 )
 {
     //TODO

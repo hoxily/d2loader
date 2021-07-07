@@ -58,7 +58,7 @@ BOOL sub_404c57_GameMain(
 
         if (!global_dd_408620_settings->db_07aa_noScript.value)
         {
-            sub_4057a8();
+            sub_4057a8_PatchByD2HackScript();
         }
 
         sub_404ed0_LogFormat(
