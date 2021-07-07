@@ -335,6 +335,13 @@ union program_setting_store
         char value[0x104];
     } db_0a8c_pluginDir;
 
+    #pragma pack(1)
+    struct
+    {
+        BYTE offset[0xb90];
+        char value[0x104];
+    } db_0b90_scriptFile;
+
     BYTE padding[0xc94];
 };
 

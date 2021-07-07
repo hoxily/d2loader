@@ -23,6 +23,8 @@ extern HMODULE global_dd_4085b0_moduleBnClient;
 extern HMODULE global_dd_4085ac_moduleD2Gfx;
 extern HMODULE global_dd_4085b4_moduleD2Net;
 
+extern void* global_dd_402e0c;
+
 extern struct string_index_item global_dd_402ea8_CommandLineArgumentTable[93];
 
 extern fn_LoadLibraryA global_dd_4085a0_LoadLibraryA;
@@ -30,6 +32,8 @@ extern fn_LoadLibraryA global_dd_4085a0_LoadLibraryA;
 extern fn_GetModuleFileNameA global_dd_4085a4_GetModuleFileNameA;
 
 extern fn_FindWindowA global_dd_4085a8_FindWindowA;
+
+extern void* global_dd_4085e0_memory;
 
 extern struct hook_search_item global_dd_4023f0[3];
 
@@ -43,6 +47,7 @@ extern HMODULE global_dd_408630_moduleD2Multi;
 extern DWORD global_dd_408638_mpqFileHandle;
 
 extern BOOL global_dd_4085d8_isDynamicFunctionsLoaded;
+extern BOOL global_dd_4085dc_isD2HackScriptLoaded;
 extern HMODULE global_dd_4085b8_moduleFog;
 extern HMODULE global_dd_4085c0_moduleD2Win;
 extern HMODULE global_dd_4085bc_moduleD2Sound;

@@ -167,7 +167,9 @@
     <ClCompile Include="functions\sub_405663.c" />
     <ClCompile Include="functions\sub_405763.c" />
     <ClCompile Include="functions\sub_4057a8.c" />
+    <ClCompile Include="functions\sub_405827.c" />
     <ClCompile Include="functions\sub_405af1.c" />
+    <ClCompile Include="functions\sub_405d19.c" />
     <ClCompile Include="functions\sub_406014.c" />
     <ClCompile Include="functions\sub_406175.c" />
     <ClCompile Include="functions\sub_4061df.c" />
@@ -175,6 +177,8 @@
     <ClCompile Include="functions\sub_4063f9.c" />
     <ClCompile Include="functions\sub_406451.c" />
     <ClCompile Include="functions\sub_4065bd.c" />
+    <ClCompile Include="functions\sub_4066ad.c" />
+    <ClCompile Include="functions\sub_4066c3.c" />
     <ClCompile Include="functions\sub_4066dc.c" />
     <ClCompile Include="functions\sub_406803.c" />
     <ClCompile Include="functions\sub_406887.c" />
@@ -226,7 +230,9 @@
     <ClInclude Include="functions\sub_405663.h" />
     <ClInclude Include="functions\sub_405763.h" />
     <ClInclude Include="functions\sub_4057a8.h" />
+    <ClInclude Include="functions\sub_405827.h" />
     <ClInclude Include="functions\sub_405af1.h" />
+    <ClInclude Include="functions\sub_405d19.h" />
     <ClInclude Include="functions\sub_406014.h" />
     <ClInclude Include="functions\sub_406175.h" />
     <ClInclude Include="functions\sub_4061df.h" />
@@ -234,6 +240,8 @@
     <ClInclude Include="functions\sub_4063f9.h" />
     <ClInclude Include="functions\sub_406451.h" />
     <ClInclude Include="functions\sub_4065bd.h" />
+    <ClInclude Include="functions\sub_4066ad.h" />
+    <ClInclude Include="functions\sub_4066c3.h" />
     <ClInclude Include="functions\sub_4066dc.h" />
     <ClInclude Include="functions\sub_406803.h" />
     <ClInclude Include="functions\sub_406887.h" />

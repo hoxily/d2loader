@@ -10,6 +10,10 @@
  * dd: 4 字节
  */
 
+// 全局变量的排列顺序最好能按照原始反汇编中的地址排列。这样容易发现重复定义的变量。
+// 比如一个变量其实是一个数组，当取数组中的某一个元素时，在汇编代码中仍然是全局变量的形式，
+// 当重复定义逻辑上相同的变量时，会引起数据错误。
+
 union program_setting_store* global_dd_408620_settings;
 FILE* global_dd_408588_logFile;
 FILE* global_dd_40858c_logFile;
@@ -29,6 +33,8 @@ const char* global_dd_40859c_gameDotExeFileName;
 HMODULE global_dd_4085b0_moduleBnClient;
 HMODULE global_dd_4085ac_moduleD2Gfx;
 HMODULE global_dd_4085b4_moduleD2Net;
+
+void* global_dd_402e0c;//TODO
 
 struct string_index_item global_dd_402ea8_CommandLineArgumentTable[93] = {
     { "exp", "MAIN", "expansion", 0x0, ARG_TYPE_NO_PARAM },
@@ -133,6 +139,8 @@ fn_GetModuleFileNameA global_dd_4085a4_GetModuleFileNameA;
 
 fn_FindWindowA global_dd_4085a8_FindWindowA;
 
+void* global_dd_4085e0_memory = NULL;
+
 #include "functions/sub_4054c2.h"
 #include "functions/sub_40543b.h"
 
@@ -159,6 +167,8 @@ HMODULE global_dd_408630_moduleD2Multi;
 DWORD global_dd_408638_mpqFileHandle;
 
 BOOL global_dd_4085d8_isDynamicFunctionsLoaded = FALSE;
+BOOL global_dd_4085dc_isD2HackScriptLoaded = FALSE;
+
 HMODULE global_dd_4085b8_moduleFog = NULL;
 HMODULE global_dd_4085c0_moduleD2Win = NULL;
 HMODULE global_dd_4085bc_moduleD2Sound = NULL;
