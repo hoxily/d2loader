@@ -1,4 +1,6 @@
 #pragma once
 
-extern void sub_404d77_GameClientLoop(
+#include <Windows.h>
+
+extern BOOL sub_404d77_GameClientLoop(
 );
