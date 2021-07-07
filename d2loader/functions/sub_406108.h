@@ -1,4 +1,6 @@
 #pragma once
 
-extern void sub_406108(
+#include <Windows.h>
+
+extern BOOL sub_406108(
 );
