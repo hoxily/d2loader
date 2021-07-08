@@ -4,20 +4,20 @@
 #include "sub_404ed0.h"
 
 DWORD sub_407246_D2DllEntry(
-    DWORD oldGameState
+    DWORD targetGameState
 )
 {
-    if (oldGameState >= GAME_STATE_INVALID)
+    if (targetGameState >= GAME_STATE_INVALID)
     {
         sub_404ed0_LogFormat(
             LOG_TAG,
             "Got Bad Dll Entry %d",
-            oldGameState
+            targetGameState
         );
         return GAME_STATE_NONE;
     }
 
-    const char* fileName = global_dd_4011b0_gameStateDlls[oldGameState];
+    const char* fileName = global_dd_4011b0_gameStateDlls[targetGameState];
 
     HMODULE hModule = LoadLibraryA(
         fileName
