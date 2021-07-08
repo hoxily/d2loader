@@ -379,3 +379,18 @@ struct d2_dll_function_item
     void **procedure;
     int ordinal;
 };
+
+struct patch_search_item
+{
+    const char* moduleFileName;
+    DWORD v1;
+    DWORD v2;
+    void* v3;
+    DWORD v4_zero;
+    DWORD v5_zero;
+    DWORD v6_zero;
+    DWORD v7;
+    void* v8;
+    const char* pattern;
+    DWORD v10_zero;
+};

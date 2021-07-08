@@ -43,7 +43,39 @@ HMODULE global_dd_4085b0_moduleBnClient;
 HMODULE global_dd_4085ac_moduleD2Gfx;
 HMODULE global_dd_4085b4_moduleD2Net;
 
-void* global_dd_402e0c;//TODO
+struct patch_search_item global_dd_402d88[3] =
+{
+    {
+        "d2lang.dll",
+        0x3fd2, 4, &global_dd_402e1c[0], 0, 0, 0,
+        1, &global_dd_40863c, &global_db_402e24[0], 0
+    },
+    {
+        "d2lang.dll",
+        0x4010, 4, &global_dd_402e68[0], 0, 0, 0,
+        1, &global_dd_408640, &global_db_402e70[0], 0
+    },
+    {
+        (const char*)(0xffffffff),
+        0, 0, NULL, 0, 0, 0,
+        0, NULL, NULL, 0
+    }
+};
+
+DWORD global_dd_402e1c[2] =
+{
+    0x910a20, 0
+};
+
+char global_db_402e24[] = "7, B8xxxxxxxx C605xxxxxxxx01 E8xxxxxxxx 0FB6086A00890D";
+
+DWORD global_dd_402e68[2] =
+{
+    0x6fc10a1c, 0
+};
+char global_db_402e70[] = "2, 8B15xxxxxxxx 83FA0D 7C10 33D2 8915xxxxxxxx EB06 8B15";
+
+struct patch_search_item* global_dd_402e0c = &global_dd_402d88[0];
 
 struct string_index_item global_dd_402ea8_CommandLineArgumentTable[93] = {
     { "exp", "MAIN", "expansion", 0x0, ARG_TYPE_NO_PARAM },
@@ -280,3 +312,6 @@ fn_D2Net_2713 global_dd_408678;
 fn_D2Net_2714 global_dd_408690;
 
 HWND global_dd_408634_gameWindowHandle;
+
+void* global_dd_40863c;
+void* global_dd_408640;

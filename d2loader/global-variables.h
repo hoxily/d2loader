@@ -25,7 +25,13 @@ extern HMODULE global_dd_4085b0_moduleBnClient;
 extern HMODULE global_dd_4085ac_moduleD2Gfx;
 extern HMODULE global_dd_4085b4_moduleD2Net;
 
-extern void* global_dd_402e0c;
+extern struct patch_search_item global_dd_402d88[3];
+struct patch_search_item* global_dd_402e0c;
+
+DWORD global_dd_402e1c[2];
+char global_db_402e24[];
+DWORD global_dd_402e68[2];
+char global_db_402e70[];
 
 extern struct string_index_item global_dd_402ea8_CommandLineArgumentTable[93];
 
@@ -104,3 +110,6 @@ extern fn_D2Net_2713 global_dd_408678;
 extern fn_D2Net_2714 global_dd_408690;
 
 extern HWND global_dd_408634_gameWindowHandle;
+
+extern void* global_dd_40863c;
+extern void* global_dd_408640;
