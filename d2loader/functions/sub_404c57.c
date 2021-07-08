@@ -56,13 +56,6 @@ BOOL sub_404c57_GameMain(
             return FALSE;
         }
 
-        // TODO: 由于d2hack.script不是游戏加载的重点，我们试试强行跳过这一步。
-        sub_404ed0_LogFormat(
-            LOG_TAG,
-            "Skip loading d2hack.script scripts."
-        );
-        global_dd_408620_settings->db_07aa_noScript.value = TRUE;
-
         if (!global_dd_408620_settings->db_07aa_noScript.value)
         {
             sub_4057a8_Patch();

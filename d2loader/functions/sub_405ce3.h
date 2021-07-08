@@ -1,7 +1,9 @@
 #pragma once
 
-extern void sub_405ce3(
-    void* arg0,
-    int arg1,
-    int arg2
+#include "../data-types.h"
+
+extern int sub_405ce3(
+    struct patch_search_item* items,
+    unsigned int mask,
+    int clearLsbBit2
 );
