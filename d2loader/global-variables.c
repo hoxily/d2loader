@@ -176,7 +176,7 @@ HMODULE global_dd_408630_moduleD2Multi;
 DWORD global_dd_408638_mpqFileHandle;
 
 BOOL global_dd_4085d8_isDynamicFunctionsLoaded = FALSE;
-BOOL global_dd_4085dc_isD2HackScriptLoaded = FALSE;
+BOOL global_dd_4085dc_isPatchCompleted = FALSE;
 
 HMODULE global_dd_4085b8_moduleFog = NULL;
 HMODULE global_dd_4085c0_moduleD2Win = NULL;

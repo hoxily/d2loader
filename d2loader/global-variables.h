@@ -49,7 +49,7 @@ extern HMODULE global_dd_408630_moduleD2Multi;
 extern DWORD global_dd_408638_mpqFileHandle;
 
 extern BOOL global_dd_4085d8_isDynamicFunctionsLoaded;
-extern BOOL global_dd_4085dc_isD2HackScriptLoaded;
+extern BOOL global_dd_4085dc_isPatchCompleted;
 extern HMODULE global_dd_4085b8_moduleFog;
 extern HMODULE global_dd_4085c0_moduleD2Win;
 extern HMODULE global_dd_4085bc_moduleD2Sound;

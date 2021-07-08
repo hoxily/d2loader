@@ -8,7 +8,7 @@
 BOOL sub_4057a8_Patch(
 )
 {
-    if (global_dd_4085dc_isD2HackScriptLoaded)
+    if (global_dd_4085dc_isPatchCompleted)
     {
         return TRUE;
     }
