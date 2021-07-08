@@ -200,6 +200,9 @@ BOOL sub_406d1e_D2Init(
         "Game Data Files Initialized"
     );
 
+    // 注意：
+    // 这个函数有可能会调用失败。会以 ACCESS VIOLATION (0xC0000005) at 一个随机的地址报错。
+    // 这个时候需要重启一下windows系统。
     var_4 = global_dd_40869c(
         GetModuleHandleA(NULL),
         videoMode,
