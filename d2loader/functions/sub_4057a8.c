@@ -5,7 +5,7 @@
 #include "sub_4066c3.h"
 #include "sub_405d19.h"
 
-BOOL sub_4057a8_PatchByD2HackScript(
+BOOL sub_4057a8_Patch(
 )
 {
     if (global_dd_4085dc_isD2HackScriptLoaded)

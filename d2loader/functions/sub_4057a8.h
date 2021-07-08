@@ -2,5 +2,5 @@
 
 #include <Windows.h>
 
-extern BOOL sub_4057a8_PatchByD2HackScript(
+extern BOOL sub_4057a8_Patch(
 );
