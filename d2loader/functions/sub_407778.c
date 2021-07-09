@@ -1,23 +1,23 @@
 #include "sub_407778.h"
 #include "sub_404ed0.h"
 
+#define REPORT_VIRTUAL_PROTECT_ERROR \
+do \
+{ \
+    sub_404ed0_LogFormat( \
+        LOG_TAG, \
+        "Virtual Protect Error %d", \
+        GetLastError() \
+    ); \
+} while (FALSE) \
+
 void* sub_407778_smemcpy(
     void* memory,
     void* arg1,
     size_t memorySize
 )
 {
-    if (arg1 == NULL)
-    {
-        return memory;
-    }
-
-    if (memory == NULL)
-    {
-        return memory;
-    }
-
-    if (memorySize == 0)
+    if (arg1 == NULL || memory == NULL || memorySize == 0)
     {
         return memory;
     }
@@ -32,11 +32,7 @@ void* sub_407778_smemcpy(
     );
     if (!ret)
     {
-        sub_404ed0_LogFormat(
-            LOG_TAG,
-            "Virtual Protect Error %d",
-            GetLastError()
-        );
+        REPORT_VIRTUAL_PROTECT_ERROR;
         return NULL;
     }
 
@@ -52,13 +48,8 @@ void* sub_407778_smemcpy(
     DWORD unused;
     if (!ret)
     {
-        sub_404ed0_LogFormat(
-            LOG_TAG,
-            "Virtual Protect Error %d",
-            GetLastError()
-        );
+        REPORT_VIRTUAL_PROTECT_ERROR;
 
-        
         ret = VirtualProtect(
             memory,
             memorySize,
@@ -67,11 +58,7 @@ void* sub_407778_smemcpy(
         );
         if (!ret)
         {
-            sub_404ed0_LogFormat(
-                LOG_TAG,
-                "Virtual Protect Error %d",
-                GetLastError()
-            );
+            REPORT_VIRTUAL_PROTECT_ERROR;
         }
         return NULL;
     }
@@ -86,11 +73,7 @@ void* sub_407778_smemcpy(
     );
     if (!ret)
     {
-        sub_404ed0_LogFormat(
-            LOG_TAG,
-            "Virtual Protect Error %d",
-            GetLastError()
-        );
+        REPORT_VIRTUAL_PROTECT_ERROR;
     }
 
     ret = VirtualProtect(
@@ -102,12 +85,7 @@ void* sub_407778_smemcpy(
 
     if (!ret)
     {
-        sub_404ed0_LogFormat(
-            LOG_TAG,
-            "Virtual Protect Error %d",
-            GetLastError()
-        );
-        
+        REPORT_VIRTUAL_PROTECT_ERROR;
     }
 
     return var_8;
