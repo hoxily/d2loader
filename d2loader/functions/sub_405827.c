@@ -58,7 +58,7 @@ BOOL sub_405827_PatchModule(
         }
 
         address = address + esi_ptr->v1;
-        sub_40798d(esi_ptr->v3, esi_ptr->v2);
+        sub_40798d_DuplicateMemoryBlock(esi_ptr->v3, esi_ptr->v2);
     }
     return FALSE;//TODO
 }
