@@ -1,8 +1,9 @@
 #pragma once
 
 #include <Windows.h>
+#include "../data-types.h"
 
 extern BOOL sub_405827_PatchModule(
-    void* arg0,
+    struct patch_search_item* items,
     int arg1
 );
