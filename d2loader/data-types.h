@@ -388,7 +388,7 @@ struct patch_search_item
     void* v3;
     DWORD v4_zero;
     DWORD v5_zero;
-    DWORD v6_zero;
+    DWORD v6;
     DWORD v7;
     void* v8;
     const char* pattern;

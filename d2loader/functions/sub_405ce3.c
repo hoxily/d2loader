@@ -25,16 +25,16 @@ int sub_405ce3(
             continue;
         }
 
-        assert(offsetof(struct patch_search_item, v6_zero) == 0x18);
+        assert(offsetof(struct patch_search_item, v6) == 0x18);
         if (clearLsbBit2)
         {
             // 11111111111111111111111111111011
-            ecx_ptr->v6_zero &= 0xfffffffb;
+            ecx_ptr->v6 &= 0xfffffffb;
         }
         else
         {
             // 00000000000000000000000000000100
-            ecx_ptr->v6_zero |= 4;
+            ecx_ptr->v6 |= 4;
         }
         count++;
     }
