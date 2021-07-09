@@ -203,6 +203,7 @@
     <ClCompile Include="functions\sub_40735e.c" />
     <ClCompile Include="functions\sub_407380.c" />
     <ClCompile Include="functions\sub_4073ac.c" />
+    <ClCompile Include="functions\sub_407778.c" />
     <ClCompile Include="functions\sub_40798d.c" />
     <ClCompile Include="functions\sub_407bb9.c" />
     <ClCompile Include="functions\sub_40a440.c" />
@@ -272,6 +273,7 @@
     <ClInclude Include="functions\sub_40735e.h" />
     <ClInclude Include="functions\sub_407380.h" />
     <ClInclude Include="functions\sub_4073ac.h" />
+    <ClInclude Include="functions\sub_407778.h" />
     <ClInclude Include="functions\sub_40798d.h" />
     <ClInclude Include="functions\sub_407bb9.h" />
     <ClInclude Include="functions\sub_40a440.h" />
