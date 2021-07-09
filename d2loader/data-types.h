@@ -382,15 +382,26 @@ struct d2_dll_function_item
 
 struct patch_search_item
 {
+    // 00 = 20 - 00
     const char* moduleFileName;
+    // 04 = 20 - 1c
     DWORD v1;
+    // 08 = 20 - 18
     DWORD v2;
+    // 0c = 20 - 14
     void* v3;
+    // 10 = 20 - 10
     DWORD v4_zero;
+    // 14 = 20 - 0c
     DWORD v5_zero;
+    // 18 = 20 - 08
     DWORD v6;
+    // 1c = 20 - 04
     DWORD v7;
+    // 20 = 20 - 00
     void* v8;
+    // 24 = 20 + 04
     const char* pattern;
+    // 28 = 20 + 08
     DWORD v10_zero;
 };
