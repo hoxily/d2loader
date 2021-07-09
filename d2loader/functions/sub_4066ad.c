@@ -8,7 +8,7 @@ BOOL sub_4066ad(
     sub_405ce3(
         global_dd_402e0c,
         1,
-        1
+        TRUE
     );
     return TRUE;
 }
