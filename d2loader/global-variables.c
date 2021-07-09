@@ -47,17 +47,17 @@ struct patch_search_item global_dd_402d88[3] =
 {
     {
         "d2lang.dll",
-        0x3fd2, 4, &global_dd_402e1c[0], 0, 0, 0,
+        0x3fd2, 4, &global_dd_402e1c[0], 0, NULL, 0,
         1, &global_dd_40863c, &global_db_402e24[0], 0
     },
     {
         "d2lang.dll",
-        0x4010, 4, &global_dd_402e68[0], 0, 0, 0,
+        0x4010, 4, &global_dd_402e68[0], 0, NULL, 0,
         1, &global_dd_408640, &global_db_402e70[0], 0
     },
     {
         (const char*)(-1),
-        0, 0, NULL, 0, 0, 0,
+        0, 0, NULL, 0, NULL, 0,
         0, NULL, NULL, 0
     }
 };

@@ -393,7 +393,7 @@ struct patch_search_item
     // 10 = 20 - 10
     DWORD v4;
     // 14 = 20 - 0c
-    DWORD v5;
+    void* v5;
     // 18 = 20 - 08
     DWORD v6;
     // 1c = 20 - 04
