@@ -12,7 +12,7 @@ void* sub_40798d(
         return NULL;
     }
 
-    sub_407778(esi_ptr, arg0, size);
+    sub_407778_smemcpy(esi_ptr, arg0, size);
     
     return esi_ptr;
 }
