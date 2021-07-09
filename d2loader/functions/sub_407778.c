@@ -12,23 +12,23 @@ do \
 } while (FALSE) \
 
 void* sub_407778_smemcpy(
-    void* memory,
-    void* arg1,
+    void* dst,
+    void* src,
     size_t memorySize
 )
 {
-    if (arg1 == NULL || memory == NULL || memorySize == 0)
+    if (src == NULL || dst == NULL || memorySize == 0)
     {
-        return memory;
+        return dst;
     }
 
     // 在汇编里实参变量 memorySize 被拿来复用了。此处重新定义一个变量。
-    DWORD oldProtectOfMemory;
+    DWORD oldProtectOfDst;
     BOOL ret = VirtualProtect(
-        memory,
+        dst,
         memorySize,
         PAGE_EXECUTE_READWRITE,
-        &oldProtectOfMemory
+        &oldProtectOfDst
     );
     if (!ret)
     {
@@ -36,24 +36,24 @@ void* sub_407778_smemcpy(
         return NULL;
     }
 
-    DWORD oldProtectOfArg1;
+    DWORD oldProtectOfSrc;
     ret = VirtualProtect(
-        arg1,
+        src,
         memorySize,
         PAGE_READWRITE,
-        &oldProtectOfArg1
+        &oldProtectOfSrc
     );
 
-    // 汇编中第4个参数，把实参 arg1 拿来复用了。此处新定义一个变量，以免歧义。
+    // 汇编中第4个参数，把实参 src 拿来复用了。此处新定义一个变量，以免歧义。
     DWORD unused;
     if (!ret)
     {
         REPORT_VIRTUAL_PROTECT_ERROR;
 
         ret = VirtualProtect(
-            memory,
+            dst,
             memorySize,
-            oldProtectOfMemory,
+            oldProtectOfDst,
             &unused
         );
         if (!ret)
@@ -63,12 +63,12 @@ void* sub_407778_smemcpy(
         return NULL;
     }
 
-    void* var_8 = memcpy(memory, arg1, memorySize);
+    void* var_8 = memcpy(dst, src, memorySize);
 
     ret = VirtualProtect(
-        arg1,
+        src,
         memorySize,
-        oldProtectOfArg1,
+        oldProtectOfSrc,
         &unused
     );
     if (!ret)
@@ -77,9 +77,9 @@ void* sub_407778_smemcpy(
     }
 
     ret = VirtualProtect(
-        memory,
+        dst,
         memorySize,
-        oldProtectOfMemory,
+        oldProtectOfDst,
         &unused
     );
 

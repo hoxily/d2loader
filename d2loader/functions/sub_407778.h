@@ -3,7 +3,7 @@
 #include <Windows.h>
 
 extern void* sub_407778_smemcpy(
-    void* memory,
-    void* arg1,
+    void* dst,
+    void* src,
     size_t memorySize
 );
