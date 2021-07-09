@@ -391,9 +391,9 @@ struct patch_search_item
     // 0c = 20 - 14
     void* v3;
     // 10 = 20 - 10
-    DWORD v4_zero;
+    DWORD v4;
     // 14 = 20 - 0c
-    DWORD v5_zero;
+    DWORD v5;
     // 18 = 20 - 08
     DWORD v6;
     // 1c = 20 - 04

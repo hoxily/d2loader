@@ -41,9 +41,9 @@ BOOL sub_405827_PatchModule(
             continue;
         }
 
-        if (esi_ptr->v2 <= esi_ptr->v4_zero)
+        if (esi_ptr->v2 <= esi_ptr->v4)
         {
-            size = esi_ptr->v4_zero;
+            size = esi_ptr->v4;
         }
 
         if (arg1 != 0 &&
