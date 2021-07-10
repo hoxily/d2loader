@@ -4,6 +4,8 @@
 #include "sub_40798d.h"
 #include "sub_4076ab.h"
 #include "sub_405b2d.h"
+#include "sub_407889.h"
+#include "sub_407778.h"
 
 BOOL sub_405827_PatchModule(
     struct patch_search_item* items,
@@ -79,7 +81,76 @@ BOOL sub_405827_PatchModule(
             {
                 sub_405b2d_IncreasePPtr(memory, edi_offset);
             }
+
+            if (esi_ptr->v4 >= 4 &&
+                (esi_ptr->v6 & 2)
+            )
+            {
+                sub_405b2d_IncreasePPtr(var_8, edi_offset);
+            }
         }
+
+        // loc_405927
+        if (esi_ptr->v6 & 0x20)
+        {
+            ptrdiff_t ecx_offset = (char*)0xfffffffcu - address;
+            sub_405b2d_IncreasePPtr(var_8, ecx_offset);
+        }
+
+        if (arg1)
+        {
+            int compare = sub_407889_smemcmp(
+                var_8,
+                address,
+                esi_ptr->v4
+            );
+
+            if (compare != 0)
+            {
+                sub_404ed0_LogFormat(
+                    LOG_TAG,
+                    "Patch %d Source Data Mismatch, Using Search Result to Restore",
+                    patchIndex
+                );
+
+                address = (char*)esi_ptr->v10_zero;
+            }
+
+            if (address != NULL && esi_ptr->v8 != NULL)
+            {
+                if (esi_ptr->v6 & 0x20)
+                {
+                    ptrdiff_t ecx_offset = (char*)0xfffffffcu - address;
+                    sub_405b2d_IncreasePPtr(esi_ptr->v8, ecx_offset);
+                }
+
+                sub_407778_smemcpy(
+                    address,
+                    esi_ptr->v8,
+                    esi_ptr->v4
+                );
+
+                if (esi_ptr->v6 & 0x10)
+                {
+                    free(esi_ptr->v8);
+                    esi_ptr->v8 = NULL;
+                    // clear lsb bit 4: 11111111111111111111111111101111
+                    esi_ptr->v6 &= 0xffffffef;
+                }
+                
+                // clear lsb bit 3: 11111111111111111111111111110111
+                esi_ptr->v6 &= 0xfffffff7;
+
+                var_4++;
+            }
+        }
+        else
+        {
+
+        }
+
+        free(memory);
+        free(var_8);
     }
     return FALSE;//TODO
 }
