@@ -18,7 +18,7 @@ BOOL sub_4057a8_Patch(
         return FALSE;
     }
 
-    if (!sub_405827_PatchModule(global_dd_402e0c, 0))
+    if (!sub_405827_PatchModule(global_dd_402e0c, PATCH_ACTION_TYPE_APPLY))
     {
         return FALSE;
     }
@@ -46,7 +46,7 @@ BOOL sub_4057a8_Patch(
 
     if (global_dd_4085e0_memory)
     {
-        sub_405827_PatchModule(global_dd_4085e0_memory, 0);
+        sub_405827_PatchModule(global_dd_4085e0_memory, PATCH_ACTION_TYPE_APPLY);
     }
 
     return TRUE;
