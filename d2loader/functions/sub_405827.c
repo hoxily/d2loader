@@ -70,7 +70,7 @@ BOOL sub_405827_PatchModule(
             continue;
         }
 
-        ptrdiff_t edi_offset = (char*)hModule - (char*)sub_4076ab(hModule);
+        ptrdiff_t edi_offset = (char*)hModule - (char*)sub_4076ab_GetImageBase(hModule);
         if (edi_offset != 0)
         {
             if (esi_ptr->v2 >= 4 &&

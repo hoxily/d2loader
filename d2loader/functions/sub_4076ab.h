@@ -2,6 +2,6 @@
 
 #include <Windows.h>
 
-extern void* sub_4076ab(
+extern DWORD sub_4076ab_GetImageBase(
     HMODULE hModule
 );
