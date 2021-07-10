@@ -6,10 +6,11 @@
 #include "sub_405b2d.h"
 #include "sub_407889.h"
 #include "sub_407778.h"
+#include "sub_405b3b.h"
 
 BOOL sub_405827_PatchModule(
     struct patch_search_item* items,
-    int arg1
+    int actionType
 )
 {
     if (items == NULL)
@@ -17,8 +18,8 @@ BOOL sub_405827_PatchModule(
         return FALSE;
     }
 
-    int var_4 = 0;
-    int var_18 = 0;
+    int succeededPatchCount = 0;
+    int totalPatchCount = 0;
     int patchIndex = 0;
     DWORD size;
     // 在汇编代码中，每次迭代时 esi 指向每个结构体对象的 +0x20 偏移处。
@@ -31,7 +32,7 @@ BOOL sub_405827_PatchModule(
             continue;
         }
 
-        var_18++;
+        totalPatchCount++;
         // 汇编代码里复用了实参 items 变量。此处声明一个新变量。
         // 汇编代码里反复计算基于hModule的偏移地址，声明为char*会更方便加减指针。
         HMODULE hModule = GetModuleHandleA(esi_ptr->moduleFileName);
@@ -50,15 +51,19 @@ BOOL sub_405827_PatchModule(
         {
             size = esi_ptr->v4;
         }
+        else
+        {
+            size = esi_ptr->v2;
+        }
 
-        if (arg1 != 0 &&
+        if (actionType != PATCH_ACTION_TYPE_APPLY &&
             (
                 (esi_ptr->v6 & 8) == 0 ||
                 (esi_ptr->v6 & 0x40) != 0
             )
         )
         {
-            var_4++;
+            succeededPatchCount++;
             continue;
         }
 
@@ -97,8 +102,8 @@ BOOL sub_405827_PatchModule(
             sub_405b2d_IncreasePPtr(var_8, ecx_offset);
         }
 
-        if (arg1)
-        {
+        if (actionType != PATCH_ACTION_TYPE_APPLY)
+        { // restore patch
             int compare = sub_407889_smemcmp(
                 var_8,
                 address,
@@ -141,16 +146,116 @@ BOOL sub_405827_PatchModule(
                 // clear lsb bit 3: 11111111111111111111111111110111
                 esi_ptr->v6 &= 0xfffffff7;
 
-                var_4++;
+                succeededPatchCount++;
             }
         }
         else
-        {
+        { // apply patch
+            // loc_4059be
+            if (esi_ptr->v6 & 8)
+            {
+                int compare = sub_407889_smemcmp(
+                    memory,
+                    address,
+                    esi_ptr->v2
+                );
+                if (compare == 0)
+                {
+                    esi_ptr->v10_zero = 0;
+                }
+                else
+                {
+                    sub_404ed0_LogFormat(
+                        LOG_TAG,
+                        "Patch %d Source Data Mismatch, Using Pattern Search",
+                        patchIndex
+                    );
+                    address = (char*)sub_405b3b_SearchPattern(hModule, esi_ptr->pattern);
+                    esi_ptr->v10_zero = (DWORD)address;
+                }
+            }
+            else
+            {
+                succeededPatchCount++;
+                address = NULL;
+            }
 
+            // loc_405a0a
+
+            // 0x40 = 0b100 0000, test lsb bit 6
+            if (esi_ptr->v6 & 0x40)
+            {
+                if (esi_ptr->v8 != NULL)
+                {
+                    sub_407778_smemcpy(
+                        esi_ptr->v8,
+                        address, // fix by hoxily@qq.com, 这里取了 address 的地址，而不是 address 存储的地址，很明显有问题。
+                        4
+                    );
+
+                    succeededPatchCount++;
+                }
+            }
+            else
+            {
+                // loc_405a29
+                if (address != NULL)
+                {
+                    if (esi_ptr->v8 != NULL &&
+                        (esi_ptr->v6 & 0x10) == 0
+                    )
+                    {
+                        esi_ptr->v8 = malloc(size);
+                        sub_407778_smemcpy(
+                            esi_ptr->v8,
+                            address,
+                            size
+                        );
+                    }
+                    else
+                    {
+                        sub_407778_smemcpy(
+                            esi_ptr->v8,
+                            address,
+                            size
+                        );
+                    }
+
+                    // loc_405a68
+                    if ((esi_ptr->v6 & 0x20) &&
+                        esi_ptr->v8 != NULL
+                    )
+                    {
+                        ptrdiff_t ecx_offset = (ptrdiff_t)(address + 4);
+                        sub_405b2d_IncreasePPtr(esi_ptr->v8, ecx_offset);
+                    }
+
+                    sub_407778_smemcpy(
+                        address,
+                        var_8,
+                        esi_ptr->v4
+                    );
+
+                    // 0x8 = 0b1000, lsb bit 4
+                    esi_ptr->v6 |= 0x8;
+
+                    succeededPatchCount++;
+                }
+            }
         }
 
         free(memory);
         free(var_8);
     }
-    return FALSE;//TODO
+
+    const char* action = actionType != PATCH_ACTION_TYPE_APPLY ? "Restored" : "Applied";
+    sub_404ed0_LogFormat(
+        LOG_TAG,
+        "%d of %d Patches Successfully %s",
+        succeededPatchCount,
+        totalPatchCount,
+        action
+    );
+
+    return succeededPatchCount == totalPatchCount;
 }
