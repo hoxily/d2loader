@@ -118,7 +118,7 @@ BOOL sub_405827_PatchModule(
                     patchIndex
                 );
 
-                address = (char*)esi_ptr->v10_zero;
+                address = (char*)esi_ptr->patternLocation;
             }
 
             if (address != NULL && esi_ptr->v8 != NULL)
@@ -161,7 +161,7 @@ BOOL sub_405827_PatchModule(
                 );
                 if (compare == 0)
                 {
-                    esi_ptr->v10_zero = 0;
+                    esi_ptr->patternLocation = NULL;
                 }
                 else
                 {
@@ -171,7 +171,7 @@ BOOL sub_405827_PatchModule(
                         patchIndex
                     );
                     address = (char*)sub_405b3b_SearchPattern(hModule, esi_ptr->pattern);
-                    esi_ptr->v10_zero = (DWORD)address;
+                    esi_ptr->patternLocation = address;
                 }
             }
             else

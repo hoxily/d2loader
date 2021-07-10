@@ -403,5 +403,6 @@ struct patch_search_item
     // 24 = 20 + 04
     const char* pattern;
     // 28 = 20 + 08
-    DWORD v10_zero;
+    // 如果是搜索模式，那么记录找到的模式的地址
+    void* patternLocation;
 };
