@@ -2,6 +2,8 @@
 #include "sub_405827.h"
 #include "sub_404ed0.h"
 #include "sub_40798d.h"
+#include "sub_4076ab.h"
+#include "sub_405b2d.h"
 
 BOOL sub_405827_PatchModule(
     struct patch_search_item* items,
@@ -30,7 +32,8 @@ BOOL sub_405827_PatchModule(
         var_18++;
         // 汇编代码里复用了实参 items 变量。此处声明一个新变量。
         // 汇编代码里反复计算基于hModule的偏移地址，声明为char*会更方便加减指针。
-        char* address = (char*)GetModuleHandleA(esi_ptr->moduleFileName);
+        HMODULE hModule = GetModuleHandleA(esi_ptr->moduleFileName);
+        char* address = (char*)hModule;
         if (address == NULL)
         {
             sub_404ed0_LogFormat(
@@ -62,6 +65,21 @@ BOOL sub_405827_PatchModule(
         address = address + esi_ptr->v1;
         void* memory = sub_40798d_DuplicateMemoryBlock(esi_ptr->v3, esi_ptr->v2);
         void* var_8 = sub_40798d_DuplicateMemoryBlock(esi_ptr->v5, esi_ptr->v4);
+        if (memory == NULL || var_8 == NULL)
+        {
+            continue;
+        }
+
+        ptrdiff_t edi_offset = (char*)hModule - (char*)sub_4076ab(hModule);
+        if (edi_offset != 0)
+        {
+            if (esi_ptr->v2 >= 4 &&
+                (esi_ptr->v6 & 1)
+            )
+            {
+                sub_405b2d_IncreasePPtr(memory, edi_offset);
+            }
+        }
     }
     return FALSE;//TODO
 }
