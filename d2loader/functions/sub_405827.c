@@ -71,8 +71,8 @@ BOOL sub_405827_PatchModule(
 
         address = address + esi_ptr->v1;
         void* memory = sub_40798d_DuplicateMemoryBlock(esi_ptr->v3, esi_ptr->v2);
-        void* var_8 = sub_40798d_DuplicateMemoryBlock(esi_ptr->v5, esi_ptr->v4);
-        if (memory == NULL || var_8 == NULL)
+        void* memory2 = sub_40798d_DuplicateMemoryBlock(esi_ptr->v5, esi_ptr->v4);
+        if (memory == NULL || memory2 == NULL)
         {
             continue;
         }
@@ -91,7 +91,7 @@ BOOL sub_405827_PatchModule(
                 (esi_ptr->v6 & 2)
             )
             {
-                sub_405b2d_IncreasePPtr(var_8, edi_offset);
+                sub_405b2d_IncreasePPtr(memory2, edi_offset);
             }
         }
 
@@ -99,13 +99,13 @@ BOOL sub_405827_PatchModule(
         if (esi_ptr->v6 & 0x20)
         {
             ptrdiff_t ecx_offset = (char*)0xfffffffcu - address;
-            sub_405b2d_IncreasePPtr(var_8, ecx_offset);
+            sub_405b2d_IncreasePPtr(memory2, ecx_offset);
         }
 
         if (actionType != PATCH_ACTION_TYPE_APPLY)
         { // restore patch
             int compare = sub_407889_smemcmp(
-                var_8,
+                memory2,
                 address,
                 esi_ptr->v4
             );
@@ -232,7 +232,7 @@ BOOL sub_405827_PatchModule(
 
                     sub_407778_smemcpy(
                         address,
-                        var_8,
+                        memory2,
                         esi_ptr->v4
                     );
 
@@ -245,7 +245,7 @@ BOOL sub_405827_PatchModule(
         }
 
         free(memory);
-        free(var_8);
+        free(memory2);
     }
 
     const char* action = actionType != PATCH_ACTION_TYPE_APPLY ? "Restored" : "Applied";
