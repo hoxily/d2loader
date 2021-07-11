@@ -228,6 +228,9 @@
     <ClCompile Include="functions\sub_407f21.c">
       <Filter>函数源文件</Filter>
     </ClCompile>
+    <ClCompile Include="functions\sub_405c59.c">
+      <Filter>函数源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="constant-strings.h">
@@ -450,6 +453,9 @@
       <Filter>函数头文件</Filter>
     </ClInclude>
     <ClInclude Include="functions\sub_407f21.h">
+      <Filter>函数头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="functions\sub_405c59.h">
       <Filter>函数头文件</Filter>
     </ClInclude>
   </ItemGroup>
