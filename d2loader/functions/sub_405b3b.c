@@ -1,7 +1,9 @@
 #include "sub_405b3b.h"
+#include <assert.h>
 #include "sub_4076ca.h"
 #include "sub_407f21.h"
 #include "sub_405c59.h"
+#include "sub_405bdc.h"
 
 void* sub_405b3b_SearchPattern(
     HMODULE hModule,
@@ -23,11 +25,23 @@ void* sub_405b3b_SearchPattern(
     }
 
     // 汇编代码中对 pattern 实参进行了复用。我们重新定义一个变量
-    unsigned long index = strtoul(esi_ptr[0], NULL, 0);
+    unsigned long offset = strtoul(esi_ptr[0], NULL, 0);
     size_t len = strlen(esi_ptr[1]);
     len >>= 1;
     len <<= 2;
     void* buffer = malloc(len);
-    sub_405c59(esi_ptr[1], buffer);
-    return NULL;//TODO
+    assert(buffer != NULL);
+    int count2 = sub_405c59(esi_ptr[1], buffer);
+    free(esi_ptr);
+    void* address = sub_405bdc(hModule, sizeOfImage, buffer, count2);
+    free(buffer);
+
+    if (address != NULL)
+    {
+        return (char*)address + offset;
+    }
+    else
+    {
+        return NULL;
+    }
 }
