@@ -1,6 +1,6 @@
 #include "sub_407f21.h"
 
-char** sub_407f21(
+char** sub_407f21_SplitString(
     const char* pattern,
     const char* s,
     DWORD* count

@@ -17,7 +17,7 @@ void* sub_405b3b_SearchPattern(
 
     DWORD sizeOfImage = sub_4076ca_GetSizeOfImage(hModule);
     DWORD count;
-    char** esi_ptr = sub_407f21(pattern, ",", &count);
+    char** esi_ptr = sub_407f21_SplitString(pattern, ",", &count);
     if (count != 2)
     {
         free(esi_ptr);
