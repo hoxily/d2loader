@@ -42,6 +42,8 @@ extern fn_GetModuleFileNameA global_dd_4085a4_GetModuleFileNameA;
 extern fn_FindWindowA global_dd_4085a8_FindWindowA;
 
 extern void* global_dd_4085e0_memory;
+extern int global_dd_4085e4_totalLoadedPatchCount;
+extern int global_dd_4085e8;
 
 extern struct hook_search_item global_dd_4023f0[3];
 

@@ -240,6 +240,12 @@
     <ClCompile Include="functions\sub_405c29.c">
       <Filter>函数源文件</Filter>
     </ClCompile>
+    <ClCompile Include="functions\sub_405d90.c">
+      <Filter>函数源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="functions\sub_405ebb.c">
+      <Filter>函数源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="constant-strings.h">
@@ -474,6 +480,12 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="functions\sub_405c29.h">
+      <Filter>函数头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="functions\sub_405d90.h">
+      <Filter>函数头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="functions\sub_405ebb.h">
       <Filter>函数头文件</Filter>
     </ClInclude>
   </ItemGroup>

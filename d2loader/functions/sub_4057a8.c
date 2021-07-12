@@ -30,14 +30,14 @@ BOOL sub_4057a8_Patch(
 
     if (global_dd_408620_settings->db_0b90_scriptFile.value[0] == '\0')
     {
-        sub_405d19(
+        sub_405d19_ScriptLoad(
             "d2hack.script",
             NULL
         );
     }
     else
     {
-        sub_405d19(
+        sub_405d19_ScriptLoad(
             "d2hack.script",
             global_dd_408620_settings->db_0b90_scriptFile.value,
             NULL
