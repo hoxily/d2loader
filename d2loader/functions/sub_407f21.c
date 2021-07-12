@@ -70,7 +70,6 @@ char** sub_407f21_SplitString(
         return NULL;
     }
 
-    int var_10 = STRING_ARRAY_INIT_ELEMENT_SIZE;
     struct string_array ebx_stringArray;
     ebx_stringArray.data = (union string_array_item*)malloc(sizeof(char*) * STRING_ARRAY_INIT_ELEMENT_SIZE);
     if (ebx_stringArray.data == NULL)
@@ -114,9 +113,8 @@ char** sub_407f21_SplitString(
             {
                 if (isCurrentCollectingStringEmpty)
                 {
-                    if (ebx_stringArray.lengthWithSentinel >= var_10)
+                    if (ebx_stringArray.lengthWithSentinel >= ebx_stringArray.capacity)
                     {
-                        var_10 += STRING_ARRAY_INCREMENT;
                         ebx_stringArray.capacity += STRING_ARRAY_INCREMENT;
                         union string_array_item* tmp = (union string_array_item*)realloc(
                             ebx_stringArray.data,
