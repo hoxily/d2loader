@@ -90,6 +90,7 @@ char** sub_407f21_SplitString(
         ebx_stringArray.lengthWithSentinel = 1;
         for (; *edi_ptr != '\0'; edi_ptr++)
         {
+            BOOL findAnySeparator = FALSE;
             // 这里并不是想在pattern中搜索s，而是s中的任何单个字符都是分割符。
             for (const char* edx_ptr = s; *edx_ptr != '\0'; edx_ptr++)
             {
@@ -103,38 +104,38 @@ char** sub_407f21_SplitString(
                         ebx_stringArray.lengthWithSentinel++;
                         var_8 = TRUE;
                     }
-                    goto breakToOutterLoopEnd;;
+                    findAnySeparator = TRUE;
                 }
             }
 
-            if (var_8)
+            if (!findAnySeparator)
             {
-                if (ebx_stringArray.lengthWithSentinel >= var_10)
+                if (var_8)
                 {
-                    var_10 += STRING_ARRAY_INCREMENT;
-                    ebx_stringArray.capacity += STRING_ARRAY_INCREMENT;
-                    union string_array_item* tmp = (union string_array_item*)realloc(
-                        ebx_stringArray.data,
-                        ebx_stringArray.capacity * sizeof(char*)
-                    );
-                    if (tmp == NULL)
+                    if (ebx_stringArray.lengthWithSentinel >= var_10)
                     {
-                        free(ebx_stringArray.data);
-                        free(buffer);
-                        return NULL;
+                        var_10 += STRING_ARRAY_INCREMENT;
+                        ebx_stringArray.capacity += STRING_ARRAY_INCREMENT;
+                        union string_array_item* tmp = (union string_array_item*)realloc(
+                            ebx_stringArray.data,
+                            ebx_stringArray.capacity * sizeof(char*)
+                        );
+                        if (tmp == NULL)
+                        {
+                            free(ebx_stringArray.data);
+                            free(buffer);
+                            return NULL;
+                        }
+                        ebx_stringArray.data = tmp;
                     }
-                    ebx_stringArray.data = tmp;
+
+                    var_8 = FALSE;
+                    ebx_stringArray.data[ebx_stringArray.length].offset = esi_ptr - buffer;
                 }
 
-                var_8 = FALSE;
-                ebx_stringArray.data[ebx_stringArray.length].offset = esi_ptr - buffer;
+                *esi_ptr = *edi_ptr;
+                esi_ptr++;
             }
-
-            *esi_ptr = *edi_ptr;
-            esi_ptr++;
-
-        breakToOutterLoopEnd:
-            ;// 当标签后面没有语句时，需要添加一个空语句，否则编译报错。
         }
 
         if (!var_8)
