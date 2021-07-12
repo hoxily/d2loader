@@ -45,8 +45,8 @@ struct string_array
 #define STRING_ARRAY_INIT_ELEMENT_SIZE 0x20
 
 char** sub_407f21_SplitString(
-    const char* pattern,
-    const char* s,
+    const char* str,
+    const char* separators,
     DWORD* count
 )
 {
@@ -59,12 +59,12 @@ char** sub_407f21_SplitString(
     assert(sizeof(union string_array_item) == sizeof(char*));
     assert(sizeof(union string_array_item) == sizeof(ptrdiff_t));
 
-    if (pattern == NULL || s == NULL)
+    if (str == NULL || separators == NULL)
     {
         return NULL;
     }
 
-    char* buffer = (char*)malloc(strlen(pattern) + 1);
+    char* buffer = (char*)malloc(strlen(str) + 1);
     if (buffer == NULL)
     {
         return NULL;
@@ -82,7 +82,7 @@ char** sub_407f21_SplitString(
     char* esi_ptr = buffer;
     //当前正在收集的字符串是否为空
     BOOL isCurrentCollectingStringEmpty = TRUE;
-    const char* edi_ptr = pattern;
+    const char* edi_ptr = str;
     if (*edi_ptr != '\0')
     {
         ebx_stringArray.capacity = STRING_ARRAY_INIT_ELEMENT_SIZE;
@@ -90,8 +90,8 @@ char** sub_407f21_SplitString(
         for (; *edi_ptr != '\0'; edi_ptr++)
         {
             BOOL findAnySeparator = FALSE;
-            // 这里并不是想在pattern中搜索s，而是s中的任何单个字符都是分割符。
-            for (const char* edx_ptr = s; *edx_ptr != '\0'; edx_ptr++)
+            // 这里并不是想在str中搜索separators，而是separators中的任何单个字符都是分割符。
+            for (const char* edx_ptr = separators; *edx_ptr != '\0'; edx_ptr++)
             {
                 if (*edx_ptr == *edi_ptr)
                 {
