@@ -49,6 +49,7 @@ int sub_405c59_ParseHexByteString(
         byteCount++;
         edi_ptr++;
         i++;
+        esi_ptr++;
     }
     return byteCount;
 }
