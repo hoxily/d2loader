@@ -3,8 +3,8 @@
 void* sub_405bdc(
     HMODULE hModule,
     DWORD sizeOfImage,
-    DWORD* buffer,
-    int count
+    DWORD* byteSequence,
+    int byteCount
 )
 {
     return NULL;//TODO
