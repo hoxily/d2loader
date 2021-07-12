@@ -86,7 +86,6 @@ char** sub_407f21_SplitString(
     if (*edi_ptr != '\0')
     {
         ebx_stringArray.capacity = STRING_ARRAY_INIT_ELEMENT_SIZE;
-        // 包括NULL结束标识的情况下，字符串数组的长度。
         ebx_stringArray.lengthWithSentinel = 1;
         for (; *edi_ptr != '\0'; edi_ptr++)
         {
