@@ -81,7 +81,8 @@ char** sub_407f21_SplitString(
     ebx_stringArray.length = 0;
     ebx_stringArray.data[0].offset = 0;
     char* esi_ptr = buffer;
-    BOOL var_8 = TRUE;
+    //当前正在收集的字符串是否为空
+    BOOL isCurrentCollectingStringEmpty = TRUE;
     const char* edi_ptr = pattern;
     if (*edi_ptr != '\0')
     {
@@ -96,21 +97,22 @@ char** sub_407f21_SplitString(
             {
                 if (*edx_ptr == *edi_ptr)
                 {
-                    if (!var_8)
+                    if (!isCurrentCollectingStringEmpty)
                     {
                         *esi_ptr = '\0';
                         esi_ptr++;
                         ebx_stringArray.length++;
                         ebx_stringArray.lengthWithSentinel++;
-                        var_8 = TRUE;
+                        isCurrentCollectingStringEmpty = TRUE;
                     }
                     findAnySeparator = TRUE;
+                    break;
                 }
             }
 
             if (!findAnySeparator)
             {
-                if (var_8)
+                if (isCurrentCollectingStringEmpty)
                 {
                     if (ebx_stringArray.lengthWithSentinel >= var_10)
                     {
@@ -129,7 +131,7 @@ char** sub_407f21_SplitString(
                         ebx_stringArray.data = tmp;
                     }
 
-                    var_8 = FALSE;
+                    isCurrentCollectingStringEmpty = FALSE;
                     ebx_stringArray.data[ebx_stringArray.length].offset = esi_ptr - buffer;
                 }
 
@@ -138,7 +140,7 @@ char** sub_407f21_SplitString(
             }
         }
 
-        if (!var_8)
+        if (!isCurrentCollectingStringEmpty)
         {
             *esi_ptr = '\0';
             esi_ptr++;
