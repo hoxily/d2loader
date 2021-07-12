@@ -1,11 +1,25 @@
 #include "sub_407f21.h"
 #include <assert.h>
 
+/*
+* 重复使用的字符串指针数组
+*/
 union string_array_item
 {
-    char* pointer;
+    /*
+    * 一开始记录的是该字符串在buffer上的偏移量
+    */
     ptrdiff_t offset;
+    /*
+    * 后面返回结果时，转换成真正的char指针。
+    */
+    char* pointer;
 };
+
+// 每次扩容时增加的元素数量
+#define STRING_ARRAY_INCREMENT 0x20
+// 初始元素数量
+#define STRING_ARRAY_INIT_ELEMENT_SIZE 0x20
 
 char** sub_407f21_SplitString(
     const char* pattern,
@@ -33,8 +47,8 @@ char** sub_407f21_SplitString(
         return NULL;
     }
 
-    size_t var_10 = 0x20;
-    union string_array_item* ebx_stringArray = malloc(0x80);
+    size_t var_10 = STRING_ARRAY_INIT_ELEMENT_SIZE;
+    union string_array_item* ebx_stringArray = (union string_array_item*)malloc(sizeof(char*) * STRING_ARRAY_INIT_ELEMENT_SIZE);
     if (ebx_stringArray == NULL)
     {
         free(buffer);
@@ -49,8 +63,9 @@ char** sub_407f21_SplitString(
     {
         goto constructResult;
     }
-    size_t stringArrayCapacity = 0x80 / sizeof(char*);
-    unsigned int var_c = 1;
+    size_t stringArrayCapacity = STRING_ARRAY_INIT_ELEMENT_SIZE;
+    // 包括NULL结束标识的情况下，字符串数组的长度。
+    unsigned int stringArrayLengthWithSentinel = 1;
     for (; *edi_ptr != '\0'; edi_ptr++)
     {
         // 这里并不是想在pattern中搜索s，而是s中的任何单个字符都是分割符。
@@ -63,7 +78,7 @@ char** sub_407f21_SplitString(
                     *esi_ptr = '\0';
                     esi_ptr++;
                     stringArrayLength++;
-                    var_c++;
+                    stringArrayLengthWithSentinel++;
                     var_8 = TRUE;
                 }
                 goto breakToOutterLoopEnd;;
@@ -72,10 +87,10 @@ char** sub_407f21_SplitString(
 
         if (var_8)
         {
-            if (var_c >= var_10)
+            if (stringArrayLengthWithSentinel >= var_10)
             {
-                var_10 += 0x20;
-                stringArrayCapacity += 0x80 / sizeof(char*);
+                var_10 += STRING_ARRAY_INCREMENT;
+                stringArrayCapacity += STRING_ARRAY_INCREMENT;
                 union string_array_item* tmp = (union string_array_item*)realloc(ebx_stringArray, stringArrayCapacity * sizeof(char*));
                 if (tmp == NULL)
                 {
@@ -94,7 +109,7 @@ char** sub_407f21_SplitString(
         esi_ptr++;
 
     breakToOutterLoopEnd:
-        ;// 需要一个空语句，否则编译报错。
+        ;// 当标签后面没有语句时，需要添加一个空语句，否则编译报错。
     }
 
     if (!var_8)
@@ -104,9 +119,16 @@ char** sub_407f21_SplitString(
         stringArrayLength++;
     }
 
-    constructResult:
-    size_t size = sizeof(char*) * (stringArrayLength + 1) + (esi_ptr - buffer);
-    char* resultBuffer = (char*)malloc(size);
+constructResult:
+    /*
+    * 分配一整块内存，分别存放
+    * 1. char* 数组；
+    * 2. 数组结束标识 NULL；
+    * 3. char* 数组针指向的字符串数据；
+    */
+    size_t pointerBlockSize = sizeof(char*) * (stringArrayLength + 1);
+    size_t stringDataBlockSize = esi_ptr - buffer;
+    char* resultBuffer = (char*)malloc(pointerBlockSize + stringDataBlockSize);
     if (resultBuffer == NULL)
     {
         free(buffer);
@@ -115,21 +137,23 @@ char** sub_407f21_SplitString(
     }
 
     memcpy(
-        resultBuffer + sizeof(char*) * (stringArrayLength + 1),
+        resultBuffer + pointerBlockSize,
         buffer,
-        esi_ptr - buffer
+        stringDataBlockSize
     );
 
     for (int i = 0; i < stringArrayLength; i++)
     {
-        ebx_stringArray[i].pointer = ebx_stringArray[i].offset + resultBuffer + sizeof(char*) * (stringArrayLength + 1);
+        ebx_stringArray[i].pointer = ebx_stringArray[i].offset + resultBuffer + pointerBlockSize;
     }
-    ebx_stringArray[stringArrayLength * sizeof(char*)].pointer = NULL;
+    ebx_stringArray[stringArrayLength].pointer = NULL;
+
     memcpy(
         resultBuffer,
         ebx_stringArray,
-        (stringArrayLength + 1) * sizeof(char*)
+        pointerBlockSize
     );
+
     free(buffer);
     free(ebx_stringArray);
     if (count != NULL)
