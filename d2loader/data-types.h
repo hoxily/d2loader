@@ -314,6 +314,13 @@ union program_setting_store
     #pragma pack(1)
     struct
     {
+        BYTE offset[0x7d4];
+        char value[18];
+    } db_07d4_locale;
+
+    #pragma pack(1)
+    struct
+    {
         BYTE offset[0x7ec];
         char value[9 + 1];
     } db_07ec_gameName;

@@ -23,6 +23,8 @@ const char* global_dd_4011b0_gameStateDlls[] =
     "d2launch.dll"
 };
 
+DWORD global_dd_404718;
+
 union program_setting_store* global_dd_408620_settings;
 FILE* global_dd_408588_logFile;
 FILE* global_dd_40858c_logFile;

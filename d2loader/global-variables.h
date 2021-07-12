@@ -5,6 +5,8 @@
 
 extern const char* global_dd_4011b0_gameStateDlls[];
 
+extern DWORD global_dd_404718;
+
 extern union program_setting_store* global_dd_408620_settings;
 extern FILE* global_dd_408588_logFile;
 extern FILE* global_dd_40858c_logFile;
