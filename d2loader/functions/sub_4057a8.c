@@ -23,7 +23,7 @@ BOOL sub_4057a8_Patch(
         return FALSE;
     }
 
-    if (!sub_4066c3())
+    if (!sub_4066c3_PatchLocale())
     {
         return FALSE;
     }

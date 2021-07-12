@@ -2,5 +2,5 @@
 
 #include <Windows.h>
 
-extern BOOL sub_4066c3(
+extern BOOL sub_4066c3_PatchLocale(
 );

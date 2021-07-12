@@ -58,6 +58,10 @@ BOOL sub_404c57_GameMain(
 
         if (!global_dd_408620_settings->db_07aa_noScript.value)
         {
+            // 虽然这个开关叫 -noscript，但是 sub_4057a8_Patch 函数不只是执行
+            // d2hack.script，同时还做了其他一些事情：
+            // 1. d2loader 内置补丁；
+            // 2. 处理 -locale 参数。
             sub_4057a8_Patch();
         }
 
