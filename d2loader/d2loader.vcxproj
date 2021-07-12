@@ -222,6 +222,7 @@
     <ClCompile Include="global-variables.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="functions\sub_40543b.c" />
+    <ClCompile Include="tests.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="constant-strings.h" />
@@ -300,6 +301,7 @@
     <ClInclude Include="global-variables.h" />
     <ClInclude Include="functions\sub_40543b.h" />
     <ClInclude Include="storm-api.h" />
+    <ClInclude Include="tests.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
