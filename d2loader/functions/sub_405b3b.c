@@ -33,7 +33,7 @@ void* sub_405b3b_SearchPattern(
     assert(buffer != NULL);
     int byteCount = sub_405c59_ParseHexByteString(esi_ptr[1], buffer);
     free(esi_ptr);
-    void* address = sub_405bdc(hModule, sizeOfImage, buffer, byteCount);
+    void* address = sub_405bdc_SearchByteSequence(hModule, sizeOfImage, buffer, byteCount);
     free(buffer);
 
     if (address != NULL)
