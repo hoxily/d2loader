@@ -3,6 +3,7 @@
 #include "global-variables.h"
 #include "functions/sub_407f21.h"
 #include "functions/sub_404ed0.h"
+#include "functions/sub_405c59.h"
 
 void StringSplitsTest(
     const char* pattern,
@@ -69,6 +70,41 @@ void InitConsoleOutput(
     (void)freopen("conout$", "w", stderr);
 }
 
+void ParseHexByteStringTest(const char* str)
+{
+    size_t srcStrLength = strlen(str);
+    size_t bufferSize = (srcStrLength >> 1) << 2;
+    sub_404ed0_LogFormat(
+        LOG_TAG,
+        "Parse string: %s",
+        str
+    );
+    sub_404ed0_LogFormat(
+        LOG_TAG,
+        "str length: %d, buffer length: %d",
+        srcStrLength,
+        bufferSize / sizeof(int)
+    );
+    int* buffer = (int*)malloc(bufferSize);
+    int byteCount = sub_405c59_ParseHexByteString(
+        str,
+        buffer
+    );
+    sub_404ed0_LogFormat(
+        LOG_TAG,
+        "parse result: byteCount = %d",
+        byteCount
+    );
+    for (int i = 0; i < byteCount; i++)
+    {
+        sub_404ed0_LogFormat(
+            LOG_TAG,
+            "%04x",
+            buffer[i]
+        );
+    }
+}
+
 void Tests(
 )
 {
@@ -85,5 +121,12 @@ void Tests(
     StringSplitsTest(
         "7, abc,,,,,,xyz,",
         ", "
+    );
+
+    ParseHexByteStringTest(
+        " B8xxxxxxxx C605xxxxxxxx01 E8xxxxxxxx 0FB6086A00890D"
+    );
+    ParseHexByteStringTest(
+        " 8B15xxxxxxxx 83FA0D 7C10 33D2 8915xxxxxxxx EB06 8B15"
     );
 }
