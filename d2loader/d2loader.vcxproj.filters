@@ -237,6 +237,9 @@
     <ClCompile Include="tests.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="functions\sub_405c29.c">
+      <Filter>函数源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="constant-strings.h">
@@ -469,6 +472,9 @@
     </ClInclude>
     <ClInclude Include="tests.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="functions\sub_405c29.h">
+      <Filter>函数头文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
