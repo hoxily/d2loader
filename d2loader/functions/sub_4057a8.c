@@ -49,5 +49,6 @@ BOOL sub_4057a8_Patch(
         sub_405827_PatchModule(global_dd_4085e0_memory, PATCH_ACTION_TYPE_APPLY);
     }
 
+    global_dd_4085dc_isPatchCompleted = TRUE;
     return TRUE;
 }
