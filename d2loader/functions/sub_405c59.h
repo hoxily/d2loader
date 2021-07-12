@@ -12,5 +12,5 @@
 */
 extern int sub_405c59_ParseHexByteString(
     const char* str,
-    int* buffer
+    unsigned int* buffer
 );

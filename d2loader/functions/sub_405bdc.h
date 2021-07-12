@@ -5,6 +5,6 @@
 extern void* sub_405bdc(
     HMODULE hModule,
     DWORD sizeOfImage,
-    char* buffer,
+    DWORD* buffer,
     int count
 );

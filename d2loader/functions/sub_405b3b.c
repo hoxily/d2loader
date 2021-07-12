@@ -29,7 +29,7 @@ void* sub_405b3b_SearchPattern(
     size_t len = strlen(esi_ptr[1]);
     len >>= 1;
     len <<= 2;
-    void* buffer = malloc(len);
+    DWORD* buffer = (DWORD*)malloc(len);
     assert(buffer != NULL);
     int count2 = sub_405c59_ParseHexByteString(esi_ptr[1], buffer);
     free(esi_ptr);
