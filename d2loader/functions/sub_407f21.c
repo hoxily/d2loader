@@ -83,70 +83,67 @@ char** sub_407f21_SplitString(
     char* esi_ptr = buffer;
     BOOL var_8 = TRUE;
     const char* edi_ptr = pattern;
-    if (*edi_ptr == '\0')
+    if (*edi_ptr != '\0')
     {
-        goto constructResult;
-    }
-    ebx_stringArray.capacity = STRING_ARRAY_INIT_ELEMENT_SIZE;
-    // 包括NULL结束标识的情况下，字符串数组的长度。
-    ebx_stringArray.lengthWithSentinel = 1;
-    for (; *edi_ptr != '\0'; edi_ptr++)
-    {
-        // 这里并不是想在pattern中搜索s，而是s中的任何单个字符都是分割符。
-        for (const char* edx_ptr = s; *edx_ptr != '\0'; edx_ptr++)
+        ebx_stringArray.capacity = STRING_ARRAY_INIT_ELEMENT_SIZE;
+        // 包括NULL结束标识的情况下，字符串数组的长度。
+        ebx_stringArray.lengthWithSentinel = 1;
+        for (; *edi_ptr != '\0'; edi_ptr++)
         {
-            if (*edx_ptr == *edi_ptr)
+            // 这里并不是想在pattern中搜索s，而是s中的任何单个字符都是分割符。
+            for (const char* edx_ptr = s; *edx_ptr != '\0'; edx_ptr++)
             {
-                if (!var_8)
+                if (*edx_ptr == *edi_ptr)
                 {
-                    *esi_ptr = '\0';
-                    esi_ptr++;
-                    ebx_stringArray.length++;
-                    ebx_stringArray.lengthWithSentinel++;
-                    var_8 = TRUE;
+                    if (!var_8)
+                    {
+                        *esi_ptr = '\0';
+                        esi_ptr++;
+                        ebx_stringArray.length++;
+                        ebx_stringArray.lengthWithSentinel++;
+                        var_8 = TRUE;
+                    }
+                    goto breakToOutterLoopEnd;;
                 }
-                goto breakToOutterLoopEnd;;
-            }
-        }
-
-        if (var_8)
-        {
-            if (ebx_stringArray.lengthWithSentinel >= var_10)
-            {
-                var_10 += STRING_ARRAY_INCREMENT;
-                ebx_stringArray.capacity += STRING_ARRAY_INCREMENT;
-                union string_array_item* tmp = (union string_array_item*)realloc(
-                    ebx_stringArray.data,
-                    ebx_stringArray.capacity * sizeof(char*)
-                );
-                if (tmp == NULL)
-                {
-                    free(ebx_stringArray.data);
-                    free(buffer);
-                    return NULL;
-                }
-                ebx_stringArray.data = tmp;
             }
 
-            var_8 = FALSE;
-            ebx_stringArray.data[ebx_stringArray.length].offset = esi_ptr - buffer;
+            if (var_8)
+            {
+                if (ebx_stringArray.lengthWithSentinel >= var_10)
+                {
+                    var_10 += STRING_ARRAY_INCREMENT;
+                    ebx_stringArray.capacity += STRING_ARRAY_INCREMENT;
+                    union string_array_item* tmp = (union string_array_item*)realloc(
+                        ebx_stringArray.data,
+                        ebx_stringArray.capacity * sizeof(char*)
+                    );
+                    if (tmp == NULL)
+                    {
+                        free(ebx_stringArray.data);
+                        free(buffer);
+                        return NULL;
+                    }
+                    ebx_stringArray.data = tmp;
+                }
+
+                var_8 = FALSE;
+                ebx_stringArray.data[ebx_stringArray.length].offset = esi_ptr - buffer;
+            }
+
+            *esi_ptr = *edi_ptr;
+            esi_ptr++;
+
+        breakToOutterLoopEnd:
+            ;// 当标签后面没有语句时，需要添加一个空语句，否则编译报错。
         }
 
-        *esi_ptr = *edi_ptr;
-        esi_ptr++;
-
-    breakToOutterLoopEnd:
-        ;// 当标签后面没有语句时，需要添加一个空语句，否则编译报错。
+        if (!var_8)
+        {
+            *esi_ptr = '\0';
+            esi_ptr++;
+            ebx_stringArray.length++;
+        }
     }
-
-    if (!var_8)
-    {
-        *esi_ptr = '\0';
-        esi_ptr++;
-        ebx_stringArray.length++;
-    }
-
-constructResult:
     /*
     * 分配一整块内存，分别存放
     * 1. char* 数组；
