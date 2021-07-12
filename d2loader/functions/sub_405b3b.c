@@ -31,7 +31,7 @@ void* sub_405b3b_SearchPattern(
     len <<= 2;
     void* buffer = malloc(len);
     assert(buffer != NULL);
-    int count2 = sub_405c59(esi_ptr[1], buffer);
+    int count2 = sub_405c59_ParseHexByteString(esi_ptr[1], buffer);
     free(esi_ptr);
     void* address = sub_405bdc(hModule, sizeOfImage, buffer, count2);
     free(buffer);
