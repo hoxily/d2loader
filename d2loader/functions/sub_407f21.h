@@ -3,7 +3,7 @@
 #include <Windows.h>
 
 /*
-* 使用给定的字符数组s中的任一字符，切割pattern字符串。
+* 使用给定的字符数组 separators 中的任一字符，切割 str 字符串。
 * @param str 被切分的字符串
 * @param separators 用以分隔的字符数组
 * @param count 返回切割完成的字符串数组的元素个数。可以为NULL。
