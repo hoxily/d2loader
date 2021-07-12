@@ -44,6 +44,4 @@ void sub_405d19_ScriptLoad(
         "Total %d Patches Loaded",
         global_dd_4085e4_totalLoadedPatchCount
     );
-    
-    return TRUE;
 }

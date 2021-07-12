@@ -25,4 +25,5 @@ BOOL sub_4075c3_D2LocaleSetLocale(
         LOG_TAG,
         "Sorry, not implemented yet! Using Default Locale"
     );
+    return TRUE;
 }
