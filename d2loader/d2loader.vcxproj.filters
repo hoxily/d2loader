@@ -132,9 +132,6 @@
     <ClCompile Include="functions\sub_4057a8.c">
       <Filter>函数源文件</Filter>
     </ClCompile>
-    <ClCompile Include="functions\sub_40a600.c">
-      <Filter>函数源文件</Filter>
-    </ClCompile>
     <ClCompile Include="functions\sub_4071a5.c">
       <Filter>函数源文件</Filter>
     </ClCompile>
@@ -250,6 +247,12 @@
       <Filter>函数源文件</Filter>
     </ClCompile>
     <ClCompile Include="functions\sub_40a380.c">
+      <Filter>函数源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="functions\sub_40a2b0.c">
+      <Filter>函数源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="functions\sub_40a600.c">
       <Filter>函数源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -498,6 +501,9 @@
       <Filter>函数头文件</Filter>
     </ClInclude>
     <ClInclude Include="functions\sub_40a380.h">
+      <Filter>函数头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="functions\sub_40a2b0.h">
       <Filter>函数头文件</Filter>
     </ClInclude>
   </ItemGroup>

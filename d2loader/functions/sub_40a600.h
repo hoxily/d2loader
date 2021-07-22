@@ -1,4 +1,4 @@
 #pragma once
 
-extern void sub_40a600_Cleanup(
+extern void sub_40a600_CleanupBnCacheFile(
 );

@@ -72,7 +72,7 @@ BOOL sub_404c57_GameMain(
         sub_404ed0_LogFormat(
             LOG_TAG,
             "Exit From Game Client Loop, Cleanup");
-        sub_40a600_Cleanup();
+        sub_40a600_CleanupBnCacheFile();
         sub_404ed0_LogFormat(
             LOG_TAG,
             "Exit From Game Client Loop, Cleanup"
