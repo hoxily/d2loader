@@ -10,7 +10,7 @@ void sub_40a600_CleanupBnCacheFile(
     char fileName[0x104];
     // ½è eax ¼Ä´æÆ÷´«µÝ²ÎÊý
     sub_40a2b0_GetBnCacheFileName(fileName);
-    HANDLE handle = (HANDLE)0x6ff3dce8;
+    HANDLE handle = *(HANDLE*)0x6ff3dce8;
     if (handle != INVALID_HANDLE_VALUE)
     {
         CloseHandle(handle);

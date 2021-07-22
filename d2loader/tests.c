@@ -4,6 +4,7 @@
 #include "functions/sub_407f21.h"
 #include "functions/sub_404ed0.h"
 #include "functions/sub_405c59.h"
+#include "functions/sub_40a600.h"
 
 void StringSplitsTest(
     const char* pattern,
@@ -105,11 +106,16 @@ void ParseHexByteStringTest(const char* str)
     }
 }
 
+void CleanBnCacheFileTest()
+{
+    sub_40a600_CleanupBnCacheFile();
+}
+
 void Tests(
 )
 {
     InitConsoleOutput();
-
+    /*
     StringSplitsTest(
         "7, abc,,,,,,xyz,",
         ","
@@ -129,4 +135,6 @@ void Tests(
     ParseHexByteStringTest(
         " 8B15xxxxxxxx 83FA0D 7C10 33D2 8915xxxxxxxx EB06 8B15"
     );
+    */
+    CleanBnCacheFileTest();
 }
