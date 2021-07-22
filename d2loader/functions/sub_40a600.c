@@ -24,4 +24,12 @@ void sub_40a600_CleanupBnCacheFile(
             fileName
         );
     }
+    else
+    {
+        sub_404ed0_LogFormat(
+            LOG_TAG,
+            "Succeeded to delete BnCache file: %s",
+            fileName
+        );
+    }
 }
