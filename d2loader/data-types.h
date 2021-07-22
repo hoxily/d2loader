@@ -30,7 +30,6 @@ struct loaded_plugin_item
     struct query_interface_result* dd_0010_queryInterfaceResult;
 };
 
-#pragma pack(1)
 struct string_index_item
 {
     // 参数的短名
@@ -46,10 +45,9 @@ struct string_index_item
 };
 
 // 在这里使用union简直绝妙！不用费劲心思凑字段的偏移量了。
-#pragma pack(1) // 逐字节对齐，方便定位
+#pragma pack(push, 1) // 逐字节对齐，方便定位
 union program_setting_store
 {
-    #pragma pack(1)
     struct
     {
         // 不允许使用不完整的类型
@@ -57,70 +55,60 @@ union program_setting_store
         BYTE value;
     } db_0000_expansion;
 
-    #pragma pack(1)
     struct
     {
         BYTE offset[4];
         BYTE value;
     } db_0004_window;
 
-    #pragma pack(1)
     struct
     {
         BYTE offset[5];
         BYTE value;
     } db_0005;
 
-    #pragma pack(1)
     struct
     {
         BYTE offset[6];
         BYTE value;
     } db_0006_glide;
 
-    #pragma pack(1)
     struct
     {
         BYTE offset[7];
         BYTE value;
     } db_0007_openGl;
 
-    #pragma pack(1)
     struct
     {
         BYTE offset[8];
         BYTE value;
     } db_0008_rave;
 
-    #pragma pack(1)
     struct
     {
         BYTE offset[9];
         BYTE value;
     } db_0009_d3d;
 
-    #pragma pack(1)
     struct
     {
         BYTE offset[9];
         BYTE value;
     } db_0009_perspective;
 
-    #pragma pack(1)
     struct
     {
         BYTE offset[0xa];
         BYTE value;
     } db_000a_lowQuality;
 
-    #pragma pack(1)
     struct
     {
         BYTE offset[0xb];
         DWORD value;
     } dd_000b_gamma;
 
-    #pragma pack(1)
     struct
     {
         // 根据 global_dd_402ea8 命令行参数表，gamma参数的偏移量为 0xc
@@ -131,7 +119,6 @@ union program_setting_store
         DWORD value;
     } dd_000c_gamma;
 
-    #pragma pack(1)
     struct
     {
         BYTE offset[0xf];
@@ -139,77 +126,66 @@ union program_setting_store
     } db_000f_vSync;
 
 
-    #pragma pack(1)
     struct
     {
         BYTE offset[0x14];
         DWORD value;
     } dd_0014_gameType;
 
-    #pragma pack(1)
     struct
     {
         BYTE offset[0x1ff];
         BYTE value;
     } db_01ff_direct;
 
-    #pragma pack(1)
     struct
     {
         BYTE offset[0x20d];
         BOOL(*value)();
     } dd_020d_IsExpansion;
 
-    #pragma pack(1)
     struct
     {
         BYTE offset[0x21b];
         BYTE value;
     } db_021b_noSound;
 
-    #pragma pack(1)
     struct
     {
         BYTE offset[0x221];
         void* value;
     } dd_0221_comInt;
 
-    #pragma pack(1)
     struct
     {
         BYTE offset[0x79b];
         BYTE value;
     } db_079b_client;
 
-    #pragma pack(1)
     struct
     {
         BYTE offset[0x79c];
         BYTE value;
     } db_079c_server;
 
-    #pragma pack(1)
     struct
     {
         BYTE offset[0x79d];
         BYTE value;
     } db_079d_launch;
 
-    #pragma pack(1)
     struct
     {
         BYTE offset[0x79e];
         BYTE value;
     } db_079e_multi;
 
-    #pragma pack(1)
     struct
     {
         BYTE offset[0x79f];
         BYTE value;
     } db_079f_noTitle;
 
-    #pragma pack(1)
     struct
     {
         BYTE offset[0x7a0];
@@ -217,7 +193,6 @@ union program_setting_store
         BYTE value;
     } db_07a0_res800;
 
-    #pragma pack(1)
     struct
     {
         BYTE offset[0x7a1];
@@ -225,7 +200,6 @@ union program_setting_store
         BYTE value;
     } db_07a1_res640;
 
-    #pragma pack(1)
     struct
     {
         BYTE offset[0x7a6];
@@ -233,70 +207,60 @@ union program_setting_store
         BYTE value;
     } db_07a6_noChar;
 
-    #pragma pack(1)
     struct
     {
         BYTE offset[0x7a7];
         BYTE value;
     } db_07a7_clientExit;
 
-    #pragma pack(1)
     struct
     {
         BYTE offset[0x7a8];
         BYTE value;
     } db_07a8_multiClient;
 
-    #pragma pack(1)
     struct
     {
         BYTE offset[0x7a9];
         BYTE value;
     } db_07a9_printArg;
 
-    #pragma pack(1)
     struct
     {
         BYTE offset[0x7aa];
         BYTE value;
     } db_07aa_noScript;
 
-    #pragma pack(1)
     struct
     {
         BYTE offset[0x7ab];
         BYTE value;
     } db_07ab_noPlugin;
 
-    #pragma pack(1)
     struct
     {
         BYTE offset[0x7ac];
         BYTE value;
     } db_07ac_enableLogFile;
 
-    #pragma pack(1)
     struct
     {
         BYTE offset[0x7ae];
         BYTE value;
     } db_07ae_removeConfFile;
 
-    #pragma pack(1)
     struct
     {
         BYTE offset[0x7af];
         BYTE value;
     } db_07af_noCleanup;
 
-    #pragma pack(1)
     struct
     {
         BYTE offset[0x7b0];
         DWORD value;
     } dd_07b0_gameState;
 
-    #pragma pack(1)
     struct
     {
         BYTE offset[0x7b4];
@@ -304,42 +268,36 @@ union program_setting_store
     } dd_07b4_gameProductVersionFlag;
 
     // 进程的优先级。默认为 bnormal，即 低于正常。
-    #pragma pack(1)
     struct
     {
         BYTE offset[0x7bc];
         char value[7 + 1];
     } db_07bc_processPriority;
 
-    #pragma pack(1)
     struct
     {
         BYTE offset[0x7d4];
         char value[18];
     } db_07d4_locale;
 
-    #pragma pack(1)
     struct
     {
         BYTE offset[0x7ec];
         char value[9 + 1];
     } db_07ec_gameName;
 
-    #pragma pack(1)
     struct
     {
         BYTE offset[0x804];
         char value[0x80];
     } db_0804_title;
 
-    #pragma pack(1)
     struct
     {
         BYTE offset[0x884];
         char value[0x104];
     } db_0884_confFile;
 
-    #pragma pack(1)
     struct
     {
         BYTE offset[0x988];
@@ -357,14 +315,12 @@ union program_setting_store
         char value[0x104];
     } db_0988_mpqFile;
 
-    #pragma pack(1)
     struct
     {
         BYTE offset[0xa8c];
         char value[0x104];
     } db_0a8c_pluginDir;
 
-    #pragma pack(1)
     struct
     {
         BYTE offset[0xb90];
@@ -373,6 +329,7 @@ union program_setting_store
 
     BYTE padding[0xc94];
 };
+#pragma pack(pop)
 
 struct hook_search_item
 {
