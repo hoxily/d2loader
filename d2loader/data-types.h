@@ -45,7 +45,8 @@ struct string_index_item
 };
 
 // 在这里使用union简直绝妙！不用费劲心思凑字段的偏移量了。
-#pragma pack(push, 1) // 逐字节对齐，方便定位
+#pragma pack(push, 1) // 逐字节对齐，方便定位。
+// #pragma pack 指令用法详情见：https://docs.microsoft.com/en-us/cpp/preprocessor/pack?view=msvc-160
 union program_setting_store
 {
     struct
