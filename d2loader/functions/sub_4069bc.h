@@ -1,4 +1,6 @@
 #pragma once
 
-extern void sub_4069bc(
+#include "pch.h"
+
+extern BOOL sub_4069bc_CleanupProgramSettingStore(
 );

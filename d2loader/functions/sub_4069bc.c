@@ -1,8 +1,14 @@
 #include "pch.h"
 #include "sub_4069bc.h"
+#include "../global-variables.h"
 
-void sub_4069bc(
+BOOL sub_4069bc_CleanupProgramSettingStore(
 )
 {
-    //TODO
+    if (global_dd_408620_settings != NULL)
+    {
+        free(global_dd_408620_settings);
+        global_dd_408620_settings = NULL;
+    }
+    return TRUE;
 }

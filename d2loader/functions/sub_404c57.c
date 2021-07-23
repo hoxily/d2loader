@@ -90,7 +90,7 @@ BOOL sub_404c57_GameMain(
             sub_405af1_RestoreAllPatches();
             sub_406175_CleanupPlugins();
             sub_405602();
-            sub_4069bc();
+            sub_4069bc_CleanupProgramSettingStore();
             sub_404ed0_LogFormat(
                 LOG_TAG,
                 "Cleanup Done, Exitting\n");
