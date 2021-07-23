@@ -11,3 +11,10 @@ BOOL __stdcall dll_storm_266(
     mpqHandle = NULL;
     return FALSE;
 }
+
+BOOL __stdcall dll_storm_252(
+    DWORD mpqHandle
+)
+{
+    return FALSE;
+}

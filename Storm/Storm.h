@@ -15,3 +15,7 @@ STORM_API BOOL __stdcall dll_storm_266(
     DWORD flag2,
     _Out_ DWORD* mpqHandle
 );
+
+STORM_API BOOL __stdcall dll_storm_252(
+    DWORD mpqHandle
+);
