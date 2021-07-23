@@ -1,4 +1,6 @@
 #pragma once
 
-extern void sub_405af1(
+#include "pch.h"
+
+extern BOOL sub_405af1_RestoreAllPatches(
 );

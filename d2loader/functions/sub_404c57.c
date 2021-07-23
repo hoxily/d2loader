@@ -87,7 +87,7 @@ BOOL sub_404c57_GameMain(
         else
         {
             sub_4071a5();
-            sub_405af1();
+            sub_405af1_RestoreAllPatches();
             sub_406175();
             sub_405602();
             sub_4069bc();

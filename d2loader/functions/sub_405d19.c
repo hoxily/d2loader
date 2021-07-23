@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "sub_405d19.h"
+#include <assert.h>
 #include <stdarg.h>
 #include "../global-variables.h"
 #include "sub_405d90.h"
@@ -33,9 +34,10 @@ void sub_405d19_ScriptLoad(
 
     if (global_dd_4085e0_memory != NULL)
     {
+        assert(sizeof(struct patch_search_item) == 0x2c);
         DWORD* ptr = (DWORD*)(
             (char*)global_dd_4085e0_memory + 
-            global_dd_4085e4_totalLoadedPatchCount * 0x2c
+            global_dd_4085e4_totalLoadedPatchCount * sizeof(struct patch_search_item)
         );
         *ptr |= 0xffffffff;
     }

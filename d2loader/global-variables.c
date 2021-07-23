@@ -183,7 +183,7 @@ fn_GetModuleFileNameA global_dd_4085a4_GetModuleFileNameA;
 
 fn_FindWindowA global_dd_4085a8_FindWindowA;
 
-void* global_dd_4085e0_memory = NULL;
+struct patch_search_item* global_dd_4085e0_memory = NULL;
 int global_dd_4085e4_totalLoadedPatchCount = 0;
 int global_dd_4085e8 = 0;
 
