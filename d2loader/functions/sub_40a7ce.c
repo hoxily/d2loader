@@ -3,6 +3,7 @@
 #include <assert.h>
 #include "../global-variables.h"
 #include "sub_40a840.h"
+#include "sub_404ed0.h"
 
 typedef LONG (WINAPI *fn_SetWindowLongA)(
     _In_ HWND hWnd,
@@ -12,6 +13,11 @@ typedef LONG (WINAPI *fn_SetWindowLongA)(
 void sub_40a7ce_SetGameWindowNoHide(
 )
 {
+    sub_404ed0_LogFormat(
+        LOG_TAG,
+        "patch game window proc to no hide on deactivate"
+    );
+
     HMODULE moduleUser32 = GetModuleHandleA("User32.dll");
     assert(moduleUser32 != NULL);
     global_dd_40a7c8 = (fn_CallWindowProcA)GetProcAddress(moduleUser32, "CallWindowProcA");

@@ -1,9 +1,15 @@
 #include "pch.h"
 #include "sub_40a6c3.h"
+#include "sub_404ed0.h"
 
 void sub_40a6c3(
 )
 {
+    sub_404ed0_LogFormat(
+        LOG_TAG,
+        "patch d2 program to get sleep"
+    );
+
     DWORD oldProtect;
     VirtualProtect(
         (void*)0x6FAF3989,
