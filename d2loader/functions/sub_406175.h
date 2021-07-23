@@ -1,4 +1,6 @@
 #pragma once
 
-extern void sub_406175(
+#include "pch.h"
+
+extern BOOL sub_406175_CleanupPlugins(
 );
