@@ -39,7 +39,7 @@ BOOL sub_404d77_GameClientLoop(
                 LOG_TAG,
                 "Trying to Run MultiClients"
             );
-            sub_4073ac();
+            sub_4073ac_D2RunMultiClient();
 
             esi_gameState = GAME_STATE_LAUNCH;
         }

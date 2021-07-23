@@ -135,6 +135,96 @@ union program_setting_store
 
     struct
     {
+        BYTE offset[0x18];
+        WORD value;
+    } dw_0018_joinId;
+
+    struct
+    {
+        BYTE offset[0x1a];
+        char value[0x18];
+    } db_001a_gameName;
+
+    struct
+    {
+        BYTE offset[0x32];
+        char value[0x18];
+    } db_0032_serverIp;
+
+    struct
+    {
+        BYTE offset[0x80];
+        BYTE value;
+    } db_0080_ama;
+
+    struct
+    {
+        BYTE offset[0x81];
+        BYTE value;
+    } db_0081_pal;
+
+    struct
+    {
+        BYTE offset[0x82];
+        BYTE value;
+    } db_0082_sor;
+
+    struct
+    {
+        BYTE offset[0x83];
+        BYTE value;
+    } db_0083_nec;
+
+    struct
+    {
+        BYTE offset[0x84];
+        BYTE value;
+    } db_0084_bar;
+
+    struct
+    {
+        BYTE offset[0x85];
+        BYTE value;
+    } db_0085_dru;
+
+    struct
+    {
+        BYTE offset[0x86];
+        BYTE value;
+    } db_0086_asn;
+
+    struct
+    {
+        BYTE offset[0x88];
+        char value[0x18];
+    } db_0088_bnAccount;
+
+    struct
+    {
+        BYTE offset[0xb8];
+        char value[0x18];
+    } db_00b8_name;
+
+    struct
+    {
+        BYTE offset[0xd0];
+        char value[0x18];
+    } db_00d0_realm;
+
+    struct
+    {
+        BYTE offset[0x1e9];
+        BYTE value;
+    } db_01e9_characterClass;
+
+    struct
+    {
+        BYTE offset[0x1ea];
+        WORD value;
+    } dw_01ea_characterStatus;
+
+    struct
+    {
         BYTE offset[0x1ff];
         BYTE value;
     } db_01ff_direct;
@@ -156,6 +246,18 @@ union program_setting_store
         BYTE offset[0x221];
         void* value;
     } dd_0221_comInt;
+
+    struct
+    {
+        BYTE offset[0x223];
+        DWORD value;
+    } dd_0223_token;
+
+    struct
+    {
+        BYTE offset[0x23f];
+        char value[0x18];
+    } db_023f_gamePass;
 
     struct
     {

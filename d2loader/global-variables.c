@@ -92,7 +92,8 @@ struct string_index_item global_dd_402ea8_CommandLineArgumentTable[93] = {
     { "gamma", "VIDEO", "gamma", 0xc, ARG_TYPE_UNSIGNED_INT },
     { "vsync", "VIDEO", "vsync", 0x10, ARG_TYPE_NO_PARAM },
     { "fr", "VIDEO", "framerate", 0x10, ARG_TYPE_UNSIGNED_INT },
-    { "s", "NETWORK", "serverip", 0x33, 0x18 },
+    // serverip 的偏移量在这里被初始化为 0x33，但是在代码中是 0x32. 以代码为准。
+    { "s", "NETWORK", "serverip", 0x32, 0x18 },
     { "gametype", "NETWORK", "gametype", 0x14, ARG_TYPE_UNSIGNED_INT },
     { "joinid", "NETWORK", "joinid", 0x18, ARG_TYPE_UNSIGNED_SHORT_INT },
     { "gamename", "NETWORK", "gamename", 0x1a, 0x18 },
@@ -104,7 +105,8 @@ struct string_index_item global_dd_402ea8_CommandLineArgumentTable[93] = {
     { "difficulty", "GAME", "difficulty", 0x20b, ARG_TYPE_NO_PARAM },
     { "txt", "GAME", "text", 0x211, ARG_TYPE_NO_PARAM },
     // -ama 与 -pal 的偏移量是一样的。可能是 d2loader 的一个bug。
-    { "ama", "CHARACTER", "ama", 0x81, ARG_TYPE_NO_PARAM },
+    // 代码中是 0x80.以代码为准。
+    { "ama", "CHARACTER", "ama", 0x80, ARG_TYPE_NO_PARAM },
     { "pal", "CHARACTER", "pal", 0x81, ARG_TYPE_NO_PARAM },
     { "sor", "CHARACTER", "sor", 0x82, ARG_TYPE_NO_PARAM },
     { "nec", "CHARACTER", "nec", 0x83, ARG_TYPE_NO_PARAM },
@@ -114,8 +116,11 @@ struct string_index_item global_dd_402ea8_CommandLineArgumentTable[93] = {
     { "i", "CHARACTER", "invincible", 0x87, ARG_TYPE_NO_PARAM },
     { "bnacct", "CHARACTER", "bnacct", 0x88, 0x18 },
     { "bnpass", "CHARACTER", "bnpass", 0xa0, 0x18 },
-    { "name", "CHARACTER", "name", 0xb9, 0x18 },
-    { "realm", "CHARACTER", "realm", 0xd1, 0x18 },
+    // name 的偏移量在这里被初始化为 0xb9，但是代码中是 0xb8. 以代码为准。
+    // 不然拿到的字符串相当于是一个空字符串。
+    { "name", "CHARACTER", "name", 0xb8, 0x18 },
+    // realm 的偏移量在这里被初始化为 0xd1，但是在代码中是 0xd0. 以代码为准。理由同上。
+    { "realm", "CHARACTER", "realm", 0xd0, 0x18 },
     { "ctemp", "CHARACTER", "ctemp", 0x1e9, ARG_TYPE_NO_PARAM },
     { "charclass", "CHARACTER", "charclass", 0x1e9, ARG_TYPE_NO_PARAM },
     { "charstatus", "CHARACTER", "charstatus", 0x1ea, ARG_TYPE_UNSIGNED_SHORT_INT },
@@ -141,6 +146,7 @@ struct string_index_item global_dd_402ea8_CommandLineArgumentTable[93] = {
     { "lem", "FILEIO", "lowend", 0x200, ARG_TYPE_NO_PARAM },
     { "nocompress", "FILEIO", "nocompress", 0x202, ARG_TYPE_NO_PARAM },
     { "comint", "BNET", "comint", 0x221, ARG_TYPE_UNSIGNED_INT },
+    // 4字节大小的 token 与上面的 comint 重叠了。奇怪。
     { "token", "BNET", "token", 0x223, ARG_TYPE_UNSIGNED_INT },
     { "gamepass", "BNET", "gamepass", 0x23f, 0x18 },
     { "skiptobnet", "BNET", "skiptobnet", 0x359, ARG_TYPE_NO_PARAM },
