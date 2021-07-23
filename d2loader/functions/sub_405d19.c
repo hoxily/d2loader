@@ -34,12 +34,9 @@ void sub_405d19_ScriptLoad(
 
     if (global_dd_4085e0_customPatches != NULL)
     {
-        assert(sizeof(struct patch_search_item) == 0x2c);
-        DWORD* ptr = (DWORD*)(
-            (char*)global_dd_4085e0_customPatches + 
-            global_dd_4085e4_totalLoadedPatchCount * sizeof(struct patch_search_item)
-        );
-        *ptr |= 0xffffffff;
+        global_dd_4085e0_customPatches[
+            global_dd_4085e4_totalLoadedPatchCount
+        ].moduleFileName = (void*)-1;
     }
 
     sub_404ed0_LogFormat(
