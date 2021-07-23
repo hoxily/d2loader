@@ -69,7 +69,7 @@ extern HMODULE global_dd_4085cc_moduleD2Common;
 extern HMODULE global_dd_4085d0_moduleD2Net;
 extern HMODULE global_dd_4085d4_moduleD2Lang;
 
-extern struct d2_dll_function_item global_dd_402500_functionTable[];
+extern struct d2_dll_function_item global_dd_402500_functionTableLegacy[];
 extern struct d2_dll_function_item global_dd_402570_functionTable[];
 extern struct d2_dll_function_item* global_dd_402750_functionTable;
 

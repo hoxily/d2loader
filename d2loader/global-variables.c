@@ -224,10 +224,12 @@ HMODULE global_dd_4085cc_moduleD2Common = NULL;
 HMODULE global_dd_4085d0_moduleD2Net = NULL;
 HMODULE global_dd_4085d4_moduleD2Lang = NULL;
 
-struct d2_dll_function_item global_dd_402500_functionTable[] =
+/*
+* 旧版 d2 dll 函数表。由于用不上，此处仅仅填了空的表。
+*/
+struct d2_dll_function_item global_dd_402500_functionTableLegacy[] =
 {
-    { &global_dd_4085c0_moduleD2Win, (void**)&global_dd_40867c, 0x2731 },
-    //TODO
+    { NULL, NULL, 0 }
 };
 
 struct d2_dll_function_item global_dd_402570_functionTable[] =
