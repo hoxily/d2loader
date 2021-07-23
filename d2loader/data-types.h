@@ -203,6 +203,27 @@ union program_setting_store
 
     struct
     {
+        BYTE offset[0x7a2];
+        // 是否屏蔽出错时的弹出提示框
+        BYTE value;
+    } db_07a2_noNotify;
+
+    struct
+    {
+        BYTE offset[0x7a3];
+        // 是否在出错时继续执行
+        BYTE value;
+    } db_07a3_noExit;
+
+    struct
+    {
+        BYTE offset[0x7a4];
+        // 是否在出错时自动重启程序
+        BYTE value;
+    } db_07a4_autoRestart;
+
+    struct
+    {
         BYTE offset[0x7a6];
         // 是否禁用 d2char.mpq 相关数据
         BYTE value;
