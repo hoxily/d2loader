@@ -1,3 +1,4 @@
+#include "pch.h"
 #include <stdio.h>
 #include <string.h>
 #include "sub_4068f2.h"

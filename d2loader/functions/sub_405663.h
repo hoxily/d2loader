@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Windows.h>
+#include "pch.h"
 
 /*
 * 加载以下DLL中的动态函数：

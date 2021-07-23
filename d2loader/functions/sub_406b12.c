@@ -1,3 +1,4 @@
+#include "pch.h"
 #include <stddef.h>
 #include <assert.h>
 #include "sub_406b12.h"

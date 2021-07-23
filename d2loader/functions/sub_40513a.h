@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Windows.h>
+#include "pch.h"
 #include "../data-types.h"
 
 extern BOOL sub_40513a(

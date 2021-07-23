@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Windows.h>
+#include "pch.h"
 #include "../data-types.h"
 
 #define PATCH_ACTION_TYPE_APPLY 0

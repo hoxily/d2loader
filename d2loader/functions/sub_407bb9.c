@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "sub_407bb9.h"
 #include "../constant-strings.h"
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Windows.h>
+#include "pch.h"
 
 extern int sub_407889_smemcmp(
     const void* buffer1,

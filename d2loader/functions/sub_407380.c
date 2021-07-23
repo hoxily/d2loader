@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "sub_407380.h"
 
 BOOL sub_407380_CheckFileExist(

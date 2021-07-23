@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Windows.h>
+#include "pch.h"
 
 UINT sub_40a440(
 );

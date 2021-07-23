@@ -1,4 +1,4 @@
-#include <Windows.h>
+#include "pch.h"
 #include "functions/sub_404b60.h"
 #include "tests.h"
 

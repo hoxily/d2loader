@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "sub_406d1e.h"
 #include "../global-variables.h"
 #include "../constant-strings.h"

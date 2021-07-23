@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "tests.h"
 #include "constants.h"
 #include "global-variables.h"

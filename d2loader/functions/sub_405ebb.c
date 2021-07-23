@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "sub_405ebb.h"
 #include "sub_404ed0.h"
 

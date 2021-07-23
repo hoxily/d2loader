@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Windows.h>
+#include "pch.h"
 
 extern void* sub_405bdc_SearchByteSequence(
     HMODULE hModule,

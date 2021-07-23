@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Windows.h>
+#include "pch.h"
 
 extern BOOL sub_4065bd_AddPlugin(
     HMODULE dllModule,

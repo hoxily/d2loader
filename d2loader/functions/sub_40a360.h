@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Windows.h>
+#include "pch.h"
 
 extern DWORD sub_40a360_GetCurrentProcessId(
 );

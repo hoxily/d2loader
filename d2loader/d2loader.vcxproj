@@ -73,7 +73,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <LibraryPath>$(SolutionDir)DummyLibs;$(LibraryPath)</LibraryPath>
-    <IncludePath>$(SolutionDir)Storm;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir);$(SolutionDir)Storm;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -93,6 +93,8 @@
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <AdditionalOptions>/wd5105 %(AdditionalOptions)</AdditionalOptions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -229,6 +231,10 @@
     <ClCompile Include="global-variables.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="functions\sub_40543b.c" />
+    <ClCompile Include="pch.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">pch.h</PrecompiledHeaderFile>
+    </ClCompile>
     <ClCompile Include="tests.c" />
   </ItemGroup>
   <ItemGroup>
@@ -314,6 +320,7 @@
     <ClInclude Include="functions\sub_40a9a0.h" />
     <ClInclude Include="global-variables.h" />
     <ClInclude Include="functions\sub_40543b.h" />
+    <ClInclude Include="pch.h" />
     <ClInclude Include="storm-api.h" />
     <ClInclude Include="tests.h" />
   </ItemGroup>

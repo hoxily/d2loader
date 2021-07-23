@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Windows.h>
+#include "pch.h"
 
 extern DWORD sub_407246_D2DllEntry(
     DWORD oldGameState

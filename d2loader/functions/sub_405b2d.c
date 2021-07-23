@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "sub_405b2d.h"
 
 BOOL sub_405b2d_IncreasePPtr(

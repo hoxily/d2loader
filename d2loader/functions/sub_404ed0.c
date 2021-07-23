@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "sub_404ed0.h"
 #include <stdio.h>
 #include <time.h>

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Windows.h>
+#include "pch.h"
 
 extern BOOL sub_405763_InitD2FunctionTable(
 );

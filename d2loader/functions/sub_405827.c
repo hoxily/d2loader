@@ -1,3 +1,4 @@
+#include "pch.h"
 #include <assert.h>
 #include "sub_405827.h"
 #include "sub_404ed0.h"

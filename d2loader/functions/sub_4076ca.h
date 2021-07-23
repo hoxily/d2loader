@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Windows.h>
+#include "pch.h"
 
 extern DWORD sub_4076ca_GetSizeOfImage(
     HMODULE hModule

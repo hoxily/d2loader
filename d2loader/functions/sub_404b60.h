@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Windows.h>
+#include "pch.h"
 
 extern int WINAPI sub_404b60_WinMain(
     _In_ HINSTANCE hInstance,

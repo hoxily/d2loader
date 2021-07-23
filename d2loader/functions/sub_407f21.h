@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Windows.h>
+#include "pch.h"
 
 /*
 * 使用给定的字符数组 separators 中的任一字符，切割 str 字符串。

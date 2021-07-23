@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Windows.h>
+#include "pch.h"
 
 extern HWND WINAPI sub_4053fd_my_FindWindowA(
     LPCSTR lpClassName,

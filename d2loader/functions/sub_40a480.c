@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "sub_40a480.h"
 #include "sub_40a440.h"
 #include "sub_4053b3.h"

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Windows.h>
+#include "pch.h"
 
 BOOL sub_4075c3_D2LocaleSetLocale(
     const char* locale

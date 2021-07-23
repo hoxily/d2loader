@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Windows.h>
+#include "pch.h"
 #include "data-types-function-ptr.h"
 
 struct query_interface_result

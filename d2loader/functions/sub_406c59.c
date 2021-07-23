@@ -1,4 +1,4 @@
-#include <Windows.h>
+#include "pch.h"
 #include <assert.h>
 #include "sub_406c59.h"
 #include "../global-variables.h"

@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "sub_40798d.h"
 #include "sub_407778.h"
 

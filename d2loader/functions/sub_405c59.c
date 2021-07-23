@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "sub_405c59.h"
 #include <string.h>
 #include <stdlib.h>

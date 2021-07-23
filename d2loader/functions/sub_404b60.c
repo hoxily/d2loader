@@ -1,3 +1,4 @@
+#include "pch.h"
 #include <stdio.h>
 #include "sub_404b60.h"
 #include "../global-variables.h"

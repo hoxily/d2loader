@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "sub_406108.h"
 #include "../global-variables.h"
 #include "sub_4063f9.h"

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Windows.h>
+#include "pch.h"
 
 extern DWORD WINAPI sub_40543b_my_GetModuleFileNameA(
     HMODULE hModule,

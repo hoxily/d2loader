@@ -1,5 +1,5 @@
+#include "pch.h"
 #include "sub_40a380.h"
-#include <Windows.h>
 #include <assert.h>
 #include "sub_404ed0.h"
 

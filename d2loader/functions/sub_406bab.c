@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "sub_406bab.h"
 #include "../global-variables.h"
 

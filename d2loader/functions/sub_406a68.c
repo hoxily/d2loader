@@ -1,5 +1,5 @@
+#include "pch.h"
 #include <stddef.h>
-#include <Windows.h>
 #include "sub_406a68.h"
 
 const char* sub_406a68_CutFirstArgument(

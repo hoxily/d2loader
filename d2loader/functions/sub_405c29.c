@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "sub_405c29.h"
 
 BOOL sub_405c29_IsByteSequenceMatch(

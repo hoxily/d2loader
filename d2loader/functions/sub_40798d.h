@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Windows.h>
+#include "pch.h"
 
 /*
 * 复制内存块数据到新申请的内存区域。

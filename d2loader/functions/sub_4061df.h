@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Windows.h>
+#include "pch.h"
 
 extern int sub_4061df_PluginListRun(
     DWORD reasonFlag

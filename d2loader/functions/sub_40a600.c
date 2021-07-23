@@ -1,7 +1,7 @@
+#include "pch.h"
 #include "sub_40a600.h"
 #include "sub_40a2b0.h"
 #include "sub_404ed0.h"
-#include <Windows.h>
 #include <stdio.h>
 
 void sub_40a600_CleanupBnCacheFile(

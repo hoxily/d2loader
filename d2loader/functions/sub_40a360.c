@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "sub_40a360.h"
 #include <assert.h>
 

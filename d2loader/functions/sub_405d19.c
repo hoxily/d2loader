@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "sub_405d19.h"
 #include <stdarg.h>
 #include "../global-variables.h"

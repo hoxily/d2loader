@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Windows.h>
+#include "pch.h"
 
 extern BOOL sub_405b2d_IncreasePPtr(
     void** pBaseAddress,

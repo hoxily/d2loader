@@ -1,3 +1,4 @@
+#include "pch.h"
 #include <assert.h>
 #include "sub_4053b3.h"
 

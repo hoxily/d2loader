@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Windows.h>
+#include "pch.h"
 
 BOOL sub_405c29_IsByteSequenceMatch(
     const BYTE* startAddress,

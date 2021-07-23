@@ -1,3 +1,4 @@
+#include "pch.h"
 #include <assert.h>
 #include "sub_406803.h"
 #include "../global-variables.h"
