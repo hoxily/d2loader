@@ -330,3 +330,8 @@ void* global_dd_40863c;
 void* global_dd_408640;
 
 BYTE global_db_40a551_isHideSleepAltColorArgsProcessed = FALSE;
+
+// 这个初始值很奇怪。看起来不像是一个函数地址。
+WNDPROC global_dd_40a7c2_originGameWindowProc = (WNDPROC)0x2150574F;
+// 这个初始值很奇怪。看起来不像是一个函数地址。
+fn_CallWindowProcA global_dd_40a7c8 = (fn_CallWindowProcA)0x21505743;

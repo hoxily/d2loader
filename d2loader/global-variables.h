@@ -119,3 +119,6 @@ extern void* global_dd_40863c;
 extern void* global_dd_408640;
 
 extern BYTE global_db_40a551_isHideSleepAltColorArgsProcessed;
+
+extern WNDPROC global_dd_40a7c2_originGameWindowProc;
+extern fn_CallWindowProcA global_dd_40a7c8;

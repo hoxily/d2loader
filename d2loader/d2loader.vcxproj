@@ -230,6 +230,8 @@
     <ClCompile Include="functions\sub_40a4e5.c" />
     <ClCompile Include="functions\sub_40a600.c" />
     <ClCompile Include="functions\sub_40a740.c" />
+    <ClCompile Include="functions\sub_40a7ce.c" />
+    <ClCompile Include="functions\sub_40a840.c" />
     <ClCompile Include="functions\sub_40a9a0.c" />
     <ClCompile Include="functions\sub_40aaf0.c" />
     <ClCompile Include="global-variables.c" />
@@ -324,6 +326,8 @@
     <ClInclude Include="functions\sub_40a4e5.h" />
     <ClInclude Include="functions\sub_40a600.h" />
     <ClInclude Include="functions\sub_40a740.h" />
+    <ClInclude Include="functions\sub_40a7ce.h" />
+    <ClInclude Include="functions\sub_40a840.h" />
     <ClInclude Include="functions\sub_40a9a0.h" />
     <ClInclude Include="functions\sub_40aaf0.h" />
     <ClInclude Include="global-variables.h" />

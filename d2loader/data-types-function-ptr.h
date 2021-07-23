@@ -213,3 +213,10 @@ typedef BOOL(__stdcall* fn_FlushInstructionCache)(
     LPCVOID lpBaseAddress,
     SIZE_T dwSize
     );
+
+typedef LRESULT(WINAPI* fn_CallWindowProcA)(
+    _In_ WNDPROC lpPrevWndFunc,
+    _In_ HWND hWnd,
+    _In_ UINT Msg,
+    _In_ WPARAM wParam,
+    _In_ LPARAM lParam);
