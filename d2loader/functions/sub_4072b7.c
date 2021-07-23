@@ -30,7 +30,7 @@ BOOL sub_4072b7_ErrorHandle(
             LOG_TAG,
             "Try to Auto Restart..."
         );
-        WinExec(GetCommandLineA(), 5);
+        WinExec(GetCommandLineA(), SW_SHOW);
     }
 
     if (global_dd_408620_settings->db_07a3_noExit.value)
