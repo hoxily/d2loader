@@ -1,4 +1,6 @@
 #pragma once
 
-extern void sub_405602(
+#include "pch.h"
+
+extern BOOL sub_405602(
 );
