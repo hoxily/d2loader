@@ -28,7 +28,7 @@ extern HMODULE global_dd_4085ac_moduleD2Gfx;
 extern HMODULE global_dd_4085b4_moduleD2Net;
 
 extern struct patch_search_item global_dd_402d88[3];
-extern struct patch_search_item* global_dd_402e0c;
+extern struct patch_search_item* global_dd_402e0c_builtinPatches;
 
 DWORD global_dd_402e1c[2];
 char global_db_402e24[];
@@ -43,7 +43,7 @@ extern fn_GetModuleFileNameA global_dd_4085a4_GetModuleFileNameA;
 
 extern fn_FindWindowA global_dd_4085a8_FindWindowA;
 
-extern struct patch_search_item* global_dd_4085e0_memory;
+extern struct patch_search_item* global_dd_4085e0_customPatches;
 extern int global_dd_4085e4_totalLoadedPatchCount;
 extern int global_dd_4085e8;
 

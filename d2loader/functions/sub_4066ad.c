@@ -7,7 +7,7 @@ BOOL sub_4066ad(
 )
 {
     sub_405ce3(
-        global_dd_402e0c,
+        global_dd_402e0c_builtinPatches,
         1,
         TRUE
     );

@@ -9,7 +9,7 @@ BOOL sub_405af1_RestoreAllPatches(
 )
 {
     BOOL ret = sub_405827_PatchModule(
-        global_dd_402e0c,
+        global_dd_402e0c_builtinPatches,
         PATCH_ACTION_TYPE_RESTORE
     );
     if (!ret)
@@ -19,15 +19,15 @@ BOOL sub_405af1_RestoreAllPatches(
 
     sub_4066d8_AlwaysReturnTrue();
 
-    if (global_dd_4085e0_memory != NULL)
+    if (global_dd_4085e0_customPatches != NULL)
     {
         sub_405827_PatchModule(
-            global_dd_4085e0_memory,
+            global_dd_4085e0_customPatches,
             PATCH_ACTION_TYPE_RESTORE
         );
     }
 
-    sub_405ebb();
+    sub_405ebb_FreeCustomPatches();
     global_dd_4085dc_isPatchCompleted = FALSE;
 
     return TRUE;

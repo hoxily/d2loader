@@ -14,9 +14,9 @@ void sub_405d19_ScriptLoad(
 {
     va_list ap;
 
-    if (global_dd_4085e0_memory != NULL)
+    if (global_dd_4085e0_customPatches != NULL)
     {
-        sub_405ebb();
+        sub_405ebb_FreeCustomPatches();
     }
 
     global_dd_4085e4_totalLoadedPatchCount = 0;
@@ -32,11 +32,11 @@ void sub_405d19_ScriptLoad(
     }
     va_end(ap);
 
-    if (global_dd_4085e0_memory != NULL)
+    if (global_dd_4085e0_customPatches != NULL)
     {
         assert(sizeof(struct patch_search_item) == 0x2c);
         DWORD* ptr = (DWORD*)(
-            (char*)global_dd_4085e0_memory + 
+            (char*)global_dd_4085e0_customPatches + 
             global_dd_4085e4_totalLoadedPatchCount * sizeof(struct patch_search_item)
         );
         *ptr |= 0xffffffff;

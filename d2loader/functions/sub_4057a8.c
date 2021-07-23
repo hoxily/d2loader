@@ -19,7 +19,7 @@ BOOL sub_4057a8_Patch(
         return FALSE;
     }
 
-    if (!sub_405827_PatchModule(global_dd_402e0c, PATCH_ACTION_TYPE_APPLY))
+    if (!sub_405827_PatchModule(global_dd_402e0c_builtinPatches, PATCH_ACTION_TYPE_APPLY))
     {
         return FALSE;
     }
@@ -45,9 +45,9 @@ BOOL sub_4057a8_Patch(
         );
     }
 
-    if (global_dd_4085e0_memory)
+    if (global_dd_4085e0_customPatches)
     {
-        sub_405827_PatchModule(global_dd_4085e0_memory, PATCH_ACTION_TYPE_APPLY);
+        sub_405827_PatchModule(global_dd_4085e0_customPatches, PATCH_ACTION_TYPE_APPLY);
     }
 
     global_dd_4085dc_isPatchCompleted = TRUE;

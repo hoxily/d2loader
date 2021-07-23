@@ -4,15 +4,15 @@
 #include "../global-variables.h"
 #include "sub_404ed0.h"
 
-BOOL sub_405ebb(
+BOOL sub_405ebb_FreeCustomPatches(
 )
 {
-    if (global_dd_4085e0_memory == NULL)
+    if (global_dd_4085e0_customPatches == NULL)
     {
         return TRUE;
     }
 
-    struct patch_search_item* esi_ptr = global_dd_4085e0_memory;
+    struct patch_search_item* esi_ptr = global_dd_4085e0_customPatches;
     while (esi_ptr->moduleFileName != (void*)-1)
     {
         free(esi_ptr->moduleFileName);
@@ -26,8 +26,8 @@ BOOL sub_405ebb(
         assert(sizeof(struct patch_search_item) == 0x2c);
         esi_ptr++;
     }
-    free(global_dd_4085e0_memory);
-    global_dd_4085e0_memory = NULL;
+    free(global_dd_4085e0_customPatches);
+    global_dd_4085e0_customPatches = NULL;
 
     return TRUE;
 }

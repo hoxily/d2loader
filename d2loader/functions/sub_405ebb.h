@@ -2,5 +2,5 @@
 
 #include "pch.h"
 
-BOOL sub_405ebb(
+BOOL sub_405ebb_FreeCustomPatches(
 );

@@ -78,7 +78,7 @@ DWORD global_dd_402e68[2] =
 };
 char global_db_402e70[] = "2, 8B15xxxxxxxx 83FA0D 7C10 33D2 8915xxxxxxxx EB06 8B15";
 
-struct patch_search_item* global_dd_402e0c = &global_dd_402d88[0];
+struct patch_search_item* global_dd_402e0c_builtinPatches = &global_dd_402d88[0];
 
 struct string_index_item global_dd_402ea8_CommandLineArgumentTable[93] = {
     { "exp", "MAIN", "expansion", 0x0, ARG_TYPE_NO_PARAM },
@@ -183,7 +183,7 @@ fn_GetModuleFileNameA global_dd_4085a4_GetModuleFileNameA;
 
 fn_FindWindowA global_dd_4085a8_FindWindowA;
 
-struct patch_search_item* global_dd_4085e0_memory = NULL;
+struct patch_search_item* global_dd_4085e0_customPatches = NULL;
 int global_dd_4085e4_totalLoadedPatchCount = 0;
 int global_dd_4085e8 = 0;
 
