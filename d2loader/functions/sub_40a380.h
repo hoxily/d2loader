@@ -1,4 +1,7 @@
 #pragma once
 
-void sub_40a380(
+extern void sub_40a380(
+);
+
+extern void FlushInstructionCacheAfterModifyCode(
 );

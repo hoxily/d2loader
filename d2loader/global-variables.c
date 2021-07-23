@@ -329,4 +329,4 @@ HWND global_dd_408634_gameWindowHandle;
 void* global_dd_40863c;
 void* global_dd_408640;
 
-BYTE global_db_40a551 = FALSE;
+BYTE global_db_40a551_isHideSleepAltColorArgsProcessed = FALSE;

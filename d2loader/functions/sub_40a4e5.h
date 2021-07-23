@@ -1,4 +1,4 @@
 #pragma once
 
-extern void sub_40a4e5(
+extern void sub_40a4e5_ProcessNoHideNoSleepAltColorArgs(
 );

@@ -207,3 +207,9 @@ typedef void* (__stdcall* fn_D2_QueryInterface)(
 typedef DWORD (__fastcall* fn_D2_ComInt)(
     union program_setting_store* settings
     );
+
+typedef BOOL(__stdcall* fn_FlushInstructionCache)(
+    HANDLE hProcess,
+    LPCVOID lpBaseAddress,
+    SIZE_T dwSize
+    );

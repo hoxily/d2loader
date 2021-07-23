@@ -118,4 +118,4 @@ extern HWND global_dd_408634_gameWindowHandle;
 extern void* global_dd_40863c;
 extern void* global_dd_408640;
 
-extern BYTE global_db_40a551;
+extern BYTE global_db_40a551_isHideSleepAltColorArgsProcessed;

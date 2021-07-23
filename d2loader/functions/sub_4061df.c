@@ -14,7 +14,7 @@ int sub_4061df_PluginListRun(
     {
         if (reasonFlag & RUN_PLUGIN_REASON_ENTER_MAIN_MENU)
         {
-            sub_40a4e5();
+            sub_40a4e5_ProcessNoHideNoSleepAltColorArgs();
         }
 
         return 0;
@@ -40,7 +40,7 @@ int sub_4061df_PluginListRun(
     }
     if (reasonFlag & RUN_PLUGIN_REASON_ENTER_MAIN_MENU)
     {
-        sub_40a4e5();
+        sub_40a4e5_ProcessNoHideNoSleepAltColorArgs();
         strcat(reasonString, "REASON_ENTER_MAIN_MENU |");
     }
     if (reasonFlag & RUN_PLUGIN_REASON_ENTER_CHANNEL)
