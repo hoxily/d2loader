@@ -59,7 +59,7 @@ struct patch_search_item global_dd_402d88[3] =
         1, &global_dd_408640, &global_db_402e70[0], 0
     },
     {
-        (const char*)(-1),
+        (char*)(-1),
         0, 0, NULL, 0, NULL, 0,
         0, NULL, NULL, 0
     }

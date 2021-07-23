@@ -348,7 +348,7 @@ struct d2_dll_function_item
 struct patch_search_item
 {
     // 00 = 20 - 00
-    const char* moduleFileName;
+    char* moduleFileName;
     // 04 = 20 - 1c
     DWORD v1;
     // 08 = 20 - 18
@@ -366,7 +366,7 @@ struct patch_search_item
     // 20 = 20 - 00
     void* v8;
     // 24 = 20 + 04
-    const char* pattern;
+    char* pattern;
     // 28 = 20 + 08
     // 如果是搜索模式，那么记录找到的模式的地址
     void* patternLocation;
