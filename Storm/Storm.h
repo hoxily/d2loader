@@ -9,6 +9,11 @@
     #define STORM_API 
 #endif
 
+// begin extern "C" block
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 STORM_API BOOL __stdcall dll_storm_266(
     const char* mpqFile,
     DWORD flag1,
@@ -19,3 +24,8 @@ STORM_API BOOL __stdcall dll_storm_266(
 STORM_API BOOL __stdcall dll_storm_252(
     DWORD mpqHandle
 );
+
+// end extern "C" block
+#ifdef __cplusplus
+}
+#endif

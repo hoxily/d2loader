@@ -1,0 +1,36 @@
+LIBRARY
+
+; 分号开头的行是注释。
+
+; 单单使用 struct __declspec(dllexport) Unicode { ... } 导出 Unicode 这个类，
+; 无法控制每个函数的Ordinal序号。在 .def 文件里重新指定其序号即可。
+
+EXPORTS
+    ; Unicode::Unicode(ushort)
+    ??0Unicode@@QAE@G@Z    @10014
+
+    ; Unicode::operator=(Unicode const &)
+    ??4Unicode@@QAEAAU0@ABU0@@Z    @10015
+
+    ; Unicode::operator ushort(void)
+    ??BUnicode@@QBEGXZ    @10016
+
+    ; Unicode::`default constructor closure'(void)
+    ??_FUnicode@@QAEXXZ    @10017
+
+    ; Unicode::Personalize(Unicode *, Unicode const *, Unicode const *, int, ELANGUAGE)
+    ?Personalize@Unicode@@SIXPAU1@PBU1@1HW4ELANGUAGE@@@Z    @10018
+
+    ; ushort * Unicode::_toLowerTable
+    ?_toLowerTable@Unicode@@0PAGA    @10019
+
+    ; ushort * Unicode::_toUpperTable
+    ?_toUpperTable@Unicode@@0PAGA    @10020
+
+    ; Unicode::compare(Unicode) const
+    ?compare@Unicode@@QBEHU1@@Z    @10021
+
+    ; Unicode::compare(Unicode, Unicode)
+    ?compare@Unicode@@SIHU1@0@Z    @10022
+
+
