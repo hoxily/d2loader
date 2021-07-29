@@ -1,9 +1,9 @@
 #include "pch.h"
 #include "d2lang-10000.h"
 
-int __stdcall d2lang_10000(
+unsigned int __stdcall d2lang_10000_HashString(
     const char* str,
-    int divider
+    unsigned int n
 )
 {
     //TODO

@@ -6,9 +6,15 @@
 extern "C" {
 #endif
 
-D2_LANG_API int __stdcall d2lang_10000(
+/*
+* 求取字符串的Hash值，返回值范围为 [0, n - 1]。
+* @param str 需要求Hash值的字符串
+* @param n 限定返回值范围为 [0, n - 1]
+* @returns 返回 [0, n - 1] 范围的Hash值。
+*/
+D2_LANG_API unsigned int __stdcall d2lang_10000_HashString(
     const char* str,
-    int divider
+    unsigned int n
 );
 
 #ifdef __cplusplus
