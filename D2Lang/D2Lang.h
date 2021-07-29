@@ -4,15 +4,4 @@
 #include "D2LangApi.h"
 
 #include "unicode.h"
-
-// begin extern "C" block
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-
-
-    // end extern "C" block
-#ifdef __cplusplus
-}
-#endif
+#include "functions/d2lang-10000.h"

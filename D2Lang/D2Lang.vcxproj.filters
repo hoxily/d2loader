@@ -33,6 +33,9 @@
     <ClInclude Include="D2LangApi.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="functions\d2lang-10000.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -48,6 +51,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="unicode-to-lower-table.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="functions\d2lang-10000.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
