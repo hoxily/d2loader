@@ -9,6 +9,7 @@ EXPORTS
     d2lang_10000_HashString @10000 NONAME
     d2lang_10001 @10001 NONAME
     d2lang_10002 @10002 NONAME
+    d2lang_10003 @10003 NONAME
 
     ; Unicode::Unicode(ushort)
     ??0Unicode@@QAE@G@Z    @10014
