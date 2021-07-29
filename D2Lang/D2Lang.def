@@ -14,6 +14,8 @@ EXPORTS
     d2lang_10005 @10005 NONAME
     d2lang_10006 @10006 NONAME
     d2lang_10007 @10007 NONAME
+    d2lang_10008 @10008 NONAME
+    d2lang_10009 @10009 NONAME
 
     ; Unicode::Unicode(ushort)
     ??0Unicode@@QAE@G@Z    @10014
