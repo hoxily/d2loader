@@ -168,6 +168,8 @@
     <ClInclude Include="D2LangApi.h" />
     <ClInclude Include="data-types.h" />
     <ClInclude Include="functions\d2lang-10000.h" />
+    <ClInclude Include="functions\d2lang-10001.h" />
+    <ClInclude Include="functions\d2lang-10002.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="storm-api.h" />
     <ClInclude Include="unicode.h" />
@@ -175,6 +177,8 @@
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="functions\d2lang-10000.cpp" />
+    <ClCompile Include="functions\d2lang-10001.cpp" />
+    <ClCompile Include="functions\d2lang-10002.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
