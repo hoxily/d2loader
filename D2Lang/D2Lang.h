@@ -10,3 +10,5 @@
 #include "functions/d2lang-10003.h"
 #include "functions/d2lang-10004.h"
 #include "functions/d2lang-10005.h"
+#include "functions/d2lang-10006.h"
+#include "functions/d2lang-10007.h"
