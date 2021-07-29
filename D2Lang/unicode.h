@@ -10,6 +10,16 @@
 */
 struct D2_LANG_API Unicode
 {
+    /*
+    * Unicode字符的方向性
+    */
+    enum class Direction
+    {
+        LeftToRight = 0xf0,
+        RightToLeft = 0xf1,
+        Didirectional = 0xf2,
+    };
+
 public:
     /*
     * 使用码元构造一个 Unicode。
@@ -35,6 +45,12 @@ public:
     int __thiscall compare(Unicode other) const;
 
     static int __fastcall compare(Unicode lhs, Unicode rhs);
+
+    Direction __thiscall directionality();
+
+    BOOL __thiscall isASCII() const;
+
+    BOOL __thiscall isAlpha() const;
 
 private:
     static USHORT _toLowerTable[];

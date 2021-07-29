@@ -18,7 +18,7 @@ EXPORTS
     ; Unicode::`default constructor closure'(void)
     ??_FUnicode@@QAEXXZ    @10017
 
-    ; Unicode::Personalize(Unicode *, Unicode const *, Unicode const *, int, ELANGUAGE)
+    ; void Unicode::Personalize(Unicode *, Unicode const *, Unicode const *, int, ELANGUAGE)
     ?Personalize@Unicode@@SIXPAU1@PBU1@1HW4ELANGUAGE@@@Z    @10018
 
     ; ushort * Unicode::_toLowerTable
@@ -27,10 +27,18 @@ EXPORTS
     ; ushort * Unicode::_toUpperTable
     ?_toUpperTable@Unicode@@0PAGA    @10020
 
-    ; Unicode::compare(Unicode) const
+    ; int Unicode::compare(Unicode) const
     ?compare@Unicode@@QBEHU1@@Z    @10021
 
-    ; Unicode::compare(Unicode, Unicode)
+    ; int Unicode::compare(Unicode, Unicode)
     ?compare@Unicode@@SIHU1@0@Z    @10022
 
+    ; 注意： ::Direction 与 Unicode::Direction 有差别。会导致 mangled 名字不同。
+    ; Unicode::Direction Unicode::directionaly()
+    ?directionality@Unicode@@QAE?AW4Direction@1@XZ    @10023
 
+    ; int __thiscall Unicode::isASCII() const
+    ?isASCII@Unicode@@QBEHXZ    @10024
+
+    ; int __thiscall Unicode::isAlpha() const
+    ?isAlpha@Unicode@@QBEHXZ    @10025

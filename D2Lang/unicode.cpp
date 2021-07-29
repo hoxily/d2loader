@@ -33,3 +33,21 @@ int Unicode::compare(Unicode lhs, Unicode rhs)
     //TODO
     return 0;
 }
+
+Unicode::Direction Unicode::directionality()
+{
+    //TODO
+    return Direction::LeftToRight;
+}
+
+BOOL Unicode::isASCII() const
+{
+    //TODO
+    return false;
+}
+
+BOOL Unicode::isAlpha() const
+{
+    //TODO
+    return false;
+}
