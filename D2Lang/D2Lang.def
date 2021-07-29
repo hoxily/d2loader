@@ -42,3 +42,114 @@ EXPORTS
 
     ; int __thiscall Unicode::isAlpha() const
     ?isAlpha@Unicode@@QBEHXZ    @10025
+
+    ; int __thiscall Unicode::isLeftToRight() const
+    ?isLeftToRight@Unicode@@QBEHXZ    @10026
+
+    ; public: static int __fastcall Unicode::isLineBreak(struct Unicode const *,unsigned int)
+    ?isLineBreak@Unicode@@SIHPBU1@I@Z    @10027
+
+    ; public: int __thiscall Unicode::isNewline(void)const
+    ?isNewline@Unicode@@QBEHXZ    @10028
+
+    ; public: int __thiscall Unicode::isPipe(void)const
+    ?isPipe@Unicode@@QBEHXZ    @10029
+
+    ; public: int __thiscall Unicode::isWhitespace(void)const
+    ?isWhitespace@Unicode@@QBEHXZ    @10030
+
+    ; public: static int __fastcall Unicode::isWordEnd(struct Unicode const *,unsigned int)
+    ?isWordEnd@Unicode@@SIHPBU1@I@Z    @10031
+
+    ; public: static int __fastcall Unicode::loadSysMap(struct HD2ARCHIVE__ *,char const *)
+    ?loadSysMap@Unicode@@SIHPAUHD2ARCHIVE__@@PBD@Z    @10032
+
+    ; public: static void __cdecl Unicode::sprintf(int,struct Unicode *,struct Unicode const *,...)
+    ?sprintf@Unicode@@SAXHPAU1@PBU1@ZZ    @10033
+
+    ; public: static struct Unicode * __fastcall Unicode::strcat(struct Unicode *,struct Unicode const *)
+    ?strcat@Unicode@@SIPAU1@PAU1@PBU1@@Z    @10034
+
+    ; public: static struct Unicode * __fastcall Unicode::strchr(struct Unicode const *,struct Unicode)
+    ?strchr@Unicode@@SIPAU1@PBU1@U1@@Z    @10035
+
+    ; public: static int __fastcall Unicode::strcmp(struct Unicode const *,struct Unicode const *)
+    ?strcmp@Unicode@@SIHPBU1@0@Z    @10036
+
+    ; public: static int __fastcall Unicode::strcoll(struct Unicode const *,struct Unicode const *)
+    ?strcoll@Unicode@@SIHPBU1@0@Z    @10037
+
+    ; public: static struct Unicode * __fastcall Unicode::strcpy(struct Unicode *,struct Unicode const *)
+    ?strcpy@Unicode@@SIPAU1@PAU1@PBU1@@Z    @10038
+
+    ; public: static int __fastcall Unicode::stricmp(struct Unicode const *,struct Unicode const *)
+    ?stricmp@Unicode@@SIHPBU1@0@Z    @10039
+
+    ; public: static int __fastcall Unicode::strlen(struct Unicode const *)
+    ?strlen@Unicode@@SIHPBU1@@Z    @10040
+
+    ; public: static struct Unicode * __fastcall Unicode::strncat(struct Unicode *,struct Unicode const *,int)
+    ?strncat@Unicode@@SIPAU1@PAU1@PBU1@H@Z    @10041
+
+    ; public: static int __fastcall Unicode::strncmp(struct Unicode const *,struct Unicode const *,unsigned int)
+    ?strncmp@Unicode@@SIHPBU1@0I@Z    @10042
+
+    ; public: static int __fastcall Unicode::strncoll(struct Unicode const *,struct Unicode const *,int)
+    ?strncoll@Unicode@@SIHPBU1@0H@Z    @10043
+
+    ; public: static struct Unicode * __fastcall Unicode::strncpy(struct Unicode *,struct Unicode const *,int)
+    ?strncpy@Unicode@@SIPAU1@PAU1@PBU1@H@Z    @10044
+
+    ; public: static int __fastcall Unicode::strnicmp(struct Unicode const *,struct Unicode const *,unsigned int)
+    ?strnicmp@Unicode@@SIHPBU1@0I@Z    @10045
+
+    ; public: static struct Unicode * __fastcall Unicode::strstr(struct Unicode const *,struct Unicode const *)
+    ?strstr@Unicode@@SIPAU1@PBU1@0@Z    @10046
+
+    ; public: static struct Unicode * __fastcall Unicode::strstri(struct Unicode const *,struct Unicode const *)
+    ?strstri@Unicode@@SIPAU1@PBU1@0@Z    @10047
+
+    ; public: static struct Unicode * __fastcall Unicode::sys2Unicode(struct Unicode *,char const *,int)
+    ?sys2Unicode@Unicode@@SIPAU1@PAU1@PBDH@Z    @10048
+
+    ; public: static unsigned long __fastcall Unicode::sysWidth(struct Unicode const *,int)
+    ?sysWidth@Unicode@@SIKPBU1@H@Z    @10049
+
+    ; public: struct Unicode __thiscall Unicode::toLower(void)const
+    ?toLower@Unicode@@QBE?AU1@XZ    @10050
+
+    ; public: static struct Unicode * __fastcall Unicode::toUnicode(struct Unicode *,char const *,int)
+    ?toUnicode@Unicode@@SIPAU1@PAU1@PBDH@Z    @10051
+
+    ; public: struct Unicode __thiscall Unicode::toUpper(void)const
+    ?toUpper@Unicode@@QBE?AU1@XZ    @10052
+
+    ; public: static char * __fastcall Unicode::toUtf(char *,struct Unicode const *,int)
+    ?toUtf@Unicode@@SIPADPADPBU1@H@Z    @10053
+
+    ; public: static char * __fastcall Unicode::unicode2Sys(char *,struct Unicode const *,int)
+    ?unicode2Sys@Unicode@@SIPADPADPBU1@H@Z    @10054
+
+    ; public: static char * __fastcall Unicode::unicode2Win(char *,struct Unicode const *,int)
+    ?unicode2Win@Unicode@@SIPADPADPBU1@H@Z    @10055
+
+    ; public: static unsigned long __fastcall Unicode::unicodeWidth(char const *,int)
+    ?unicodeWidth@Unicode@@SIKPBDH@Z    @10056
+
+    ; public: static unsigned int __fastcall Unicode::unicodenwidth(char const *,int)
+    ?unicodenwidth@Unicode@@SIIPBDH@Z    @10057
+
+    ; public: static void __fastcall Unicode::unloadSysMap(void)
+    ?unloadSysMap@Unicode@@SIXXZ    @10058
+
+    ; public: static struct Unicode * __fastcall Unicode::utf8ToUnicode(struct Unicode *,char const *,int)
+    ?utf8ToUnicode@Unicode@@SIPAU1@PAU1@PBDH@Z    @10059
+
+    ; public: static unsigned int __fastcall Unicode::utfnwidth(struct Unicode const *,int)
+    ?utfnwidth@Unicode@@SIIPBU1@H@Z    @10060
+
+    ; public: int __thiscall Unicode::utfwidth(void)const
+    ?utfwidth@Unicode@@QBEHXZ    @10061
+
+    ; public: static struct Unicode * __fastcall Unicode::win2Unicode(struct Unicode *,char const *,int)
+    ?win2Unicode@Unicode@@SIPAU1@PAU1@PBDH@Z    @10062

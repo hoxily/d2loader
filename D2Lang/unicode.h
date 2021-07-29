@@ -52,6 +52,80 @@ public:
 
     BOOL __thiscall isAlpha() const;
 
+    BOOL __thiscall isLeftToRight() const;
+
+    static BOOL __fastcall isLineBreak(const Unicode* str, unsigned int u);
+
+    BOOL __thiscall isNewline() const;
+
+    BOOL __thiscall isPipe() const;
+
+    BOOL __thiscall isWhitespace() const;
+
+    static BOOL __fastcall isWordEnd(const Unicode* str, unsigned int u);
+
+    static BOOL __fastcall loadSysMap(HD2ARCHIVE__* mpqHandle, const char* str);
+
+    static void __cdecl sprintf(int bufferSize, Unicode* buffer, const Unicode* format, ...);
+
+    static Unicode* __fastcall strcat(Unicode* dest, const Unicode* src);
+
+    static Unicode* __fastcall strchr(const Unicode* str, Unicode ch);
+
+    static int __fastcall strcmp(const Unicode* lhs, const Unicode* rhs);
+
+    static int __fastcall strcoll(const Unicode* lhs, const Unicode* rhs);
+
+    static Unicode* __fastcall strcpy(Unicode* dest, const Unicode* src);
+
+    static int __fastcall stricmp(const Unicode* lhs, const Unicode* rhs);
+
+    static int __fastcall strlen(const Unicode* str);
+
+    static Unicode* __fastcall strncat(Unicode* dest, const Unicode* src, int n);
+
+    static int __fastcall strncmp(const Unicode* lhs, const Unicode* rhs, unsigned int n);
+
+    static int __fastcall strncoll(const Unicode* lhs, const Unicode* rhs, int n);
+
+    static Unicode* __fastcall strncpy(Unicode* dest, const Unicode* src, int n);
+
+    static int __fastcall strnicmp(const Unicode* lhs, const Unicode* rhs, unsigned int n);
+
+    static Unicode* __fastcall strstr(const Unicode* str, const Unicode* subStr);
+
+    static Unicode* __fastcall strstri(const Unicode* str, const Unicode* subStr);
+
+    static Unicode* __fastcall sys2Unicode(Unicode* buffer, const char* str, int bufferSize);
+
+    static unsigned long __fastcall sysWidth(const Unicode* str, int i);
+
+    Unicode __thiscall toLower() const;
+
+    static Unicode* __fastcall toUnicode(Unicode* buffer, const char* str, int bufferSize);
+
+    Unicode __thiscall toUpper() const;
+
+    static char* __fastcall toUtf(char* buffer, const Unicode* str, int bufferSize);
+
+    static char* __fastcall unicode2Sys(char* buffer, const Unicode* str, int bufferSize);
+
+    static char* __fastcall unicode2Win(char* buffer, const Unicode* str, int bufferSize);
+
+    static unsigned long __fastcall unicodeWidth(const char* str, int i);
+
+    static unsigned int __fastcall unicodenwidth(const char* str, int n);
+
+    static void __fastcall unloadSysMap();
+
+    static Unicode* __fastcall utf8ToUnicode(Unicode* buffer, const char* str, int bufferSize);
+
+    static unsigned int __fastcall utfnwidth(const Unicode* str, int n);
+
+    int __thiscall utfwidth() const;
+
+    static Unicode* __fastcall win2Unicode(Unicode* buffer, const char* str, int bufferSize);
+
 private:
     static USHORT _toLowerTable[];
 
