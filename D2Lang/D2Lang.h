@@ -8,3 +8,4 @@
 #include "functions/d2lang-10001.h"
 #include "functions/d2lang-10002.h"
 #include "functions/d2lang-10003.h"
+#include "functions/d2lang-10004.h"

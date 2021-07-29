@@ -45,6 +45,9 @@
     <ClInclude Include="functions\d2lang-10003.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="functions\d2lang-10004.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -72,6 +75,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="functions\d2lang-10003.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="functions\d2lang-10004.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
