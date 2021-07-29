@@ -17,17 +17,17 @@ public:
     * 这个 default constructor closure 函数也有它自己的函数体。
     * @param codeUnit 码元
     */
-    Unicode(USHORT codeUnit = 0);
+    __thiscall Unicode(USHORT codeUnit = 0);
     /*
     * 重载赋值操作符
     */
-    Unicode& operator =(const Unicode& ch);
+    Unicode& __thiscall operator =(const Unicode& ch);
     /*
     * 重载 (USHORT) 强制类型转换操作符。
     * 强制类型转换操作符不能写返回值类型。
     * 使用时 USHORT y = (USHORT)unicode; 即可。
     */
-    operator USHORT() const;
+    __thiscall operator USHORT() const;
 
     static void __fastcall Personalize(Unicode* dest, const Unicode* a, const Unicode* b, int i, ELANGUAGE lang);
 
