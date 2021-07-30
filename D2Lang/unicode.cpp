@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "unicode.h"
+#include <cassert>
 
 Unicode::Unicode(USHORT codeUnit)
 {
@@ -19,7 +20,66 @@ Unicode::operator USHORT() const
 
 void Unicode::Personalize(Unicode* dest, const Unicode* a, const Unicode* b, int i, ELANGUAGE lang)
 {
+    const Unicode* esi_ptr = a;
+    Unicode* edi_ptr = dest;
+    int aLength = 0;
+    int bLength = 0;
+    if (esi_ptr != nullptr)
+    {
+        aLength = Unicode::strlen(esi_ptr);
+    }
+    const Unicode* ebp_ptr = b;
+    if (ebp_ptr != nullptr)
+    {
+        bLength = Unicode::strlen(ebp_ptr);
+    }
+
+    if (aLength + bLength + 5 > i)
+    {
+        if (bLength >= i)
+        {
+            return;
+        }
+        else
+        {
+            const Unicode* eax = b;
+            Unicode ch;
+            assert(eax != nullptr);
+            do
+            {
+                ch = *eax;
+                *dest = ch;
+
+                dest++;
+                eax++;
+            } while (ch.m_codeUnit != 0);
+
+            return;
+        }
+    }
+
+    Unicode str[10];
+    memset(str, 0, sizeof(str));
+
     //TODO
+    switch (lang)
+    {
+    case ELANGUAGE::Language1:
+        break;
+    case ELANGUAGE::Language3:
+        break;
+    case ELANGUAGE::Language5:
+        break;
+    case ELANGUAGE::Language0:
+    case ELANGUAGE::Language12:
+        break;
+    case ELANGUAGE::Language2:
+        break;
+    case ELANGUAGE::Language10:
+        break;
+    default:
+        break;
+    }
 }
 
 int Unicode::compare(Unicode other) const
@@ -137,8 +197,17 @@ int Unicode::stricmp(const Unicode* lhs, const Unicode* rhs)
 
 int Unicode::strlen(const Unicode* str)
 {
-    //TODO
-    return 0;
+    if (str == nullptr)
+    {
+        return 0;
+    }
+
+    int length = 0;
+    while (str[length].m_codeUnit != 0)
+    {
+        length++;
+    }
+    return length;
 }
 
 Unicode* Unicode::strncat(Unicode* dest, const Unicode* src, int n)
