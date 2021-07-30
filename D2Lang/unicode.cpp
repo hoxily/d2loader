@@ -136,7 +136,22 @@ BOOL Unicode::isAlpha() const
 
 BOOL Unicode::isLeftToRight() const
 {
-    //TODO
+    unsigned short code = this->m_codeUnit;
+    if (code >= 0x590 && code <= 0x5ff)
+    {
+        return false;
+    }
+
+    if (code < 0x600)
+    {
+        return true;
+    }
+
+    if (code > 0x6ff)
+    {
+        return true;
+    }
+
     return false;
 }
 
