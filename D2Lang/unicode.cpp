@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "unicode.h"
 #include <cassert>
+#include "functions/sub_6fc01301.h"
 
 Unicode::Unicode(USHORT codeUnit)
 {
@@ -124,8 +125,13 @@ BOOL Unicode::isASCII() const
 
 BOOL Unicode::isAlpha() const
 {
-    //TODO
-    return false;
+    if (this->m_codeUnit >= 0x80)
+    {
+        return false;
+    }
+
+    bool isAlphabet = sub_6fc01301_IsAlphabet(this->m_codeUnit);
+    return isAlphabet;
 }
 
 BOOL Unicode::isLeftToRight() const
