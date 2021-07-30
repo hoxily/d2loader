@@ -116,7 +116,7 @@ BOOL Unicode::isASCII() const
     // sbb eax, eax
     // neg eax
     // 注意，neg eax 指令指的是 eax = 0 - eax，
-    // 即 eax = (not eax) + 1
+    // 相当于 eax = (not eax) + 1
     // 先前把它当成了 not 指令，所以引起了错误的判断。
     // 原始代码并没有错误。
     return this->m_codeUnit < 0x80;
