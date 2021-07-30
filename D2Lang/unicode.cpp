@@ -279,8 +279,17 @@ unsigned long Unicode::sysWidth(const Unicode* str, int i)
 
 Unicode Unicode::toLower() const
 {
-    //TODO
-    return *this;
+    /*
+    * 虽然 toLower 是无参数的 __thiscall 函数。但是因为要返回的是一个结构体，所以
+    * 在编译器编译后，依然会添加一个参数，相当于调用方分配的 Unicode 结构的存储空间，把返回结果
+    * 的指针传入给 toLower 函数。
+    */
+    unsigned short code = this->m_codeUnit;
+    if (code < 256)
+    {
+        code = Unicode::_toLowerTable[code];
+    }
+    return Unicode(code);
 }
 
 Unicode* Unicode::toUnicode(Unicode* buffer, const char* str, int bufferSize)
@@ -291,8 +300,13 @@ Unicode* Unicode::toUnicode(Unicode* buffer, const char* str, int bufferSize)
 
 Unicode Unicode::toUpper() const
 {
-    //TODO
-    return *this;
+    // toUpper 与 toLower 同理，在汇编代码里会发现传入了一个用于返回 Unicode 的指针。
+    unsigned short code = this->m_codeUnit;
+    if (code < 256)
+    {
+        code = Unicode::_toUpperTable[code];
+    }
+    return Unicode(code);
 }
 
 char* Unicode::toUtf(char* buffer, const Unicode* str, int bufferSize)
