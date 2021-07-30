@@ -102,8 +102,11 @@ Unicode::Direction Unicode::directionality()
 
 BOOL Unicode::isASCII() const
 {
-    //TODO
-    return false;
+    // 这里的逻辑好像反掉了。判断非ASCII
+    // cmp word ptr[ecx], 80h
+    // sbb eax, eax
+    // neg eax
+    return this->m_codeUnit >= 0x80;
 }
 
 BOOL Unicode::isAlpha() const
