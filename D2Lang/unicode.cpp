@@ -84,14 +84,24 @@ void Unicode::Personalize(Unicode* dest, const Unicode* a, const Unicode* b, int
 
 int Unicode::compare(Unicode other) const
 {
-    //TODO
-    return 0;
+    return Unicode::compare(*this, other);
 }
 
 int Unicode::compare(Unicode lhs, Unicode rhs)
 {
-    //TODO
-    return 0;
+    unsigned short lCode = lhs.m_codeUnit;
+    if (lCode < 256)
+    {
+        lCode = Unicode::_toUpperTable[lCode];
+    }
+
+    unsigned short rCode = rhs.m_codeUnit;
+    if (rCode < 256)
+    {
+        rCode = Unicode::_toUpperTable[rCode];
+    }
+
+    return lCode == rCode;
 }
 
 Unicode::Direction Unicode::directionality()
