@@ -112,11 +112,14 @@ Unicode::Direction Unicode::directionality()
 
 BOOL Unicode::isASCII() const
 {
-    // 这里的逻辑好像反掉了。判断非ASCII
     // cmp word ptr[ecx], 80h
     // sbb eax, eax
     // neg eax
-    return this->m_codeUnit >= 0x80;
+    // 注意，neg eax 指令指的是 eax = 0 - eax，
+    // 即 eax = (not eax) + 1
+    // 先前把它当成了 not 指令，所以引起了错误的判断。
+    // 原始代码并没有错误。
+    return this->m_codeUnit < 0x80;
 }
 
 BOOL Unicode::isAlpha() const
