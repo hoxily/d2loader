@@ -1,7 +1,9 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "unicode.h"
 #include <cassert>
 #include "functions/sub_6fc01301.h"
+#include "functions/d2lang-10009.h"
+#include "functions/sub_6fc01340.h"
 
 Unicode::Unicode(USHORT codeUnit)
 {
@@ -65,18 +67,18 @@ void Unicode::Personalize(Unicode* dest, const Unicode* a, const Unicode* b, int
     //TODO
     switch (lang)
     {
-    case ELANGUAGE::Language1:
+    case ELANGUAGE::ESP:
         break;
-    case ELANGUAGE::Language3:
+    case ELANGUAGE::FRA:
         break;
-    case ELANGUAGE::Language5:
+    case ELANGUAGE::ITA:
         break;
-    case ELANGUAGE::Language0:
-    case ELANGUAGE::Language12:
+    case ELANGUAGE::ENG_DEFAULT:
+    case ELANGUAGE::ENG:
         break;
-    case ELANGUAGE::Language2:
+    case ELANGUAGE::DEU:
         break;
-    case ELANGUAGE::Language10:
+    case ELANGUAGE::POL:
         break;
     default:
         break;
@@ -116,10 +118,10 @@ BOOL Unicode::isASCII() const
     // cmp word ptr[ecx], 80h
     // sbb eax, eax
     // neg eax
-    // ×¢Òâ£¬neg eax Ö¸ÁîÖ¸µÄÊÇ eax = 0 - eax£¬
-    // Ïàµ±ÓÚ eax = (not eax) + 1
-    // ÏÈÇ°°ÑËüµ±³ÉÁË not Ö¸Áî£¬ËùÒÔÒýÆðÁË´íÎóµÄÅÐ¶Ï¡£
-    // Ô­Ê¼´úÂë²¢Ã»ÓÐ´íÎó¡£
+    // æ³¨æ„ï¼Œneg eax æŒ‡ä»¤æŒ‡çš„æ˜¯ eax = 0 - eaxï¼Œ
+    // ç›¸å½“äºŽ eax = (not eax) + 1
+    // å…ˆå‰æŠŠå®ƒå½“æˆäº† not æŒ‡ä»¤ï¼Œæ‰€ä»¥å¼•èµ·äº†é”™è¯¯çš„åˆ¤æ–­ã€‚
+    // åŽŸå§‹ä»£ç å¹¶æ²¡æœ‰é”™è¯¯ã€‚
     return this->m_codeUnit < 0x80;
 }
 
@@ -157,8 +159,56 @@ BOOL Unicode::isLeftToRight() const
 
 BOOL Unicode::isLineBreak(const Unicode* str, unsigned int u)
 {
-    //TODO
-    return false;
+    if (u == 0)
+    {
+        return true;
+    }
+
+    ELANGUAGE ret = d2lang_10009_GetLanguage();
+    // if (ret == 6 || (ret > 7 && ret <= 9))
+    if (ret == ELANGUAGE::JPN ||
+        ret == ELANGUAGE::SIN ||
+        ret == ELANGUAGE::CHI
+        )
+    {
+        // loc_6fc086a1
+        unsigned short code = str[u];
+        if (code == 0x2026 // â€¦
+            || code == 0x3001 // ã€
+            || code == 0x3002 // ã€‚
+            || code == 0xff01 // ï¼
+            || code == 0xff0c // ï¼Œ
+            || code == 0xff0e // ï¼Ž
+            || code == 0xff1f // ï¼Ÿ
+            || code == 0xff61 // ï½¡
+            || code == 0xff64 // ï½¤
+            )
+        {
+
+        }
+        //TODO
+    }
+    else
+    {
+        // loc_6fc08656
+        unsigned short code = str[u];
+        if (code < 0x100)
+        {
+            if (sub_6fc01340(code))
+            {
+                return false;
+            }
+        }
+        code = str[u - 1];
+        if (code < 0x100)
+        {
+            if (sub_6fc01340(code))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }
 
 BOOL Unicode::isNewline() const
@@ -304,9 +354,9 @@ unsigned long Unicode::sysWidth(const Unicode* str, int i)
 Unicode Unicode::toLower() const
 {
     /*
-    * ËäÈ» toLower ÊÇÎÞ²ÎÊýµÄ __thiscall º¯Êý¡£µ«ÊÇÒòÎªÒª·µ»ØµÄÊÇÒ»¸ö½á¹¹Ìå£¬ËùÒÔ
-    * ÔÚ±àÒëÆ÷±àÒëºó£¬ÒÀÈ»»áÌí¼ÓÒ»¸ö²ÎÊý£¬Ïàµ±ÓÚµ÷ÓÃ·½·ÖÅäµÄ Unicode ½á¹¹µÄ´æ´¢¿Õ¼ä£¬°Ñ·µ»Ø½á¹û
-    * µÄÖ¸Õë´«Èë¸ø toLower º¯Êý¡£
+    * è™½ç„¶ toLower æ˜¯æ— å‚æ•°çš„ __thiscall å‡½æ•°ã€‚ä½†æ˜¯å› ä¸ºè¦è¿”å›žçš„æ˜¯ä¸€ä¸ªç»“æž„ä½“ï¼Œæ‰€ä»¥
+    * åœ¨ç¼–è¯‘å™¨ç¼–è¯‘åŽï¼Œä¾ç„¶ä¼šæ·»åŠ ä¸€ä¸ªå‚æ•°ï¼Œç›¸å½“äºŽè°ƒç”¨æ–¹åˆ†é…çš„ Unicode ç»“æž„çš„å­˜å‚¨ç©ºé—´ï¼ŒæŠŠè¿”å›žç»“æžœ
+    * çš„æŒ‡é’ˆä¼ å…¥ç»™ toLower å‡½æ•°ã€‚
     */
     unsigned short code = this->m_codeUnit;
     if (code < 256)
@@ -324,7 +374,7 @@ Unicode* Unicode::toUnicode(Unicode* buffer, const char* str, int bufferSize)
 
 Unicode Unicode::toUpper() const
 {
-    // toUpper Óë toLower Í¬Àí£¬ÔÚ»ã±à´úÂëÀï»á·¢ÏÖ´«ÈëÁËÒ»¸öÓÃÓÚ·µ»Ø Unicode µÄÖ¸Õë¡£
+    // toUpper ä¸Ž toLower åŒç†ï¼Œåœ¨æ±‡ç¼–ä»£ç é‡Œä¼šå‘çŽ°ä¼ å…¥äº†ä¸€ä¸ªç”¨äºŽè¿”å›ž Unicode çš„æŒ‡é’ˆã€‚
     unsigned short code = this->m_codeUnit;
     if (code < 256)
     {
