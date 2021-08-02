@@ -242,8 +242,12 @@ BOOL Unicode::isNewline() const
 
 BOOL Unicode::isPipe() const
 {
-    //TODO
-    return false;
+    if (this->m_codeUnit >= 0x100)
+    {
+        return false;
+    }
+
+    return this->m_codeUnit == 0xff; // 'ÿ'
 }
 
 BOOL Unicode::isWhitespace() const
