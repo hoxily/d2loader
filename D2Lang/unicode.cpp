@@ -237,8 +237,7 @@ BOOL Unicode::isLineBreak(const Unicode* str, unsigned int u)
 
 BOOL Unicode::isNewline() const
 {
-    //TODO
-    return false;
+    return this->m_codeUnit == '\n';
 }
 
 BOOL Unicode::isPipe() const
