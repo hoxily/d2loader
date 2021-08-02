@@ -165,7 +165,6 @@ BOOL Unicode::isLineBreak(const Unicode* str, unsigned int u)
     }
 
     ELANGUAGE ret = d2lang_10009_GetLanguage();
-    // if (ret == 6 || (ret > 7 && ret <= 9))
     if (ret == ELANGUAGE::JPN ||
         ret == ELANGUAGE::SIN ||
         ret == ELANGUAGE::CHI
@@ -184,9 +183,34 @@ BOOL Unicode::isLineBreak(const Unicode* str, unsigned int u)
             || code == 0xff64 // ､
             )
         {
-
+            return false;
         }
-        //TODO
+        if (code >= 0x61 && code <= 0x7a) // 半角小写英文字母：'a' to 'z'
+        {
+            return false;
+        }
+        if (code >= 0xff41 && code <= 0xff5a) // 全角小写英文字母：'ａ' to 'ｚ'
+        {
+            return false;
+        }
+        if (code >= 0x41 && code <= 0x5a) // 半角大写英文字母: 'A' to 'Z'
+        {
+            return false;
+        }
+        if (code >= 0xff21 && code <= 0xff3a) // 全角大写英文字母：'Ａ' to 'Ｚ'
+        {
+            return false;
+        }
+        if (code >= 0x30 && code <= 0x39) // 阿拉伯数字：'0' to '9'
+        {
+            return false;
+        }
+        if (code >= 0xff10 && code <= 0xff19) // 全角阿拉伯数字：'０' to '９'
+        {
+            return false;
+        }
+        
+        return true;
     }
     else
     {
