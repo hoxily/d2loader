@@ -5,6 +5,9 @@
 #include "functions/d2lang-10009.h"
 #include "functions/sub_6fc01340.h"
 #include "functions/sub_6fc0137a.h"
+#include "fog-api.h"
+#include "functions/sub_6fc07ef0.h"
+#include "functions/sub_6fc01580.h"
 
 Unicode::Unicode(USHORT codeUnit)
 {
@@ -283,6 +286,13 @@ BOOL Unicode::isWordEnd(const Unicode* str, unsigned int u)
 
 BOOL Unicode::loadSysMap(HD2ARCHIVE__* mpqHandle, const char* str)
 {
+    void* edi_ptr = sub_6fc07ef0(mpqHandle, str, 0);
+    if (sub_6fc01580(edi_ptr, "KAMAP\n", 5))
+    {
+        fog_10043(edi_ptr, __FILE__, __LINE__, 0);
+        return false;
+    }
+
     //TODO
     return false;
 }
