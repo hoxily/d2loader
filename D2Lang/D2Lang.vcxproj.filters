@@ -84,6 +84,9 @@
     <ClInclude Include="functions\sub_6fc0137a.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="functions\sub_6fc07ef0.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -150,6 +153,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="functions\sub_6fc0137a.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="functions\sub_6fc07ef0.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
