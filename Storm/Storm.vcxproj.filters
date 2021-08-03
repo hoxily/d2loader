@@ -18,12 +18,30 @@
     <ClInclude Include="Storm.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="StormApi.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="functions\storm_266.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="functions\storm_252.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="dllmain.c">
+    <ClCompile Include="dllmain.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Storm.c">
+    <ClCompile Include="pch.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="functions\storm_266.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="functions\storm_252.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

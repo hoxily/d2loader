@@ -26,7 +26,7 @@ BOOL sub_4073ac_D2RunMultiClient(
     * rep stosd
     */
     assert(sizeof(STARTUPINFOA) == 0x44);
-    memset(&startupInfo.lpReserved, 0, sizeof(STARTUPINFOA));
+    memset(&startupInfo, 0, sizeof(STARTUPINFOA));
     startupInfo.cb = sizeof(STARTUPINFOA);
 
     GetTempPathA(sizeof(tempPath), tempPath);

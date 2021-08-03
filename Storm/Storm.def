@@ -1,5 +1,5 @@
 LIBRARY
 
 EXPORTS
-   dll_storm_266 @266 NONAME
-   dll_storm_252 @252 NONAME
+   storm_266 @266 NONAME
+   storm_252 @252 NONAME

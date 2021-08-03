@@ -41,7 +41,7 @@ BOOL sub_406d1e_D2Init(
 
     if (global_dd_408620_settings->db_0988_mpqFile.value[0] != '\0')
     {
-        BOOL success = dll_storm_266(
+        BOOL success = storm_266(
             global_dd_408620_settings->db_0988_mpqFile.value,
             0x10000,
             2,

@@ -45,7 +45,7 @@ BOOL sub_4071a5(
 
     if (global_dd_408638_mpqFileHandle != 0)
     {
-        dll_storm_252(global_dd_408638_mpqFileHandle);
+        storm_252(global_dd_408638_mpqFileHandle);
     }
 
     return TRUE;
