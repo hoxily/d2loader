@@ -252,8 +252,13 @@ BOOL Unicode::isPipe() const
 
 BOOL Unicode::isWhitespace() const
 {
-    //TODO
-    return false;
+    unsigned short code = this->m_codeUnit;
+    if (code >= 0x100)
+    {
+        return false;
+    }
+
+    return sub_6fc01340(code);
 }
 
 BOOL Unicode::isWordEnd(const Unicode* str, unsigned int u)
