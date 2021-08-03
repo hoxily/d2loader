@@ -4,6 +4,7 @@
 #include "functions/sub_6fc01301.h"
 #include "functions/d2lang-10009.h"
 #include "functions/sub_6fc01340.h"
+#include "functions/sub_6fc0137a.h"
 
 Unicode::Unicode(USHORT codeUnit)
 {
@@ -263,8 +264,21 @@ BOOL Unicode::isWhitespace() const
 
 BOOL Unicode::isWordEnd(const Unicode* str, unsigned int u)
 {
-    //TODO
-    return false;
+    if (str == nullptr)
+    {
+        return false;
+    }
+
+    if (sub_6fc0137a(str[u].m_codeUnit) &&
+        !sub_6fc0137a(str[u + 1].m_codeUnit)
+        )
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 BOOL Unicode::loadSysMap(HD2ARCHIVE__* mpqHandle, const char* str)

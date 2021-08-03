@@ -184,6 +184,7 @@
     <ClInclude Include="functions\d2lang-10013.h" />
     <ClInclude Include="functions\sub_6fc01301.h" />
     <ClInclude Include="functions\sub_6fc01340.h" />
+    <ClInclude Include="functions\sub_6fc0137a.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="storm-api.h" />
     <ClInclude Include="unicode.h" />
@@ -206,6 +207,7 @@
     <ClCompile Include="functions\d2lang-10013.cpp" />
     <ClCompile Include="functions\sub_6fc01301.cpp" />
     <ClCompile Include="functions\sub_6fc01340.cpp" />
+    <ClCompile Include="functions\sub_6fc0137a.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
