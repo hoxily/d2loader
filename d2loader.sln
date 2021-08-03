@@ -18,6 +18,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "D2Lang", "D2Lang\D2Lang.vcx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "demangler", "demangler\demangler.vcxproj", "{57C8FA61-47B0-4D77-8726-F79A4104D4B1}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Fog", "Fog\Fog.vcxproj", "{EF25F97B-0923-45C2-BD0C-FC0D71BAED14}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -48,6 +50,10 @@ Global
 		{57C8FA61-47B0-4D77-8726-F79A4104D4B1}.Debug|x86.Build.0 = Debug|Win32
 		{57C8FA61-47B0-4D77-8726-F79A4104D4B1}.Release|x86.ActiveCfg = Release|Win32
 		{57C8FA61-47B0-4D77-8726-F79A4104D4B1}.Release|x86.Build.0 = Release|Win32
+		{EF25F97B-0923-45C2-BD0C-FC0D71BAED14}.Debug|x86.ActiveCfg = Debug|Win32
+		{EF25F97B-0923-45C2-BD0C-FC0D71BAED14}.Debug|x86.Build.0 = Debug|Win32
+		{EF25F97B-0923-45C2-BD0C-FC0D71BAED14}.Release|x86.ActiveCfg = Release|Win32
+		{EF25F97B-0923-45C2-BD0C-FC0D71BAED14}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
