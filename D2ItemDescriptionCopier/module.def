@@ -1,0 +1,6 @@
+LIBRARY
+
+; 分号开头的行是注释。
+
+EXPORTS
+    QueryInterface=_QueryInterface@0

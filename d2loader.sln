@@ -20,6 +20,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "demangler", "demangler\dema
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Fog", "Fog\Fog.vcxproj", "{EF25F97B-0923-45C2-BD0C-FC0D71BAED14}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "D2ItemDescriptionCopier", "D2ItemDescriptionCopier\D2ItemDescriptionCopier.vcxproj", "{EFFBBF5C-77E9-4DB1-9C1C-7E11337AF5F8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -54,6 +56,10 @@ Global
 		{EF25F97B-0923-45C2-BD0C-FC0D71BAED14}.Debug|x86.Build.0 = Debug|Win32
 		{EF25F97B-0923-45C2-BD0C-FC0D71BAED14}.Release|x86.ActiveCfg = Release|Win32
 		{EF25F97B-0923-45C2-BD0C-FC0D71BAED14}.Release|x86.Build.0 = Release|Win32
+		{EFFBBF5C-77E9-4DB1-9C1C-7E11337AF5F8}.Debug|x86.ActiveCfg = Debug|Win32
+		{EFFBBF5C-77E9-4DB1-9C1C-7E11337AF5F8}.Debug|x86.Build.0 = Debug|Win32
+		{EFFBBF5C-77E9-4DB1-9C1C-7E11337AF5F8}.Release|x86.ActiveCfg = Release|Win32
+		{EFFBBF5C-77E9-4DB1-9C1C-7E11337AF5F8}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
