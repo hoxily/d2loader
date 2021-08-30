@@ -9,7 +9,7 @@ EXPORTS
     d2lang_10000_HashString @10000 NONAME
     d2lang_10001 @10001 NONAME
     d2lang_10002 @10002 NONAME
-    d2lang_10003 @10003 NONAME
+    d2lang_10003_GetLocalText @10003 NONAME
     d2lang_10004 @10004 NONAME
     d2lang_10005 @10005 NONAME
     d2lang_10006 @10006 NONAME
