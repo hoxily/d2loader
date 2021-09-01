@@ -12,7 +12,7 @@ extern "C" {
 * @param n 限定返回值范围为 [0, n - 1]
 * @returns 返回 [0, n - 1] 范围的Hash值。
 */
-D2_LANG_API unsigned int __stdcall d2lang_10000_HashString(
+D2_LANG_API unsigned int __stdcall d2lang_10000_GetStringHash(
     const char* str,
     unsigned int n
 );

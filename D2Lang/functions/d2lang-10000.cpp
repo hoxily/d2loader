@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "d2lang-10000.h"
 
-unsigned int __stdcall d2lang_10000_HashString(
+unsigned int __stdcall d2lang_10000_GetStringHash(
     const char* str,
     unsigned int n
 )
