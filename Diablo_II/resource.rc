@@ -1,0 +1,80 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "winres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// 中文(简体，中国) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE
+BEGIN
+"resource.h\0"
+END
+
+2 TEXTINCLUDE
+BEGIN
+"#include ""winres.h""\r\n"
+"\0"
+END
+
+3 TEXTINCLUDE
+BEGIN
+"\r\n"
+"\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE
+BEGIN
+IDS_STRING1 "Game.exe"
+IDS_STRING2 "CD-ROM drive error."
+IDS_STRING3 "Please verify that your Diablo II Expansion Disc is in your CD-ROM drive, then click on 'Retry'."
+IDS_STRING4 "Diablo II was unable to locate your CD-ROM drive.\nPlease make sure your Diablo II Expansion Disc is in your CD-ROM drive, then click on 'Retry'."
+IDS_STRING5 "Diablo II was unable to detect a Disc in your CD-ROM drive.\nPlease make sure your Diablo II Expansion Disc is in your CD-ROM drive, then click on 'Retry'."
+IDS_STRING6 "Please make sure your Diablo II Expansion Disc is in your CD-ROM drive, then click on 'Retry'."
+IDS_STRING7 "Diablo II.exe"
+IDS_STRING8 "Diablo II failed to run.\nPlease make sure your Diablo II Expansion Disc is in your CD-ROM drive, then click on 'Retry'."
+IDS_STRING9 "Diablo II was unable to find Game.exe.\nPlease make sure your application is correctly installed, and that your Expansion Disc is in your CD_ROM drive, and try again.\n"
+END
+
+#endif    // 中文(简体，中国) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
