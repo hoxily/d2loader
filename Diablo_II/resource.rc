@@ -52,13 +52,13 @@ END
 
 STRINGTABLE
 BEGIN
-IDS_STRING1 "Game.exe"
+IDS_1_GAME_DOT_EXE "Game.exe"
 IDS_STRING2 "CD-ROM drive error."
 IDS_STRING3 "Please verify that your Diablo II Expansion Disc is in your CD-ROM drive, then click on 'Retry'."
 IDS_STRING4 "Diablo II was unable to locate your CD-ROM drive.\nPlease make sure your Diablo II Expansion Disc is in your CD-ROM drive, then click on 'Retry'."
 IDS_STRING5 "Diablo II was unable to detect a Disc in your CD-ROM drive.\nPlease make sure your Diablo II Expansion Disc is in your CD-ROM drive, then click on 'Retry'."
 IDS_STRING6 "Please make sure your Diablo II Expansion Disc is in your CD-ROM drive, then click on 'Retry'."
-IDS_STRING7 "Diablo II.exe"
+IDS_7_DIABLO_II_DOT_EXE "Diablo II.exe"
 IDS_STRING8 "Diablo II failed to run.\nPlease make sure your Diablo II Expansion Disc is in your CD-ROM drive, then click on 'Retry'."
 IDS_STRING9 "Diablo II was unable to find Game.exe.\nPlease make sure your application is correctly installed, and that your Expansion Disc is in your CD_ROM drive, and try again.\n"
 END

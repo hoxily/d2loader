@@ -143,9 +143,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="functions\sub_40146d.c" />
     <ClCompile Include="main.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="functions\sub_40146d.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
